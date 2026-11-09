@@ -224,6 +224,10 @@
   .err { color: #b3261e; font-size: 14px; min-height: 1.2em; margin: 0; font-weight: 400; }
   .card .btn { justify-self: start; }
   .after-btn { margin: 22px 4px 0; font-size: 15px; color: var(--on-dark-muted); max-width: 30em; }
+  .card .next { border-top: 1px solid rgba(28,21,18,.12); padding-top: 16px; margin-top: 4px; font-size: 15.5px; line-height: 1.5; color: var(--ink); }
+  .card .next p { margin: 0 0 6px; font-weight: 600; }
+  .card .next ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .card .next li::before { content: "✓"; color: var(--accent); font-weight: 700; margin-inline-end: 8px; }
   .demo-msg { display: none; margin: 18px 4px 0; padding: 14px 18px; border-radius: 14px; background: #3a2d16; color: #f4dfae; font-size: 15px; }
   .demo-msg.show { display: block; }
 
@@ -467,7 +471,6 @@
         <li><small>איפה</small><strong>זום</strong></li>
         <li><small>מחיר</small><strong>190 ש"ח</strong></li>
       </ul>
-      <p class="after-btn">מיד אחרי ההרשמה: מייל עם קישור לזום והוראות איך להכין את התמונה.</p>
     </div>
     <div data-reveal style="--d:.12s">
       <div class="card">
@@ -487,6 +490,10 @@
           <button class="btn" type="submit">להרשמה לסדנה
             <i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></i>
           </button>
+          <div class="next">
+            <p>אחרי ההרשמה יגיע אלייך מייל עם:</p>
+            <ul><li>קישור לזום</li><li>הוראות איך להכין את התמונה</li></ul>
+          </div>
         </form>
       </div>
       <div class="demo-msg" id="demo-msg" role="status">זה עמוד הדגמה. לא נשלח כלום ולא בוצע תשלום.</div>
