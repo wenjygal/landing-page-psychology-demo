@@ -227,7 +227,8 @@
   .card .next { border-top: 1px solid rgba(28,21,18,.12); padding-top: 16px; margin-top: 4px; font-size: 15.5px; line-height: 1.5; color: var(--ink); }
   .card .next p { margin: 0 0 6px; font-weight: 600; }
   .card .next ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-  .card .next li::before { content: "✓"; color: var(--accent); font-weight: 700; margin-inline-end: 8px; }
+  .card .next li { display: flex; gap: 8px; }
+  .card .next li::before { content: "✓"; color: var(--accent); font-weight: 700; flex: none; }
   .demo-msg { display: none; margin: 18px 4px 0; padding: 14px 18px; border-radius: 14px; background: #3a2d16; color: #f4dfae; font-size: 15px; }
   .demo-msg.show { display: block; }
 
@@ -492,7 +493,7 @@
           </button>
           <div class="next">
             <p>אחרי ההרשמה יגיע אלייך מייל עם:</p>
-            <ul><li>קישור לזום</li><li>הוראות איך להכין את התמונה</li></ul>
+            <ul><li>קישור לזום</li><li>איך לצלם את המוצר שלך לפני הסדנה: מהטלפון, על כל רקע. על התמונה הזו נעבוד.</li></ul>
           </div>
         </form>
       </div>
