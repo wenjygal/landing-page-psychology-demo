@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הפסיכולוגיה של עמודי נחיתה</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2B1A2E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* BOOST ME starter tokens (BOOST ME — DESIGN.md §9) */
+  :root {
+    --plum:#2B1A2E; --plum-2:#3A2540; --plum-line:rgba(43,26,46,.12);
+    --paper:#FFF8F0; --paper-2:#F7EBDD;
+    --ink:#2B1A2E; --ink-soft:#5E4A5F;
+    --magenta:#E0128B; --magenta-deep:#B30C6E;
+    --orange:#F68920; --orange-ink:#8A4300;
+    --on-plum:#FFF8F0; --on-plum-soft:#E3CFDD;
+    --swipe:linear-gradient(90deg, rgba(246,137,32,.38), rgba(224,18,139,.30));
+    --ease-out:cubic-bezier(0.16,1,0.3,1);
+    --gutter:clamp(16px,4vw,48px);
+    --line-plum:rgba(255,248,240,.14);
+    --phone: 390px;
+  }
+  * { box-sizing:border-box; }
+  html, body { height:100%; }
+  body { margin:0; font-family:"Rubik","Segoe UI","Arial Hebrew",Arial,sans-serif; font-size:17px; line-height:1.6;
+    color:var(--on-plum); background:var(--plum); -webkit-font-smoothing:antialiased; font-variant-numeric:tabular-nums;
+    display:grid; grid-template-rows:auto 1fr auto; overflow:hidden; }
+  img { max-width:100%; display:block; }
+  ::selection { background:var(--magenta); color:#fff; }
+  :focus-visible { outline:3px solid var(--orange); outline-offset:3px; border-radius:6px; }
+  .paper :focus-visible { outline-color:var(--magenta-deep); }
+  mark { background:var(--swipe); color:inherit; padding:0 2px; }
+  .pen { color:var(--magenta); }
+
+  /* top bar */
+  .top { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:max(14px, env(safe-area-inset-top, 0px)) var(--gutter) 12px; border-bottom:1px solid var(--line-plum); min-height:64px; }
+  .brand { display:inline-flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.02em; font-size:1.1rem; }
+  .brand img { width:30px; height:auto; }
+  .tag { display:none; align-items:center; gap:14px; flex-wrap:wrap; justify-content:center; }
+  body.cmp .tag { display:inline-flex; }
+  .tag .stage { background:var(--magenta-deep); color:#fff; font-weight:700; font-size:1rem; padding:4px 16px; border-radius:999px; }
+  .tag b { font-weight:900; font-size:clamp(1.3rem, 2vw, 1.9rem); line-height:1.1; }
+  .tag .pr { color:var(--on-plum-soft); font-size:1rem; }
+  .tag .pr::before { content:"עיקרון: "; }
+  .part { color:var(--on-plum-soft); font-size:.95rem; text-align:end; }
+  .part strong { color:var(--on-plum); font-weight:500; }
+
+  /* deck */
+  .deck { position:relative; min-height:0; }
+  .slide { position:absolute; inset:0; display:none; padding:clamp(20px,4vh,56px) var(--gutter); overflow:hidden; }
+  .slide.on { display:flex; flex-direction:column; justify-content:center; }
+  body.cmp .slide.on { display:none; }
+  .inner { width:100%; max-width:1280px; margin:0 auto; }
+
+  /* plum statements */
+  .big { font-weight:900; font-size:clamp(2.6rem, min(8vw, 11vh), 7.2rem); line-height:.98; letter-spacing:-.02em; margin:0; text-wrap:balance; }
+  .lede { color:var(--on-plum-soft); font-size:clamp(1.15rem, min(2vw, 3vh), 1.7rem); max-width:34em; margin:clamp(18px,3vh,34px) 0 0; }
+  .lede strong { color:var(--on-plum); font-weight:500; }
+  .kicker { display:inline-block; color:var(--orange); font-weight:700; font-size:clamp(1rem, 1.6vw, 1.35rem); margin:0 0 clamp(10px,2vh,20px); }
+  .byline { margin-top:clamp(28px,6vh,72px); padding-top:16px; border-top:2px solid var(--line-plum); display:flex; gap:14px; align-items:center; color:var(--on-plum-soft); font-size:1.1rem; }
+  .byline img { width:44px; }
+  .byline strong { color:var(--on-plum); font-weight:700; }
+
+  /* paper sheet slides */
+  .sheet { background:var(--paper); color:var(--ink); border-radius:6px 6px 18px 18px; padding:clamp(24px,5vh,64px) clamp(24px,4vw,72px);
+    box-shadow:0 30px 60px -24px rgba(0,0,0,.55), inset 0 2px 0 rgba(255,255,255,.4); transform:rotate(-.6deg); max-height:100%; }
+  .sheet h2 { font-weight:900; font-size:clamp(2rem, min(4.6vw, 7vh), 4.2rem); line-height:1.05; letter-spacing:-.015em; margin:0; text-wrap:balance; padding-bottom:clamp(12px,2vh,20px); border-bottom:2px solid var(--ink); }
+  .sheet .sub { color:var(--ink-soft); font-size:clamp(1.05rem, min(1.7vw, 2.6vh), 1.45rem); margin:clamp(12px,2vh,20px) 0 0; }
+  .sheet .honest { font-weight:500; font-size:clamp(1.3rem, min(2.4vw, 3.6vh), 2.1rem); line-height:1.4; margin:clamp(20px,4vh,44px) 0 0; }
+
+  /* s2: two columns split by ink */
+  .vs { display:grid; grid-template-columns:1fr 1fr; margin-top:clamp(18px,3vh,32px); }
+  .vs > div { padding:6px clamp(16px,2.4vw,40px) 6px 0; }
+  .vs > div + div { border-inline-start:1px solid var(--plum-line); padding-inline-start:clamp(16px,2.4vw,40px); }
+  .vs > div:first-child { padding-inline-start:0; }
+  .vs h3 { margin:0 0 10px; font-weight:900; font-size:clamp(1.5rem, min(2.6vw, 4vh), 2.4rem); }
+  .vs h3 em { font-style:normal; color:var(--magenta-deep); }
+  .vs ul { margin:0; padding:0; list-style:none; }
+  .vs li { padding:clamp(8px,1.4vh,14px) 0; border-bottom:1px solid var(--plum-line); font-size:clamp(1.1rem, min(1.8vw, 2.8vh), 1.6rem); }
+  .vs li b { font-weight:800; }
+
+  /* s4: many roads, one point */
+  .roads { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1.1fr); align-items:center; gap:clamp(16px,3vw,48px); margin-top:clamp(18px,3vh,36px); }
+  .roads ol { list-style:none; margin:0; padding:0; }
+  .roads li { display:flex; align-items:center; gap:14px; padding:clamp(10px,1.8vh,18px) 0; border-bottom:1px solid var(--plum-line); font-weight:800; font-size:clamp(1.2rem, min(2.2vw, 3.4vh), 2rem); }
+  .roads li:first-child { border-top:3px solid var(--ink); }
+  .dot { width:15px; height:15px; border-radius:50%; background:var(--magenta); box-shadow:0 0 0 4px #fff; flex:none; }
+  .arrow-big { font-weight:900; font-size:clamp(2.4rem, 5vw, 4.5rem); color:var(--ink); line-height:1; }
+  .end-pt { border-top:3px solid var(--orange); padding-top:14px; }
+  .end-pt .dot { background:var(--orange); display:inline-block; vertical-align:middle; margin-inline-end:12px; }
+  .end-pt b { font-weight:900; font-size:clamp(1.8rem, min(3.4vw, 5vh), 3rem); }
+  .end-pt p { margin:8px 0 0; color:var(--ink-soft); font-size:clamp(1rem, 1.5vw, 1.3rem); }
+
+  /* s5 / generic peek: text + phone */
+  .with-phone { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:clamp(24px,5vw,80px); height:100%; }
+  .phone { width:min(var(--phone), 34vw); height:100%; max-height:820px; border-radius:30px; padding:7px; background:var(--plum-2);
+    box-shadow:0 0 0 1px var(--line-plum), 0 30px 60px -24px rgba(0,0,0,.6); transform:rotate(1.5deg); }
+  .phone iframe { display:block; width:100%; height:100%; border:0; border-radius:24px; background:#fff; }
+
+  /* research bars */
+  .study { margin-top:clamp(18px,3vh,36px); }
+  .study .q { color:var(--ink-soft); font-size:clamp(1rem, 1.5vw, 1.3rem); margin:0 0 clamp(8px,1.6vh,16px); }
+  .study .q b { color:var(--ink); font-weight:500; }
+  .row { display:grid; grid-template-columns:minmax(0,15em) minmax(0,1fr) auto; align-items:center; gap:clamp(14px,2vw,32px); padding:clamp(12px,2.2vh,22px) 0; border-bottom:1px solid var(--plum-line); }
+  .row:first-of-type { border-top:2px solid var(--ink); }
+  .row .who { font-weight:800; font-size:clamp(1.1rem, min(1.9vw, 3vh), 1.7rem); line-height:1.25; }
+  .row .track { height:clamp(16px,3vh,30px); border-radius:999px; background:rgba(43,26,46,.08); overflow:hidden; }
+  .row .fill { height:100%; border-radius:999px; background:var(--orange); }
+  .row.low .fill { background:var(--ink-soft); }
+  .row .num { font-weight:900; font-size:clamp(2.4rem, min(5.4vw, 8vh), 5rem); line-height:.9; letter-spacing:-.03em; color:var(--magenta-deep); min-width:2.4em; text-align:end; }
+  .row.low .num { color:var(--ink-soft); }
+  .src { margin:clamp(12px,2vh,22px) 0 0; color:var(--ink-soft); font-size:.95rem; }
+
+  /* s8: experience + hero quote */
+  .split { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:clamp(24px,5vw,80px); align-items:center; }
+  .quote { background:var(--paper); color:var(--ink); border-radius:6px 6px 18px 18px; padding:clamp(22px,4vh,44px) clamp(22px,3vw,44px); transform:rotate(.8deg);
+    box-shadow:0 30px 60px -28px rgba(0,0,0,.6); }
+  .quote .lbl { color:var(--magenta-deep); font-weight:700; font-size:.95rem; display:block; padding-bottom:10px; border-bottom:2px solid var(--ink); }
+  .quote p { margin:16px 0 0; font-weight:900; font-size:clamp(1.8rem, min(3.6vw, 5.4vh), 3.2rem); line-height:1.1; }
+  .quote small { display:block; margin-top:12px; color:var(--ink-soft); font-size:1rem; }
+
+  /* s9: one person */
+  .person { list-style:none; margin:clamp(18px,3vh,32px) 0 0; padding:0; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); border-top:2px solid var(--ink); }
+  .person li { padding:clamp(14px,2.6vh,26px) clamp(14px,2vw,28px); font-weight:900; font-size:clamp(1.3rem, min(2.4vw, 3.6vh), 2.2rem); line-height:1.2; }
+  .person li + li { border-inline-start:1px solid var(--plum-line); }
+  .person li:first-child { padding-inline-start:0; }
+  .person li span { display:block; color:var(--magenta-deep); font-size:.55em; font-weight:700; margin-bottom:6px; }
+
+  /* s11: the prompt */
+  .prompt-head { display:flex; justify-content:space-between; align-items:baseline; gap:16px; border-bottom:2px solid var(--ink); padding-bottom:12px; }
+  .prompt-head h2 { border:0; padding:0; }
+  .copy { font:inherit; font-size:1rem; background:none; border:0; padding:4px 2px; cursor:pointer; color:var(--magenta-deep); font-weight:500; text-decoration:underline; text-underline-offset:.22em; text-decoration-thickness:1.5px; white-space:nowrap; }
+  .prompt { margin:clamp(12px,2vh,20px) 0 0; font-size:clamp(.92rem, min(1.35vw, 2.15vh), 1.25rem); line-height:1.5; columns:2; column-gap:clamp(24px,4vw,64px); column-rule:1px solid var(--plum-line); }
+  .prompt p { margin:0 0 .55em; break-inside:avoid; }
+  .prompt .h { font-weight:800; }
+  .prompt ol, .prompt ul { margin:0 0 .55em; padding-inline-start:1.3em; break-inside:avoid; }
+  .prompt .key { font-weight:700; }
+
+  /* s12: the answer */
+  .answer { list-style:none; margin:clamp(10px,1.6vh,18px) 0 0; padding:0; counter-reset:a; }
+  .answer li { counter-increment:a; display:grid; grid-template-columns:2em minmax(0,13em) minmax(0,1fr) auto; gap:12px; align-items:baseline; padding:clamp(6px,1.25vh,13px) 0; border-bottom:1px solid var(--plum-line); color:var(--ink-soft); font-size:clamp(1rem, min(1.6vw, 2.5vh), 1.45rem); line-height:1.3; }
+  .answer li::before { content:counter(a); font-weight:900; color:var(--ink-soft); }
+  .answer li b { font-weight:800; }
+  .answer li.hot { color:var(--ink); }
+  .answer li.hot::before { color:var(--magenta-deep); }
+  .answer li.hot span mark { font-weight:500; }
+  .inf { font-size:.75em; font-weight:700; color:var(--magenta-deep); border:1.5px dashed var(--magenta-deep); border-radius:6px; padding:0 8px; white-space:nowrap; }
+  .demo-lbl { color:var(--ink-soft); font-size:1rem; font-weight:400; white-space:nowrap; }
+  .legend { margin:clamp(8px,1.4vh,14px) 0 0; color:var(--ink-soft); font-size:.95rem; }
+
+  /* ===== part 4: map + side by side ===== */
+  .map { display:none; min-height:0; padding:clamp(20px,4vh,56px) var(--gutter); align-items:center; justify-content:center; }
+  body.mapmode .map { display:flex; }
+  .map .sheet { width:100%; max-width:1280px; }
+  .map ol { list-style:none; margin:clamp(14px,2.4vh,28px) 0 0; padding:0; display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); }
+  .map li { padding:clamp(14px,2.4vh,26px) clamp(14px,2vw,30px); border-bottom:1px solid var(--plum-line); }
+  .map li:nth-child(3n+1) { padding-inline-start:0; }
+  .map li:not(:nth-child(3n+1)) { border-inline-start:1px solid var(--plum-line); }
+  .map li:nth-child(n+4) { border-bottom:0; }
+  .map .n { font-weight:900; font-size:clamp(2rem, 4vh, 3rem); line-height:1; color:var(--magenta-deep); }
+  .map .st { display:block; margin:8px 0 2px; font-weight:700; color:var(--ink-soft); font-size:1rem; }
+  .map .q { font-weight:900; font-size:clamp(1.4rem, min(2.4vw, 3.6vh), 2.2rem); line-height:1.2; }
+  .map .ss { margin-top:8px; color:var(--ink-soft); font-size:.95rem; }
+
+  .stage-area { display:none; min-height:0; justify-content:center; align-items:stretch;
+    grid-template-columns:minmax(0,330px) var(--phone) var(--phone) minmax(0,330px);
+    grid-template-areas:"gc gf if ic"; gap:0 28px; padding:16px 24px 12px; }
+  body.cmp:not(.mapmode) .stage-area { display:grid; }
+  .col-cap { align-self:center; }
+  .col-cap.g { grid-area:gc; } .col-cap.i { grid-area:ic; }
+  .col-cap h3 { margin:0 0 12px; padding-bottom:8px; font-weight:900; font-size:28px; border-bottom:2px solid var(--line-plum); }
+  .col-cap.g h3 { color:var(--on-plum-soft); }
+  .col-cap.i h3 { border-bottom-color:var(--magenta); }
+  .col-cap p { margin:0; font-size:clamp(17px,1.25vw,20px); transition:opacity .35s var(--ease-out); }
+  .col-cap p mark { background:none; color:var(--orange); font-weight:700; padding:0; }
+  body.nocap .col-cap p { opacity:0; }
+
+  .frame { position:relative; display:flex; flex-direction:column; min-height:0; }
+  .frame.g { grid-area:gf; } .frame.i { grid-area:if; }
+  .frame .lbl { font-size:15px; font-weight:500; color:var(--on-plum-soft); margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid var(--line-plum); }
+  .frame.i .lbl { color:var(--on-plum); }
+  .bezel { position:relative; flex:1; min-height:0; border-radius:30px; padding:7px; background:var(--plum-2); box-shadow:0 0 0 1px var(--line-plum), 0 30px 60px -24px rgba(0,0,0,.6); }
+  .bezel iframe { display:block; width:100%; height:100%; border:0; border-radius:24px; background:#fff; }
+  .none { position:absolute; inset:7px; border-radius:24px; display:grid; place-content:center; text-align:center; gap:6px;
+    background:rgba(43,26,46,.94); opacity:0; pointer-events:none; transition:opacity .45s var(--ease-out); }
+  .none b { font-weight:900; font-size:76px; line-height:1; }
+  .none span { color:var(--on-plum-soft); font-size:17px; padding:0 30px; }
+  .frame.empty .none { opacity:1; }
+
+  /* bottom rail */
+  nav { display:flex; justify-content:center; align-items:center; gap:4px 6px; flex-wrap:wrap; padding:10px 16px max(14px, env(safe-area-inset-bottom, 0px)); border-top:1px solid var(--line-plum); }
+  nav button { font:inherit; font-size:15px; color:var(--on-plum-soft); background:none; border:0; padding:6px 12px; border-radius:999px; cursor:pointer; transition:color .2s; }
+  nav button:hover { color:var(--on-plum); }
+  nav button[aria-current="true"] { background:var(--paper); color:var(--ink); font-weight:500; }
+  nav .arrow { font-size:20px; color:var(--on-plum); padding:2px 14px; box-shadow:0 0 0 1px var(--line-plum); }
+  nav .sep { width:1px; height:18px; background:var(--line-plum); margin:0 6px; }
+  nav .sub { font-size:14px; padding:4px 9px; }
+  nav .count { color:var(--on-plum-soft); font-size:13px; margin-inline-start:12px; }
+
+  @media (max-width:1380px) {
+    .stage-area { grid-template-columns:var(--phone) var(--phone); grid-template-rows:auto 1fr; grid-template-areas:"gc ic" "gf if"; gap:12px 28px; }
+    .col-cap { align-self:start; }
+    .col-cap h3 { display:none; }
+    .col-cap p { font-size:16px; }
+  }
+  @media (max-width:920px) {
+    .sheet, .quote, .phone { transform:none; }
+    .vs, .roads, .split, .with-phone, .person, .map ol { grid-template-columns:1fr; }
+    .vs > div + div, .person li + li, .map li { border-inline-start:0 !important; padding-inline-start:0 !important; }
+    .arrow-big { transform:rotate(-90deg); }
+    .prompt { columns:1; }
+    .phone { width:100%; height:60vh; }
+    .slide { overflow:auto; }
+    .slide.on { justify-content:flex-start; }
+  }
+  @media (max-width:860px) {
+    :root { --phone: calc(50vw - 26px); }
+    .stage-area { gap:10px 12px; padding-inline:12px; }
+    nav .count, .part { display:none; }
+  }
+  @media (max-width:560px) { body { font-size:16px; } .answer li { grid-template-columns:1.6em minmax(0,1fr); } .answer li span { grid-column:2; } }
+  @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none!important; animation:none!important; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand"><img src="robot-white.png" alt="" width="30" height="34">BOOST ME</div>
+  <div class="tag" aria-live="polite"><span class="stage" id="stage"></span><b id="q"></b><span class="pr" id="principle"></span></div>
+  <div class="part" id="part"></div>
+</header>
+
+<main class="deck" id="deck">
+
+  <!-- ===== חלק 1: הקדמה ===== -->
+  <section class="slide" id="intro" data-part="1" data-name="פתיחה" aria-labelledby="t-intro">
+    <div class="inner">
+      <p class="kicker">הפסיכולוגיה של עמודי נחיתה</p>
+      <h1 class="big" id="t-intro">אל תבנו עמוד.<br><span class="pen">תבנו החלטה.</span></h1>
+      <div class="byline"><img src="robot-white.png" alt=""><span><strong>גל</strong> · BOOST ME · AI &amp; Tools</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="site-vs-lp" data-part="1" data-name="אתר מול עמוד" aria-labelledby="t-vs">
+    <div class="inner sheet paper">
+      <h2 id="t-vs">אתר מול עמוד נחיתה</h2>
+      <div class="vs">
+        <div>
+          <h3>אתר</h3>
+          <ul><li><b>כמו כלבו.</b> הרבה עמודים, תפריט.</li><li>באים להסתובב, לחפור, לגלות.</li></ul>
+        </div>
+        <div>
+          <h3><em>עמוד נחיתה</em></h3>
+          <ul><li><b>עמוד אחד. מטרה אחת.</b></li><li>בלי תפריט, בלי "אולי תציצו גם פה".</li></ul>
+        </div>
+      </div>
+      <p class="honest">או שעושים את הצעד, <mark>או שלא.</mark></p>
+    </div>
+  </section>
+
+  <section class="slide" id="chat" data-part="1" data-name="לצ'אט" aria-labelledby="t-chat">
+    <div class="inner">
+      <p class="kicker">כתבו בצ'אט</p>
+      <h2 class="big" id="t-chat">יש לכם עמוד נחיתה?<br><span class="pen">על מה הוא?</span></h2>
+    </div>
+  </section>
+
+  <section class="slide" id="meeting" data-part="1" data-name="נקודת מפגש" aria-labelledby="t-meet">
+    <div class="inner sheet paper">
+      <h2 id="t-meet">נקודת מפגש אחת</h2>
+      <div class="roads">
+        <ol aria-label="מאיפה מגיעים">
+          <li><span class="dot" aria-hidden="true"></span>מודעה</li>
+          <li><span class="dot" aria-hidden="true"></span>ניוזלטר</li>
+          <li><span class="dot" aria-hidden="true"></span>הודעה בוואטסאפ</li>
+        </ol>
+        <div class="arrow-big" aria-hidden="true">←</div>
+        <div class="end-pt"><b><span class="dot" aria-hidden="true"></span>העמוד</b><p>כל הדרכים נגמרות כאן.</p></div>
+      </div>
+      <p class="honest">אתם לא שם כדי להסביר. <mark>העמוד מדבר במקומכם.</mark></p>
+    </div>
+  </section>
+
+  <section class="slide" id="peek" data-part="1" data-name="הצצה" aria-labelledby="t-peek">
+    <div class="inner with-phone">
+      <div>
+        <p class="kicker">ניסוי קטן</p>
+        <h2 class="big" id="t-peek">ביקשתי מ-AI עמוד נחיתה לסדנה.<br><span class="pen">בשורה אחת.</span></h2>
+        <p class="lede">נראה טוב, נכון? <strong>תזכרו אותו. נחזור אליו.</strong></p>
+      </div>
+      <div class="phone"><iframe data-src="generic.html" title="העמוד הגנרי" loading="lazy"></iframe></div>
+    </div>
+  </section>
+
+  <!-- ===== חלק 2: כאב או תענוג ===== -->
+  <section class="slide" id="pain" data-part="2" data-name="העיקרון" aria-labelledby="t-pain">
+    <div class="inner">
+      <h2 class="big" id="t-pain">מתרחקים מכאב.<br><span class="pen">מתקרבים לתענוג.</span></h2>
+      <p class="lede">תולעת · חתול · בן אדם</p>
+    </div>
+  </section>
+
+  <section class="slide" id="study" data-part="2" data-name="המחקר" aria-labelledby="t-study">
+    <div class="inner sheet paper">
+      <h2 id="t-study">אותו מוצר. מצב אחר.</h2>
+      <div class="study">
+        <p class="q">כמה בחרו <b>במשחת שיניים מלבינה</b>, ולא במשחה נגד עששת?</p>
+        <div class="row"><div class="who">חשבו קודם על<br>החלומות שלהם</div><div class="track"><div class="fill" style="width:39%"></div></div><div class="num">39%</div></div>
+        <div class="row low"><div class="who">חשבו קודם על<br>חובות ובעיות</div><div class="track"><div class="fill" style="width:17%"></div></div><div class="num">17%</div></div>
+      </div>
+      <p class="src">Chernev, 2004 · Journal of Consumer Psychology</p>
+    </div>
+  </section>
+
+  <section class="slide" id="business" data-part="2" data-name="ולעסקים" aria-labelledby="t-biz">
+    <div class="inner split">
+      <div>
+        <p class="kicker">מהשטח</p>
+        <h2 class="big" id="t-biz">בעלי עסקים מגיעים <span class="pen">כשמשהו כואב.</span></h2>
+        <p class="lede">הם לא מחפשים חוויה. <strong>הם רוצים שמשהו יפסיק להציק.</strong></p>
+      </div>
+      <div class="quote paper">
+        <span class="lbl">הכותרת בעמוד הדוגמה</span>
+        <p>יש לך מוצר ואין לך צלם?</p>
+        <small>לא "תמונות מהממות". מתחילה מהכאב.</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== חלק 3: בראש של הלקוח ===== -->
+  <section class="slide" id="persona" data-part="3" data-name="אפיון" aria-labelledby="t-persona">
+    <div class="inner sheet paper">
+      <h2 id="t-persona">"כולם" זה לא קהל.</h2>
+      <p class="sub">גם "בעלי עסקים" זה לא קהל. אפיון לקוח הוא תמונה של <strong>אדם אחד</strong>:</p>
+      <ul class="person">
+        <li><span>1</span>מה כואב לו</li>
+        <li><span>2</span>ממה הוא חושש</li>
+        <li><span>3</span>מה הוא כבר ניסה</li>
+      </ul>
+      <p class="honest">כשזה לא כתוב, <mark>ה-AI ממלא את החורים בממוצע.</mark></p>
+    </div>
+  </section>
+
+  <section class="slide" id="flip" data-part="3" data-name="הפוך" aria-labelledby="t-flip">
+    <div class="inner">
+      <p class="kicker">הפעם הראשונה של ה-AI בהדרכה</p>
+      <h2 class="big" id="t-flip">ה-AI שואל.<br><span class="pen">אתם עונים.</span></h2>
+      <p class="lede">הוא לא מכיר את הלקוחות שלכם. <strong>אתם כן.</strong></p>
+    </div>
+  </section>
+
+  <section class="slide" id="prompt" data-part="3" data-name="הפרומפט" aria-labelledby="t-prompt">
+    <div class="inner sheet paper">
+      <div class="prompt-head"><h2 id="t-prompt">פרומפט: ראיין אותי</h2><button type="button" class="copy" id="copy">להעתקת הפרומפט</button></div>
+      <div class="prompt" id="prompt-text">
+        <p class="h">אני רוצה לדייק מי הלקוח שלי. תראיין אותי.<br>המוצר או השירות שלי: [ ]</p>
+        <p class="h">כללים:</p>
+        <ul>
+          <li>שאל שאלה אחת בכל פעם, וחכה לתשובה.</li>
+          <li>עד 8 שאלות. אם תשובה כללית מדי ("כולם", "נשים", "עסקים קטנים"), שאל שאלת המשך אחת שמחדדת.</li>
+          <li class="key"><mark>אל תציע תשובות ואל תנחש.</mark> את התשובות אתה מקבל ממני, אתה רק שואל.</li>
+        </ul>
+        <p class="h">בסוף הראיון, סכם את הלקוח שלי בשבע שורות:</p>
+        <ol>
+          <li>מה הוא רוצה</li>
+          <li>מה כואב לו עכשיו (במילים שלו, לא במילים שיווקיות)</li>
+          <li>מה הוא כבר יודע</li>
+          <li>מה הוא לא מבין</li>
+          <li>ממה הוא חושש</li>
+          <li>במה הוא לא מאמין</li>
+          <li>מה הוא כבר ניסה ולא עבד</li>
+        </ol>
+        <p>ליד כל שורה סמן 🟢 אם זה מהתשובות שלי, או 🟡 אם זו הסקה שלך.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="answer" data-part="3" data-name="התשובה" aria-labelledby="t-answer">
+    <div class="inner sheet paper">
+      <div class="prompt-head"><h2 id="t-answer">הלקוחה שלי בשבע שורות</h2><span class="demo-lbl">סדנה לדוגמה</span></div>
+      <ol class="answer">
+        <li><b>מה היא רוצה</b><span>תמונות של המוצר שלה, שאפשר להעלות לחנות</span></li>
+        <li><b>מה כואב לה</b><span>"זה נראה ביתי"</span></li>
+        <li><b>מה היא כבר יודעת</b><span>שאחרים מצליחים עם AI</span></li>
+        <li><b>מה היא לא מבינה</b><span>חושבת שיש פרומפט סודי או כלי בתשלום</span><span class="inf">הסקה</span></li>
+        <li class="hot"><b>ממה היא חוששת</b><span><mark>ללמוד, ולהישאר עם תמונות שאי אפשר להשתמש בהן</mark></span></li>
+        <li class="hot"><b>במה היא לא מאמינה</b><span><mark>שהיא תגיע לרמה מספיק טובה</mark></span></li>
+        <li><b>מה כבר ניסתה</b><span>חלון, צלם, כלי AI ששינה את הצבעים והתווית</span></li>
+      </ol>
+      <p class="legend">כל השורות מהתשובות, חוץ מזו שמסומנת "הסקה".</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== חלק 4: מסע ההחלטה ===== -->
+<div class="map" id="mapwrap">
+  <div class="sheet paper">
+    <h2>מסע ההחלטה: 6 שאלות בראש של הלקוח</h2>
+    <ol id="map"></ol>
+  </div>
+</div>
+
+<div class="stage-area" id="stagearea">
+  <div class="col-cap g"><h3>גנרי</h3><p id="gcap"></p></div>
+  <div class="frame g" id="gframe">
+    <div class="lbl">גנרי · פרומפט של שורה אחת</div>
+    <div class="bezel">
+      <iframe id="gif" src="generic.html" title="העמוד הגנרי"></iframe>
+      <div class="none"><b>אין</b><span>בעמוד הגנרי אין סקשן כזה</span></div>
+    </div>
+  </div>
+  <div class="frame i" id="iframe">
+    <div class="lbl">מושכל · אחרי ההחלטות</div>
+    <div class="bezel"><iframe id="iif" src="index.html" title="העמוד המושכל"></iframe></div>
+  </div>
+  <div class="col-cap i"><h3>מושכל</h3><p id="icap"></p></div>
+</div>
+
+<nav id="nav" aria-label="ניווט במצגת"></nav>
+
+<script>
+(function () {
+  var PARTS = { 1: 'הקדמה', 2: 'כאב או תענוג', 3: 'בראש של הלקוח', 4: 'מסע ההחלטה' };
+
+  // Table "גנרי מול מושכל" (training note, 2026-11-10). g: selector in generic.html, null = no matching section.
+  var S = [
+    { id: 's1', name: 'פתיחה', stage: 'קשב', pr: 'בולטות',
+      g: '#s1', gt: '"תמונה אחת של המוצר. חמש תמונות שמוכרות." כפתור: "אני רוצה את המקום שלי".',
+      i: '#s1', it: 'פותח בכאב: "יש לך מוצר ואין לך צלם?". לפני ואחרי אמיתי. <mark>↩ מהגנרי:</mark> כפתור בגוף ראשון, "אני רוצה תמונות כאלה".' },
+    { id: 's2', name: 'בשבילך', stage: 'רלוונטיות', pr: 'רלוונטיות',
+      g: '#s2', gt: 'שלושה כאבים: תמונות סתמיות, צלם יקר, "ניסית AI ולא יצא טוב".',
+      i: '#s2', it: '<mark>↩</mark> חנות או בשלבי הקמה. <mark>↩</mark> "צילום ו-AI זה לא התחום שלך". תמונת ה"לפני" מהטלפון: "ככה התחלתי".' },
+    { id: 's3', name: 'מה מקבלים', stage: 'הבנה', pr: 'מאמץ קוגניטיבי',
+      g: '#s3', gt: 'שלוש רשימות נפרדות: איך זה עובד (4), מה תיקחי (4), מה להביא (3).',
+      i: '#s3', it: 'מספר אחד גדול: 5. שלושה סגנונות. <mark>↩</mark> "השיטה נשארת אצלך". מה להביא בשורה אחת.' },
+    { id: 's4', name: 'הוכחה', stage: 'אמון', pr: 'אמון והוכחה',
+      g: null, gt: 'אין הוכחה.',
+      i: '#s4', it: 'הניסיון הראשון שלא יצא טוב, בגלוי.' },
+    { id: 's5', name: 'הדרך', stage: 'ביטחון', pr: 'אי-ודאות',
+      g: '#faq details:nth-of-type(2)', open: true, gt: 'הפחד המרכזי, "יהיו דומות למוצר?", מופיע בשאלה נפוצה מקופלת, ונענה בהבטחה.',
+      i: '#s5', it: 'בדיקה, תיקון, תוצאה, כולל הפרומפט המתוקן וההבדל שנשאר.' },
+    { id: 's5b', name: 'תוצאות', stage: 'אמון', pr: 'אמון והוכחה',
+      g: null, gt: 'אין. הוא לא המציא תוצאות, וזה לזכותו.',
+      i: '#s5b', it: 'תוצאות מסומנות "לדוגמה, מדומות". בעמוד אמיתי: תוצאות אמיתיות.' },
+    { id: 's6', name: 'המנחה', stage: 'אמון', pr: 'אמון והוכחה',
+      g: '#s6', gt: '"גל תנחה צעד אחר צעד, בקבוצה קטנה". לא אומר מי היא.',
+      i: '#s6', it: '"אני לא צלמת". מי אני, ו"את התמונות כאן הפקתי בעצמי".' },
+    { id: 's7', name: 'פרטים', stage: 'ביטחון', pr: 'חיכוך',
+      g: '.g-facts', gt: 'יום, שעתיים, 12, מחיר. אין שעה ואין הקלטה.',
+      i: '#s7', it: 'שעה, זום עם הקלטה, "הקישור נשאר אצלך לתמיד".' },
+    { id: 's8', name: 'סיכון', stage: 'ביטחון', pr: 'הפסד',
+      g: null, gt: 'אין.',
+      i: '#s8', it: 'קבוצת וואטסאפ מרגע ההרשמה ועד שבוע אחרי הסדנה.' },
+    { id: 's9', name: 'הרשמה', stage: 'פעולה', pr: 'חיכוך + דחיפות',
+      g: '#register', gt: '"12 מקומות בלבד" ו"נשארו 12 מקומות", ולצידם "כדי שיהיה זמן לכל אחת". קישור הזום רק בשאלה נפוצה.',
+      i: '#s9', it: '"12 משתתפות, כדי שיהיה זמן לעבור על התמונה של כל אחת". פרטים ומחיר ליד הכפתור. "אני נרשמת". שלושה דברים שיגיעו במייל, מתחת לכפתור.' }
+  ];
+
+  // 6 stages, one question each (Gal, 2026-11-10)
+  var STAGES = ['קשב', 'רלוונטיות', 'הבנה', 'אמון', 'ביטחון', 'פעולה'];
+  var Q = { 'קשב': 'מה זה?', 'רלוונטיות': 'זה בשבילי?', 'הבנה': 'הבנתי מה מציעים?',
+            'אמון': 'למה שאאמין?', 'ביטחון': 'מה הסיכון?', 'פעולה': 'מה יקרה אם אלחץ?' };
+  var mapEl = document.getElementById('map');
+  STAGES.forEach(function (st, k) {
+    var secs = S.filter(function (s) { return s.stage === st; }).map(function (s) { return s.name; }).join(' · ');
+    var li = document.createElement('li');
+    li.innerHTML = '<div class="n">' + (k + 1) + '</div><span class="st">' + st + '</span><div class="q">' + Q[st] + '</div><div class="ss">' + secs + '</div>';
+    mapEl.appendChild(li);
+  });
+
+  // one ordered list of steps: slides (parts 1-3), then map, then comparison sections (part 4)
+  var STEPS = [];
+  Array.prototype.forEach.call(document.querySelectorAll('.slide'), function (el) {
+    STEPS.push({ kind: 'slide', id: el.id, part: +el.dataset.part, name: el.dataset.name, el: el });
+  });
+  STEPS.push({ kind: 'map', id: 'map', part: 4, name: 'מפה' });
+  S.forEach(function (s) { s.kind = 'cmp'; s.part = 4; STEPS.push(s); });
+
+  var gif = document.getElementById('gif'), iif = document.getElementById('iif');
+  var gframe = document.getElementById('gframe'), nav = document.getElementById('nav');
+  var cur = 0, loaded = 0;
+
+  // rail: arrows + parts; inside a part, its steps as small buttons
+  function btn(t, c, f) { var b = document.createElement('button'); b.type = 'button'; b.textContent = t; if (c) b.className = c; b.onclick = f; return b; }
+  function firstOf(p) { for (var k = 0; k < STEPS.length; k++) if (STEPS[k].part === p) return k; return 0; }
+  function renderNav() {
+    nav.innerHTML = '';
+    var s = STEPS[cur];
+    var prev = btn('→', 'arrow', function () { go(cur - 1); }); prev.setAttribute('aria-label', 'הקודם'); nav.appendChild(prev);
+    Object.keys(PARTS).forEach(function (p) {
+      p = +p;
+      var b = btn(PARTS[p], '', function () { go(firstOf(p)); });
+      if (p === s.part) b.setAttribute('aria-current', 'true');
+      nav.appendChild(b);
+      if (p === s.part) {
+        STEPS.forEach(function (x, k) {
+          if (x.part !== p) return;
+          var sb = btn(x.name, 'sub', function () { go(k); });
+          sb.style.color = k === cur ? 'var(--on-plum)' : '';
+          sb.style.textDecoration = k === cur ? 'underline' : '';
+          sb.style.textUnderlineOffset = '.3em';
+          if (k === cur) sb.setAttribute('aria-current', 'step');
+          nav.appendChild(sb);
+        });
+        var sep = document.createElement('span'); sep.className = 'sep'; nav.appendChild(sep);
+      }
+    });
+    var next = btn('←', 'arrow', function () { go(cur + 1); }); next.setAttribute('aria-label', 'הבא'); nav.appendChild(next);
+    var c = document.createElement('span'); c.className = 'count'; c.textContent = (cur + 1) + ' / ' + STEPS.length + ' · חיצים · C כיתובים'; nav.appendChild(c);
+  }
+
+  function prep(fr) {
+    var d = fr.contentDocument;
+    var st = d.createElement('style');
+    st.textContent = '.present-hl{outline:3px solid #B30C6E;outline-offset:8px;border-radius:14px;transition:outline-color .3s}.pill{display:none!important}';
+    d.head.appendChild(st);
+  }
+
+  function scrollTo(fr, sel, open) {
+    var w = fr.contentWindow, d = fr.contentDocument;
+    if (!d) return;
+    d.querySelectorAll('.present-hl').forEach(function (e) { e.classList.remove('present-hl'); });
+    var el = d.querySelector(sel);
+    if (!el) return;
+    d.querySelectorAll('#faq details').forEach(function (x) { x.open = false; });
+    if (open) el.open = true;
+    var isSection = el.tagName === 'SECTION';
+    if (!isSection) el.classList.add('present-hl');
+    var top = el.getBoundingClientRect().top + w.scrollY - (isSection ? 0 : 90);
+    w.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+
+  function go(n) {
+    cur = Math.max(0, Math.min(STEPS.length - 1, n));
+    var s = STEPS[cur];
+    document.querySelectorAll('.slide.on').forEach(function (e) { e.classList.remove('on'); });
+    document.body.classList.toggle('cmp', s.kind !== 'slide');
+    document.body.classList.toggle('mapmode', s.kind === 'map');
+    document.getElementById('part').innerHTML = '<strong>' + s.part + '</strong> · ' + PARTS[s.part];
+    if (s.kind === 'slide') {
+      s.el.classList.add('on');
+      var lz = s.el.querySelector('iframe[data-src]');
+      if (lz && !lz.src) lz.src = lz.dataset.src;
+    } else if (s.kind === 'map') {
+      document.getElementById('stage').textContent = '';
+    } else {
+      document.getElementById('stage').textContent = s.stage;
+      document.getElementById('q').textContent = Q[s.stage];
+      document.getElementById('principle').textContent = s.pr;
+      document.getElementById('gcap').innerHTML = s.gt;
+      document.getElementById('icap').innerHTML = s.it;
+      gframe.classList.toggle('empty', !s.g);
+      if (loaded === 2) {
+        if (s.g) scrollTo(gif, s.g, s.open);
+        scrollTo(iif, s.i);
+      }
+    }
+    renderNav();
+    history.replaceState(null, '', '#' + s.id);
+  }
+
+  [gif, iif].forEach(function (fr) {
+    fr.addEventListener('load', function () {
+      prep(fr); loaded++; if (loaded === 2 && STEPS[cur].kind === 'cmp') go(cur);
+      fr.contentDocument.addEventListener('keydown', function (e) {
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: e.key }));
+        if (['ArrowLeft', 'ArrowRight', ' ', 'PageDown', 'PageUp'].indexOf(e.key) > -1) e.preventDefault();
+      });
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.target && e.target.tagName === 'BUTTON' && e.key === ' ') return;
+    if (e.key === 'ArrowLeft' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(cur + 1); }
+    else if (e.key === 'ArrowRight' || e.key === 'PageUp') { e.preventDefault(); go(cur - 1); }
+    else if (e.key === 'Home') go(0);
+    else if (e.key === 'End') go(STEPS.length - 1);
+    else if (e.key === 'c' || e.key === 'C' || e.key === 'ב') document.body.classList.toggle('nocap');
+  });
+
+  // copy the interview prompt as plain text
+  document.getElementById('copy').addEventListener('click', function () {
+    var b = this;
+    var txt = 'אני רוצה לדייק מי הלקוח שלי. תראיין אותי.\nהמוצר או השירות שלי: [ ]\n\nכללים:\n- שאל שאלה אחת בכל פעם, וחכה לתשובה.\n- עד 8 שאלות. אם תשובה כללית מדי ("כולם", "נשים", "עסקים קטנים"), שאל שאלת המשך אחת שמחדדת.\n- אל תציע תשובות ואל תנחש. את התשובות אתה מקבל ממני, אתה רק שואל.\n\nבסוף הראיון, סכם את הלקוח שלי בשבע שורות:\n1. מה הוא רוצה\n2. מה כואב לו עכשיו (במילים שלו, לא במילים שיווקיות)\n3. מה הוא כבר יודע\n4. מה הוא לא מבין\n5. ממה הוא חושש\n6. במה הוא לא מאמין\n7. מה הוא כבר ניסה ולא עבד\n\nליד כל שורה סמן 🟢 אם זה מהתשובות שלי, או 🟡 אם זו הסקה שלך.';
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function () {
+      b.textContent = 'הועתק'; setTimeout(function () { b.textContent = 'להעתקת הפרומפט'; }, 1800);
+    }, function () { b.textContent = 'לא הצלחתי להעתיק'; });
+  });
+
+  var start = STEPS.findIndex(function (s) { return '#' + s.id === location.hash; });
+  go(start > -1 ? start : 0);
+})();
+</script>
+</body>
+</html>
