@@ -50,8 +50,9 @@
   /* deck */
   .deck{position:relative;min-height:0}
   .slide{position:absolute;inset:0;display:none;padding:clamp(20px,4vh,56px) var(--gutter);overflow:hidden}
-  .slide.on{display:flex;flex-direction:column;justify-content:center}
-  body.cmp .slide.on{display:none}
+  .slide.on{display:flex;flex-direction:column;justify-content:safe center}
+  body.cmp .deck{display:none}
+  body:not(.cmp) .map,body:not(.cmp) .stage-area{display:none!important}
   .inner{width:100%;max-width:1240px;margin:0 auto}
   .slide.grad{background:var(--gradient);color:#fff}
   .slide.grad .pen{color:var(--dark)}
@@ -573,6 +574,7 @@
       }
     }
     renderNav();
+    fit();
     history.replaceState(null, '', '#' + s.id);
   }
 
@@ -603,6 +605,19 @@
       b.textContent = 'הועתק'; setTimeout(function () { b.textContent = 'להעתקת הפרומפט'; }, 1800);
     }, function () { b.textContent = 'לא הצלחתי להעתיק'; });
   });
+
+  // shrink a slide that is taller than the screen, so nothing falls below the fold
+  function fit() {
+    var s = STEPS[cur]; if (s.kind !== 'slide') return;
+    var inner = s.el.querySelector('.inner'); if (!inner) return;
+    inner.style.zoom = '';
+    var cs = getComputedStyle(s.el);
+    var avail = s.el.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    var need = inner.scrollHeight;
+    if (need > avail && avail > 0) inner.style.zoom = Math.max(.5, avail / need).toFixed(3);
+  }
+  window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 
   var start = STEPS.findIndex(function (s) { return '#' + s.id === location.hash; });
   go(start > -1 ? start : 0);
