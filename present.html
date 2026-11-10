@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>גנרי מול מושכל</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f6f1e8; --paper: #fbf8f2; --ink: #1c1512; --muted: #6f655b;
+    --hair: rgba(28,21,18,.12); --accent: #7a1f2e; --espresso: #17110e;
+    --on-dark: #f3ece1; --on-dark-muted: #b9ad9e; --hair-dark: rgba(243,236,225,.14);
+    --serif: "Rubik", "Heebo", system-ui, sans-serif;
+    --sans: "Heebo", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --ease: cubic-bezier(.32,.72,0,1);
+    --phone: 390px;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--espresso); color: var(--on-dark);
+    font-family: var(--sans); font-size: 18px; line-height: 1.55;
+    display: grid; grid-template-rows: auto 1fr auto; overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* top: section + tag */
+  header {
+    display: flex; align-items: baseline; justify-content: center; gap: 22px; flex-wrap: wrap;
+    padding: 18px 24px 14px; border-bottom: 1px solid var(--hair-dark);
+  }
+  .sec { font-family: var(--serif); font-weight: 800; font-size: clamp(26px, 2.6vw, 38px); line-height: 1.1; }
+  .sec small { font-family: var(--sans); font-weight: 500; font-size: .5em; color: var(--on-dark-muted); margin-inline-end: 10px; letter-spacing: .04em; }
+  .tag { display: inline-flex; gap: 10px; align-items: center; font-size: clamp(17px, 1.4vw, 21px); }
+  .tag span { padding: 5px 16px; border-radius: 999px; box-shadow: 0 0 0 1px var(--hair-dark); }
+  .tag .stage { background: var(--accent); box-shadow: none; color: #fff; font-weight: 500; }
+  .tag i { color: var(--on-dark-muted); font-style: normal; }
+
+  /* stage: caption | frame | frame | caption */
+  .stage-area {
+    min-height: 0; display: grid; justify-content: center; align-items: stretch;
+    grid-template-columns: minmax(0, 330px) var(--phone) var(--phone) minmax(0, 330px);
+    grid-template-areas: "gc gf if ic";
+    gap: 0 28px; padding: 18px 24px 14px;
+  }
+  .col-cap { align-self: center; }
+  .col-cap.g { grid-area: gc; text-align: right; }
+  .col-cap.i { grid-area: ic; }
+  .col-cap h3 { margin: 0 0 10px; font-family: var(--serif); font-weight: 800; font-size: 28px; }
+  .col-cap.i h3 { color: #e9b8a8; }
+  .col-cap p { margin: 0; font-size: clamp(17px, 1.25vw, 20px); color: var(--on-dark); transition: opacity .35s var(--ease); }
+  .col-cap p mark { background: none; color: #e9b8a8; font-weight: 700; }
+  body.nocap .col-cap p { opacity: 0; }
+
+  .frame { position: relative; display: flex; flex-direction: column; min-height: 0; }
+  .frame.g { grid-area: gf; } .frame.i { grid-area: if; }
+  .frame .lbl { text-align: center; font-size: 15px; font-weight: 500; letter-spacing: .06em; color: var(--on-dark-muted); margin-bottom: 8px; }
+  .bezel { position: relative; flex: 1; min-height: 0; border-radius: 34px; padding: 8px; background: #2a211c; box-shadow: 0 0 0 1px var(--hair-dark), 0 30px 60px -20px rgba(0,0,0,.6); }
+  .bezel iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 27px; background: var(--cream); }
+  .none {
+    position: absolute; inset: 8px; border-radius: 27px; display: grid; place-content: center; text-align: center; gap: 6px;
+    background: rgba(23,17,14,.9); opacity: 0; pointer-events: none; transition: opacity .45s var(--ease);
+  }
+  .none b { font-family: var(--serif); font-weight: 800; font-size: 76px; line-height: 1; }
+  .none span { color: var(--on-dark-muted); font-size: 17px; padding: 0 30px; }
+  .frame.empty .none { opacity: 1; }
+
+  /* bottom: section rail */
+  nav { display: flex; justify-content: center; align-items: center; gap: 6px; flex-wrap: wrap; padding: 10px 16px 16px; border-top: 1px solid var(--hair-dark); }
+  nav button { font: inherit; font-size: 15px; color: var(--on-dark-muted); background: none; border: 0; padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+  nav button:hover { color: var(--on-dark); }
+  nav button[aria-current="true"] { background: var(--on-dark); color: var(--ink); font-weight: 500; }
+  nav .arrow { font-size: 20px; color: var(--on-dark); padding: 4px 14px; box-shadow: 0 0 0 1px var(--hair-dark); }
+  nav .keys { color: var(--on-dark-muted); font-size: 13px; margin-inline-start: 14px; }
+
+  @media (max-width: 1380px) {
+    .stage-area { grid-template-columns: var(--phone) var(--phone); grid-template-rows: auto 1fr; grid-template-areas: "gc ic" "gf if"; gap: 12px 28px; }
+    .col-cap { align-self: start; }
+    .col-cap h3 { display: none; }
+    .col-cap p { font-size: 16px; }
+    .col-cap.g { text-align: right; }
+  }
+  @media (max-width: 860px) {
+    :root { --phone: calc(50vw - 26px); }
+    .stage-area { gap: 10px 12px; padding-inline: 12px; }
+    nav .keys { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="sec" id="sec"></div>
+  <div class="tag"><span class="stage" id="stage"></span><i>·</i><span id="principle"></span></div>
+</header>
+
+<main class="stage-area">
+  <div class="col-cap g"><h3>גנרי</h3><p id="gcap"></p></div>
+  <div class="frame g" id="gframe">
+    <div class="lbl">גנרי · פרומפט של שורה אחת</div>
+    <div class="bezel">
+      <iframe id="gif" src="generic.html" title="העמוד הגנרי"></iframe>
+      <div class="none"><b>אין</b><span>בעמוד הגנרי אין סקשן כזה</span></div>
+    </div>
+  </div>
+  <div class="frame i" id="iframe">
+    <div class="lbl">מושכל · אחרי ההחלטות</div>
+    <div class="bezel"><iframe id="iif" src="index.html" title="העמוד המושכל"></iframe></div>
+  </div>
+  <div class="col-cap i"><h3>מושכל</h3><p id="icap"></p></div>
+</main>
+
+<nav id="nav" aria-label="סקשנים"></nav>
+
+<script>
+(function () {
+  // Table "גנרי מול מושכל" (training note, 2026-11-10). g: selector in generic.html, null = no matching section.
+  var S = [
+    { id: 's1', name: 'פתיחה', stage: 'קשב', pr: 'בולטות',
+      g: '#s1', gt: '"תמונה אחת של המוצר. חמש תמונות שמוכרות." כפתור: "אני רוצה את המקום שלי".',
+      i: '#s1', it: 'פותח בכאב: "יש לך מוצר ואין לך צלם?". לפני ואחרי אמיתי. <mark>↩ מהגנרי:</mark> כפתור בגוף ראשון, "אני רוצה תמונות כאלה".' },
+    { id: 's2', name: 'בשבילך', stage: 'רלוונטיות', pr: 'רלוונטיות',
+      g: '#s2', gt: 'שלושה כאבים: תמונות סתמיות, צלם יקר, "ניסית AI ולא יצא טוב".',
+      i: '#s2', it: '<mark>↩</mark> חנות או בשלבי הקמה. <mark>↩</mark> "צילום ו-AI זה לא התחום שלך". תמונת ה"לפני" מהטלפון: "ככה התחלתי".' },
+    { id: 's3', name: 'מה מקבלים', stage: 'הבנה', pr: 'מאמץ קוגניטיבי',
+      g: '#s3', gt: 'שלוש רשימות נפרדות: איך זה עובד (4), מה תיקחי (4), מה להביא (3).',
+      i: '#s3', it: 'מספר אחד גדול: 5. שלושה סגנונות. <mark>↩</mark> "השיטה נשארת אצלך". מה להביא בשורה אחת.' },
+    { id: 's4', name: 'הוכחה', stage: 'אמון', pr: 'אמון והוכחה',
+      g: null, gt: 'אין הוכחה.',
+      i: '#s4', it: 'הניסיון הראשון שלא יצא טוב, בגלוי.' },
+    { id: 's5', name: 'הדרך', stage: 'ביטחון', pr: 'אי-ודאות',
+      g: '#faq details:nth-of-type(2)', open: true, gt: 'הפחד המרכזי, "יהיו דומות למוצר?", מופיע בשאלה נפוצה מקופלת, ונענה בהבטחה.',
+      i: '#s5', it: 'בדיקה, תיקון, תוצאה, כולל הפרומפט המתוקן וההבדל שנשאר.' },
+    { id: 's5b', name: 'תוצאות', stage: 'אמון', pr: 'אמון והוכחה',
+      g: null, gt: 'אין. הוא לא המציא תוצאות, וזה לזכותו.',
+      i: '#s5b', it: 'תוצאות מסומנות "לדוגמה, מדומות". בעמוד אמיתי: תוצאות אמיתיות.' },
+    { id: 's6', name: 'המנחה', stage: 'אמון', pr: 'אמון והוכחה',
+      g: '#s6', gt: '"גל תנחה צעד אחר צעד, בקבוצה קטנה". לא אומר מי היא.',
+      i: '#s6', it: '"אני לא צלמת". מי אני, ו"את התמונות כאן הפקתי בעצמי".' },
+    { id: 's7', name: 'פרטים', stage: 'ביטחון', pr: 'חיכוך',
+      g: '.g-facts', gt: 'יום, שעתיים, 12, מחיר. אין שעה ואין הקלטה.',
+      i: '#s7', it: 'שעה, זום עם הקלטה, "הקישור נשאר אצלך לתמיד".' },
+    { id: 's8', name: 'סיכון', stage: 'ביטחון', pr: 'הפסד',
+      g: null, gt: 'אין.',
+      i: '#s8', it: 'קבוצת וואטסאפ מרגע ההרשמה ועד שבוע אחרי הסדנה.' },
+    { id: 's9', name: 'הרשמה', stage: 'פעולה', pr: 'חיכוך + דחיפות',
+      g: '#register', gt: '"12 מקומות בלבד" ו"נשארו 12 מקומות", ולצידם "כדי שיהיה זמן לכל אחת". קישור הזום רק בשאלה נפוצה.',
+      i: '#s9', it: '"12 משתתפות, כדי שיהיה זמן לעבור על התמונה של כל אחת". פרטים ומחיר ליד הכפתור. "אני נרשמת". שלושה דברים שיגיעו במייל, מתחת לכפתור.' }
+  ];
+
+  var gif = document.getElementById('gif'), iif = document.getElementById('iif');
+  var gframe = document.getElementById('gframe'), nav = document.getElementById('nav');
+  var cur = 0, loaded = 0;
+
+  // rail
+  var prev = btn('→', 'arrow', function () { go(cur - 1); }); prev.setAttribute('aria-label', 'הקודם');
+  nav.appendChild(prev);
+  var rail = S.map(function (s, n) { var b = btn(s.name, '', function () { go(n); }); nav.appendChild(b); return b; });
+  var next = btn('←', 'arrow', function () { go(cur + 1); }); next.setAttribute('aria-label', 'הבא');
+  nav.appendChild(next);
+  var keys = document.createElement('span'); keys.className = 'keys'; keys.textContent = 'חיצים · C כיתובים';
+  nav.appendChild(keys);
+  function btn(t, c, f) { var b = document.createElement('button'); b.type = 'button'; b.textContent = t; if (c) b.className = c; b.onclick = f; return b; }
+
+  function prep(fr) {
+    var d = fr.contentDocument;
+    var st = d.createElement('style');
+    st.textContent = '.present-hl{outline:3px solid #7a1f2e;outline-offset:8px;border-radius:14px;transition:outline-color .3s}.pill{display:none!important}';
+    d.head.appendChild(st);
+  }
+
+  function scrollTo(fr, sel, open) {
+    var w = fr.contentWindow, d = fr.contentDocument;
+    if (!d) return;
+    d.querySelectorAll('.present-hl').forEach(function (e) { e.classList.remove('present-hl'); });
+    var el = d.querySelector(sel);
+    if (!el) return;
+    d.querySelectorAll('#faq details').forEach(function (x) { x.open = false; });
+    if (open) el.open = true;
+    var isSection = el.tagName === 'SECTION';
+    if (!isSection) el.classList.add('present-hl');
+    var top = el.getBoundingClientRect().top + w.scrollY - (isSection ? 0 : 90);
+    w.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+
+  function go(n) {
+    cur = Math.max(0, Math.min(S.length - 1, n));
+    var s = S[cur];
+    document.getElementById('sec').innerHTML = '<small>' + s.id + '</small>' + s.name;
+    document.getElementById('stage').textContent = s.stage;
+    document.getElementById('principle').textContent = s.pr;
+    document.getElementById('gcap').innerHTML = s.gt;
+    document.getElementById('icap').innerHTML = s.it;
+    rail.forEach(function (b, k) { b.setAttribute('aria-current', k === cur ? 'true' : 'false'); });
+    gframe.classList.toggle('empty', !s.g);
+    if (loaded === 2) {
+      if (s.g) scrollTo(gif, s.g, s.open);
+      scrollTo(iif, s.i);
+    }
+    history.replaceState(null, '', '#' + s.id);
+  }
+
+  [gif, iif].forEach(function (fr) {
+    fr.addEventListener('load', function () { prep(fr); loaded++; if (loaded === 2) go(cur); });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(cur + 1); }
+    else if (e.key === 'ArrowRight' || e.key === 'PageUp') { e.preventDefault(); go(cur - 1); }
+    else if (e.key === 'Home') go(0);
+    else if (e.key === 'End') go(S.length - 1);
+    else if (e.key === 'c' || e.key === 'C' || e.key === 'ב') document.body.classList.toggle('nocap');
+  });
+  // keys pressed while focus is inside a frame
+  [gif, iif].forEach(function (fr) {
+    fr.addEventListener('load', function () {
+      fr.contentDocument.addEventListener('keydown', function (e) {
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: e.key }));
+        if (['ArrowLeft', 'ArrowRight', ' ', 'PageDown', 'PageUp'].indexOf(e.key) > -1) e.preventDefault();
+      });
+    });
+  });
+
+  var start = S.findIndex(function (s) { return '#' + s.id === location.hash; });
+  go(start > -1 ? start : 0);
+})();
+</script>
+</body>
+</html>
