@@ -38,6 +38,20 @@
   .tag span { padding: 5px 16px; border-radius: 999px; box-shadow: 0 0 0 1px var(--hair-dark); }
   .tag .stage { background: var(--accent); box-shadow: none; color: #fff; font-weight: 500; }
   .tag i { color: var(--on-dark-muted); font-style: normal; }
+  .tag b { font-family: var(--serif); font-weight: 700; font-size: 1.15em; }
+  .tag .pr { box-shadow: none; padding: 0; color: var(--on-dark-muted); font-size: .85em; }
+
+  /* opening map: 6 stages, 6 questions */
+  .map { display: none; min-height: 0; padding: 22px 24px; align-content: center; justify-content: center;
+    grid-template-columns: repeat(3, minmax(0, 360px)); gap: 18px; }
+  body.mapmode .map { display: grid; }
+  body.mapmode .stage-area, body.mapmode .tag, body.mapmode .sec small { display: none; }
+  .map li { list-style: none; border-radius: 22px; padding: 24px 26px; box-shadow: 0 0 0 1px var(--hair-dark); background: rgba(243,236,225,.03); }
+  .map .n { font-family: var(--serif); font-weight: 800; font-size: 44px; line-height: 1; color: #e9b8a8; }
+  .map .st { display: inline-block; margin: 14px 0 8px; padding: 4px 14px; border-radius: 999px; background: var(--accent); color: #fff; font-size: 16px; font-weight: 500; }
+  .map .q { font-family: var(--serif); font-weight: 800; font-size: clamp(24px, 2.2vw, 32px); line-height: 1.2; }
+  .map .ss { margin-top: 10px; color: var(--on-dark-muted); font-size: 15px; }
+  @media (max-width: 900px) { .map { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .map li { padding: 16px; } }
 
   /* stage: caption | frame | frame | caption */
   .stage-area {
@@ -94,8 +108,10 @@
 
 <header>
   <div class="sec" id="sec"></div>
-  <div class="tag"><span class="stage" id="stage"></span><i>·</i><span id="principle"></span></div>
+  <div class="tag"><span class="stage" id="stage"></span><b id="q"></b><i>·</i><span class="pr" id="principle"></span></div>
 </header>
+
+<ol class="map" id="map"></ol>
 
 <main class="stage-area">
   <div class="col-cap g"><h3>גנרי</h3><p id="gcap"></p></div>
@@ -151,6 +167,19 @@
       i: '#s9', it: '"12 משתתפות, כדי שיהיה זמן לעבור על התמונה של כל אחת". פרטים ומחיר ליד הכפתור. "אני נרשמת". שלושה דברים שיגיעו במייל, מתחת לכפתור.' }
   ];
 
+  // 6 stages, one question each (Gal, 2026-11-10: stages and questions are distinct, 6 questions)
+  var STAGES = ['קשב', 'רלוונטיות', 'הבנה', 'אמון', 'ביטחון', 'פעולה'];
+  var Q = { 'קשב': 'מה זה?', 'רלוונטיות': 'זה בשבילי?', 'הבנה': 'הבנתי מה מציעים?',
+            'אמון': 'למה שאאמין?', 'ביטחון': 'מה הסיכון?', 'פעולה': 'מה יקרה אם אלחץ?' };
+  var mapEl = document.getElementById('map');
+  STAGES.forEach(function (st, k) {
+    var secs = S.filter(function (s) { return s.stage === st; }).map(function (s) { return s.name; }).join(' · ');
+    var li = document.createElement('li');
+    li.innerHTML = '<div class="n">' + (k + 1) + '</div><span class="st">' + st + '</span><div class="q">' + Q[st] + '</div><div class="ss">' + secs + '</div>';
+    mapEl.appendChild(li);
+  });
+  S.unshift({ id: 'map', name: 'מפה', map: true });
+
   var gif = document.getElementById('gif'), iif = document.getElementById('iif');
   var gframe = document.getElementById('gframe'), nav = document.getElementById('nav');
   var cur = 0, loaded = 0;
@@ -189,8 +218,16 @@
   function go(n) {
     cur = Math.max(0, Math.min(S.length - 1, n));
     var s = S[cur];
+    rail.forEach(function (b, k) { b.setAttribute('aria-current', k === cur ? 'true' : 'false'); });
+    document.body.classList.toggle('mapmode', !!s.map);
+    if (s.map) {
+      document.getElementById('sec').textContent = 'מסע ההחלטה';
+      history.replaceState(null, '', '#' + s.id);
+      return;
+    }
     document.getElementById('sec').innerHTML = '<small>' + s.id + '</small>' + s.name;
     document.getElementById('stage').textContent = s.stage;
+    document.getElementById('q').textContent = Q[s.stage];
     document.getElementById('principle').textContent = s.pr;
     document.getElementById('gcap').innerHTML = s.gt;
     document.getElementById('icap').innerHTML = s.it;
