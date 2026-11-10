@@ -425,6 +425,9 @@
   #site-vs-lp .wf-nav{font-size:clamp(11px,1vw,15px)}
   #site-vs-lp .wf-bar span{font-size:12px}
   #site-vs-lp .wf-hero .cta{font-size:clamp(12px,1.1vw,16px);padding:7px 18px}
+
+  .fly{transform:translateY(var(--dy,0)) scale(1.6);transform-origin:100% 50%;transition:transform .7s var(--ease-out)}
+  .fly.in,.fly.measure{transform:none}
 </style>
 </head>
 <body>
@@ -457,9 +460,9 @@
 
   <section class="slide" id="site-vs-lp" data-part="1" data-name="אתר מול עמוד" aria-labelledby="t-vs">
     <div class="inner">
-      <h2 class="h" id="t-vs">אתר מול עמוד נחיתה</h2>
+      <h2 class="h fly" data-frag="1" id="t-vs">אתר מול עמוד נחיתה</h2>
       <div class="vs">
-        <div class="vcol"><div class="card">
+        <div class="vcol frag" data-frag="1"><div class="card">
           <div class="wf-stack" aria-hidden="true">
             <div class="wf ghost g2"></div><div class="wf ghost g1"></div>
             <div class="wf">
@@ -475,7 +478,7 @@
           <h3>אתר</h3>
           <p>כמו כלבו. באים להסתובב ולחפור.</p>
         </div>
-        <div class="vcol frag" data-frag="1"><div class="card">
+        <div class="vcol frag" data-frag="2"><div class="card">
           <div class="wf-stack" aria-hidden="true">
             <div class="wf">
               <div class="wf-bar"><i></i><i></i><i></i><span>www.studio.co.il/workshop</span></div>
@@ -788,16 +791,16 @@
   function next() {
     var s = STEPS[cur];
     if (s.kind === 'slide') {
-      var f = s.el.querySelector('.frag:not(.in)');
-      if (f) { s.el.querySelectorAll('.frag[data-frag="' + f.dataset.frag + '"]').forEach(function (x) { x.classList.add('in'); }); return; }
+      var f = s.el.querySelector('[data-frag]:not(.in)');
+      if (f) { s.el.querySelectorAll('[data-frag="' + f.dataset.frag + '"]').forEach(function (x) { x.classList.add('in'); }); return; }
     }
     go(cur + 1);
   }
   function prev() {
     var s = STEPS[cur];
     if (s.kind === 'slide') {
-      var shown = s.el.querySelectorAll('.frag.in');
-      if (shown.length) { var g = shown[shown.length - 1].dataset.frag; s.el.querySelectorAll('.frag[data-frag="' + g + '"]').forEach(function (x) { x.classList.remove('in'); }); return; }
+      var shown = s.el.querySelectorAll('[data-frag].in');
+      if (shown.length) { var g = shown[shown.length - 1].dataset.frag; s.el.querySelectorAll('[data-frag="' + g + '"]').forEach(function (x) { x.classList.remove('in'); }); return; }
     }
     go(cur - 1, true);
   }
@@ -810,7 +813,8 @@
     document.getElementById('part').innerHTML = '<strong>' + s.part + '</strong> · ' + PARTS[s.part];
     if (s.kind === 'slide') {
       s.el.classList.add('on');
-      s.el.querySelectorAll('.frag').forEach(function (x) { x.classList.toggle('in', !!back); });
+      s.el.querySelectorAll('[data-frag]').forEach(function (x) { x.classList.toggle('in', !!back); });
+      placeFly(s.el);
       var lz = s.el.querySelector('iframe[data-src]');
       if (lz && !lz.src) lz.src = lz.dataset.src;
       else if (s.id === 'intro' && typeof aimCursor === 'function') setTimeout(aimCursor, 50);
@@ -872,6 +876,20 @@
     if (need > avail && avail > 0) inner.style.zoom = Math.max(.5, avail / need).toFixed(3);
   }
   window.addEventListener('resize', fit);
+  // .fly: starts big in the middle of the slide, travels to its place when its step is revealed
+  function placeFly(sl) {
+    sl.querySelectorAll('.fly').forEach(function (el) {
+      var keep = el.style.transition; el.style.transition = 'none'; el.style.setProperty('--dy', '0px');
+      el.classList.add('measure');
+      var r = el.getBoundingClientRect(), sr = sl.getBoundingClientRect();
+      var inner = el.closest('.inner'), z = parseFloat(inner && inner.style.zoom) || 1;
+      var dy = (sr.top + sr.height / 2 - (r.top + r.height / 2)) / z;
+      el.classList.remove('measure');
+      el.style.setProperty('--dy', dy + 'px');
+      void el.offsetWidth; el.style.transition = keep;
+    });
+  }
+  window.addEventListener('resize', function () { var s = STEPS[cur]; if (s.kind === 'slide') placeFly(s.el); });
   // click on the slide = next step
   document.getElementById('deck').addEventListener('click', function (e) {
     if (e.target.closest('button, a, iframe, .phone, .laptop, .prompt')) return;
