@@ -349,6 +349,17 @@
 
   #peek .bub.mine{margin-top:clamp(16px,3vh,28px);background:#fff;box-shadow:var(--shadow-card);border-start-start-radius:6px;max-width:100%;font-size:clamp(.95rem,min(1.3vw,2.1vh),1.2rem)}
   #peek .bub.mine small{color:var(--fg-2)}
+
+  /* 01: signup page + hesitating cursor */
+  .hover-wrap{position:relative;justify-self:center;height:min(76vh,780px)}
+  .hover-wrap .phone{height:100%}
+  .phone.flat{transform:none}
+  .cursor{position:absolute;width:clamp(30px,2.6vw,42px);height:auto;left:0;top:0;opacity:0;pointer-events:none;filter:drop-shadow(0 4px 8px rgba(26,26,26,.25))}
+  .cursor.go{animation:approach 2.6s cubic-bezier(.16,1,.3,1) .4s forwards, hesitate 1.6s ease-in-out 3s 2}
+  @keyframes approach{0%{opacity:0;transform:translate(calc(var(--tx) + 140px),calc(var(--ty) + 160px))}15%{opacity:1}100%{opacity:1;transform:translate(var(--tx),var(--ty))}}
+  @keyframes hesitate{0%,100%{opacity:1;transform:translate(var(--tx),var(--ty))}50%{opacity:1;transform:translate(calc(var(--tx) + 10px),calc(var(--ty) + 6px))}}
+  .cursor.done{opacity:1;transform:translate(var(--tx),var(--ty))}
+  @media (prefers-reduced-motion:reduce){.cursor.go{animation:none;opacity:1;transform:translate(var(--tx),var(--ty))}}
 </style>
 </head>
 <body>
@@ -369,9 +380,9 @@
         <p class="lede">אל תבנו עמוד. תבנו החלטה.</p>
         <p class="byline"><img src="robot-color.png" alt="">גל · BOOST ME · AI &amp; Tools</p>
       </div>
-      <div class="pair" aria-hidden="true">
-        <img class="p-before" src="shampoo-before-phone.jpg" alt="">
-        <img class="p-after" src="shampoo-after-warm-clean.jpg" alt="">
+      <div class="hover-wrap">
+        <div class="phone flat"><iframe id="signup-if" data-src="signup-preview.html?static" title="עמוד ההרשמה להדרכה" loading="lazy" tabindex="-1"></iframe></div>
+        <svg class="cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2 L3 19 L8 14.5 L11.5 22 L14.5 20.6 L11 13.4 L17.5 13.4 Z" fill="#1A1A1A" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
       </div>
     </div>
   </section>
@@ -699,6 +710,7 @@
       s.el.classList.add('on');
       var lz = s.el.querySelector('iframe[data-src]');
       if (lz && !lz.src) lz.src = lz.dataset.src;
+      else if (s.id === 'intro' && typeof aimCursor === 'function') setTimeout(aimCursor, 50);
     } else if (s.kind === 'map') {
       document.getElementById('stage').textContent = '';
     } else {
@@ -757,6 +769,20 @@
     if (need > avail && avail > 0) inner.style.zoom = Math.max(.5, avail / need).toFixed(3);
   }
   window.addEventListener('resize', fit);
+
+  // slide 1: cursor stops just short of the signup button inside the phone
+  var sif = document.getElementById('signup-if'), cur1 = document.querySelector('#intro .cursor');
+  function aimCursor() {
+    if (!sif || !sif.contentDocument) return;
+    var btn = sif.contentDocument.getElementById('hero-cta');
+    if (!btn) return;
+    var r = btn.getBoundingClientRect(), f = sif.getBoundingClientRect(), w = sif.closest('.hover-wrap').getBoundingClientRect();
+    var x = f.left - w.left + r.left + r.width * 0.5 + 18, y = f.top - w.top + r.top + r.height + 10;
+    cur1.style.setProperty('--tx', x + 'px'); cur1.style.setProperty('--ty', y + 'px');
+    cur1.classList.remove('go'); void cur1.offsetWidth; cur1.classList.add('go');
+  }
+  if (sif) sif.addEventListener('load', function () { setTimeout(aimCursor, 300); });
+  window.addEventListener('resize', function () { if (STEPS[cur].id === 'intro') aimCursor(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 
   var start = STEPS.findIndex(function (s) { return '#' + s.id === location.hash; });
