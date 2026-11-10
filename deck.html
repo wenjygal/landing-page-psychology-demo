@@ -764,6 +764,15 @@
 
   /* QR in the bottom-left corner of the "who am I" slide */
   #me .boost-qr{position:absolute;left:var(--gutter);bottom:clamp(14px,3vh,32px);margin:0}
+
+  /* live volunteers slide */
+  #live .frag[data-frag="1"].in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+  .live-q{list-style:none;margin:clamp(26px,5.4vh,56px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,22px);counter-reset:lq}
+  .live-q li{counter-increment:lq;background:#fff;border-radius:var(--r-lg);box-shadow:0 2px 12px rgba(0,0,0,.06),0 24px 50px -32px rgba(26,26,26,.3);padding:clamp(20px,3.6vh,36px) clamp(18px,2vw,30px);display:flex;flex-direction:column;gap:8px}
+  .live-q li::before{content:counter(lq);font-weight:800;color:var(--magenta);font-size:clamp(1.6rem,min(3vw,4.6vh),2.6rem);line-height:1}
+  .live-q b{font-weight:800;font-size:clamp(1.3rem,min(2.3vw,3.6vh),2.1rem);line-height:1.2}
+  .live-q span{color:var(--fg-2);font-size:clamp(1rem,min(1.6vw,2.5vh),1.4rem)}
+  @media (max-width:920px){.live-q{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1042,6 +1051,17 @@
         <li class="frag" data-frag="4"><b>הוא לא ידע את הפרטים</b><span>שיש הקלטה, שיש קבוצה, מה מגיע במייל.</span></li>
       </ol>
       <p class="sharpen frag" data-frag="5">השאלות כלליות. אצל כל לקוח הן <mark>מתחדדות אחרת.</mark></p>
+    </div>
+  </section>
+
+  <section class="slide" id="live" data-part="4" data-after="cmp" data-name="עמוד אמיתי" aria-labelledby="t-live">
+    <div class="inner">
+      <h2 class="h fly" data-frag="1" id="t-live">בואו ננסה <span class="pen">על עמוד אמיתי</span></h2>
+      <ol class="live-q frag" data-frag="1">
+        <li><b>לאיזה קצה הוא מדבר?</b><span>כאב או תענוג</span></li>
+        <li><b>על איזו שאלה הוא עוד לא עונה?</b><span>מתוך שש השאלות</span></li>
+        <li><b>במה בדיוק?</b><span>מה הלקוח שלך מתלבט פה</span></li>
+      </ol>
     </div>
   </section>
 
