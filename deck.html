@@ -426,11 +426,14 @@
   #site-vs-lp .wf-bar span{font-size:12px}
   #site-vs-lp .wf-hero .cta{font-size:clamp(12px,1.1vw,16px);padding:7px 18px}
 
-  .fly{transform:translateY(var(--dy,0)) scale(1.6);transform-origin:100% 50%;transition:transform .7s var(--ease-out)}
+  .fly{transform:translateY(var(--dy,0)) scale(1.6);transform-origin:100% 50%;transition:transform 1.2s cubic-bezier(.65,0,.35,1)}
   .fly.in,.fly.measure{transform:none}
 
   #site-vs-lp .vs>div{color:var(--fg)}
   .wf-cards q::before,.wf-cards q::after{content:none}
+
+  /* the site appears only after the title has landed */
+  #site-vs-lp .vcol.frag[data-frag="1"].in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
 </style>
 </head>
 <body>
