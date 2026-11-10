@@ -382,6 +382,36 @@
   .screen iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0}
   .base{height:clamp(12px,1.6vw,20px);margin:0 -7%;background:linear-gradient(#d9d9de,#b9b9c0);border-radius:2px 2px 16px 16px;position:relative;box-shadow:0 18px 30px -12px rgba(26,26,26,.35)}
   .base::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:16%;height:45%;background:#a9a9b0;border-radius:0 0 10px 10px}
+
+  /* 02: browser wireframes, site vs landing page */
+  .wf-stack{position:relative;height:clamp(150px,27vh,260px);margin:4px 0 0}
+  .wf{position:absolute;inset:0;background:#fff;border-radius:10px;box-shadow:0 0 0 1px var(--line),0 10px 24px rgba(26,26,26,.08);overflow:hidden;display:flex;flex-direction:column}
+  .wf.ghost{background:#fbfbfc}
+  .wf.g1{transform:translate(-10px,-10px)} .wf.g2{transform:translate(-20px,-20px)}
+  .wf-bar{display:flex;align-items:center;gap:5px;padding:6px 10px;background:#EEF0F3;flex:none}
+  .wf-bar i{width:7px;height:7px;border-radius:50%;background:rgba(26,26,26,.2)}
+  .wf-bar span{margin-inline-start:8px;flex:1;direction:ltr;text-align:left;font-size:10px;color:var(--fg-2);background:#fff;border-radius:5px;padding:1px 8px}
+  .wf-nav{display:flex;align-items:center;gap:clamp(6px,1vw,14px);padding:7px 12px;border-bottom:1px solid var(--line);font-size:clamp(9px,.75vw,12px);font-weight:500;flex:none;position:relative;z-index:2}
+  .wf-nav b{width:26px;height:10px;border-radius:3px;background:var(--fg);margin-inline-end:auto;order:-1}
+  .wf-nav span{color:var(--fg-2);position:relative}
+  .wf-nav .open{color:var(--fg);font-weight:700}
+  .wf-nav em{position:absolute;top:150%;right:-8px;display:flex;flex-direction:column;gap:3px;background:#fff;border-radius:6px;box-shadow:0 6px 16px rgba(26,26,26,.15);padding:6px 10px;font-style:normal;white-space:nowrap}
+  .wf-nav u{text-decoration:none;color:var(--fg-2);font-weight:500}
+  .wf-nav.lp{justify-content:flex-start}
+  .wf-body{flex:1;padding:10px 12px;display:grid;gap:10px;min-height:0}
+  .wf-body s{display:block;height:6px;border-radius:3px;background:rgba(26,26,26,.1);margin-bottom:5px}
+  .wf-body.site{grid-template-columns:1fr 26%}
+  .wf-main s.t{height:9px;width:60%;background:rgba(26,26,26,.22)}
+  .wf-main s:nth-child(3){width:80%}
+  .wf-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+  .wf-cards q{display:block;aspect-ratio:4/3;border-radius:5px;background:rgba(26,26,26,.07)}
+  .wf-side{border-inline-start:1px solid var(--line);padding-inline-start:8px}
+  .wf-body.lp{grid-template-columns:1.1fr .9fr;align-items:center}
+  .wf-hero s.h1{height:clamp(10px,1.4vh,14px);background:var(--fg);margin-bottom:6px}
+  .wf-hero s.h1.short{width:70%}
+  .wf-hero s:nth-child(3){width:85%;margin-top:8px}
+  .wf-hero .cta{display:inline-block;margin-top:clamp(6px,1.4vh,14px);background:var(--magenta);color:#fff;font-size:clamp(10px,.85vw,13px);font-weight:700;border-radius:999px;padding:5px 14px;box-shadow:0 0 0 6px var(--magenta-10)}
+  .wf-img{aspect-ratio:1;border-radius:8px;background:linear-gradient(135deg,rgba(26,26,26,.08),rgba(26,26,26,.03))}
 </style>
 </head>
 <body>
@@ -417,15 +447,31 @@
       <h2 class="h" id="t-vs">אתר מול עמוד נחיתה</h2>
       <div class="vs">
         <div class="card">
-          <div class="dia-site" aria-hidden="true">
-            <span class="root">תפריט</span>
-            <div class="branches"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="wf-stack" aria-hidden="true">
+            <div class="wf ghost g2"></div><div class="wf ghost g1"></div>
+            <div class="wf">
+              <div class="wf-bar"><i></i><i></i><i></i><span>www.studio.co.il/blog</span></div>
+              <div class="wf-nav"><b></b><span>בית</span><span>אודות</span><span class="open">שירותים<em><u>צילום</u><u>עיצוב</u><u>הדרכות</u></em></span><span>בלוג</span><span>צור קשר</span></div>
+              <div class="wf-body site">
+                <div class="wf-main"><s class="t"></s><s></s><s></s><div class="wf-cards"><q></q><q></q><q></q></div></div>
+                <div class="wf-side"><s></s><s></s><s></s><s></s></div>
+              </div>
+            </div>
           </div>
           <h3>אתר</h3>
           <p>כמו כלבו. באים להסתובב ולחפור.</p>
         </div>
         <div class="card">
-          <div class="dia-lp" aria-hidden="true"><span class="page"><i></i><i></i><i></i><b>הצעד</b></span></div>
+          <div class="wf-stack" aria-hidden="true">
+            <div class="wf">
+              <div class="wf-bar"><i></i><i></i><i></i><span>www.studio.co.il/workshop</span></div>
+              <div class="wf-nav lp"><b></b></div>
+              <div class="wf-body lp">
+                <div class="wf-hero"><s class="h1"></s><s class="h1 short"></s><s></s><span class="cta">אני נרשמת</span></div>
+                <div class="wf-img"></div>
+              </div>
+            </div>
+          </div>
           <h3>עמוד נחיתה</h3>
           <p>עמוד אחד. מטרה אחת. בלי תפריט.</p>
         </div>
