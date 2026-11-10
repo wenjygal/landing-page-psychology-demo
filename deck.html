@@ -434,6 +434,12 @@
 
   /* the site appears only after the title has landed */
   #site-vs-lp .vcol.frag[data-frag="1"].in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+
+  /* 03: goals = what the button should make happen */
+  .goals{list-style:none;margin:clamp(24px,5vh,52px) 0 0;padding:0;display:flex;flex-wrap:wrap;gap:clamp(10px,1.4vw,18px)}
+  .goals li{background:#fff;border:2px solid var(--magenta);color:var(--magenta-ink);font-weight:700;font-size:clamp(1.15rem,min(2vw,3.2vh),1.8rem);border-radius:var(--r-pill);padding:.55em 1.4em;box-shadow:var(--shadow-card)}
+  .goals li.more{border-style:dashed;border-color:rgba(26,26,26,.3);color:var(--fg-2);box-shadow:none;background:transparent}
+  .goals li.in:nth-child(2){transition-delay:.12s} .goals li.in:nth-child(3){transition-delay:.24s} .goals li.in:nth-child(4){transition-delay:.36s}
 </style>
 </head>
 <body>
@@ -507,6 +513,12 @@
     <div class="inner">
       <p class="lede top">כתבו בצ'אט</p>
       <h2 class="big" id="t-chat">יש לכם עמוד נחיתה?<br><span class="pen">מה המטרה שלו?</span></h2>
+      <ul class="goals" aria-label="מטרות לדוגמה">
+        <li class="frag" data-frag="1">הרשמה</li>
+        <li class="frag" data-frag="1">מכירה</li>
+        <li class="frag" data-frag="1">הורדה של Giveaway</li>
+        <li class="frag more" data-frag="1">ועוד מטרות</li>
+      </ul>
     </div>
   </section>
 
