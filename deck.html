@@ -237,6 +237,118 @@
   }
   @media (max-width:560px){.answer li{grid-template-columns:1.6em minmax(0,1fr)}.answer li span{grid-column:2}}
   @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+
+  /* ===== /p4 slide visuals (2026-11-10) ===== */
+  .slide.on{justify-content:safe center}
+  .inner.two{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,80px);align-items:center;height:100%}
+  .big.md{font-size:clamp(2.2rem,min(5.4vw,8vh),5rem)}
+  .h{font-weight:800;font-size:clamp(2rem,min(4.2vw,6.6vh),3.8rem);line-height:1.1;letter-spacing:-.025em}
+  .h small{font-size:.32em;font-weight:500;color:var(--fg-2);letter-spacing:0;margin-inline-start:14px;vertical-align:middle}
+  .lede{font-weight:500}
+  .lede.top{margin:0 0 clamp(10px,2vh,20px)}
+  .byline{display:flex;align-items:center;gap:10px;background:none;box-shadow:none;padding:0;border-radius:0;color:var(--fg-2);font-weight:500;font-size:1.05rem;margin-top:clamp(28px,6vh,64px)}
+  .byline img{width:28px}
+  .card{background:#fff;border-radius:var(--r-lg);box-shadow:var(--shadow-card)}
+
+  /* 01: before/after pair */
+  .pair{position:relative;height:min(72vh,640px);display:flex;align-items:center;justify-content:center}
+  .pair img{position:absolute;width:58%;aspect-ratio:3/4;object-fit:cover;border-radius:20px;box-shadow:0 24px 60px rgba(26,26,26,.18)}
+  .p-before{inset-inline-end:2%;top:4%;filter:saturate(.85)}
+  .p-after{inset-inline-start:2%;bottom:4%;box-shadow:0 30px 70px rgba(110,0,60,.25)}
+
+  /* 02: diagrams */
+  .vs{grid-template-columns:1fr 1fr}
+  .vs .card{padding:clamp(18px,3vh,32px) clamp(20px,2.4vw,34px)}
+  .vs .card+.card{background:#fff;color:var(--fg)}
+  .vs h3{margin:clamp(12px,2vh,20px) 0 6px}
+  .vs p{color:var(--fg-2);font-size:clamp(1.05rem,min(1.6vw,2.6vh),1.4rem)}
+  .dia-site,.dia-lp{height:clamp(110px,20vh,190px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+  .dia-site .root{font-size:.85rem;font-weight:700;background:var(--bg);border-radius:8px;padding:.3rem 1rem;color:var(--fg-2)}
+  .dia-site .branches{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;width:90%}
+  .dia-site .branches span{height:clamp(44px,8vh,72px);border-radius:8px;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line)}
+  .dia-lp .page{width:42%;height:100%;border-radius:10px;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column;gap:7px;padding:12px;justify-content:flex-end}
+  .dia-lp i{display:block;height:8px;border-radius:4px;background:rgba(26,26,26,.12)}
+  .dia-lp i:nth-child(2){width:80%} .dia-lp i:nth-child(3){width:60%}
+  .dia-lp b{margin-top:6px;background:var(--magenta);color:#fff;border-radius:var(--r-pill);font-size:.8rem;text-align:center;padding:.3rem 0}
+
+  /* 04 */
+  .roads li::before{content:none}
+  .end-pt{border-right:0}
+
+  /* 05/08 phone */
+  .phone{justify-self:center;width:min(var(--phone),100%);height:min(76vh,780px);transform:rotate(-1.5deg)}
+
+  /* 06: axis */
+  .axis{display:flex;align-items:center;gap:clamp(12px,2vw,28px);margin-top:clamp(28px,6vh,64px)}
+  .axis .end{font-weight:800;font-size:clamp(1.6rem,min(3vw,4.6vh),2.8rem)}
+  .axis .end:first-child{color:var(--fg-2)}
+  .axis .line{flex:1;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--magenta),rgba(26,26,26,.2));position:relative}
+  .axis .line::after{content:"";position:absolute;inset-inline-end:-2px;top:50%;width:16px;height:16px;border-top:4px solid var(--magenta);border-left:4px solid var(--magenta);transform:translateY(-50%) rotate(-45deg)}
+
+  /* 07: two vertical columns */
+  .cols{display:flex;align-items:flex-end;justify-content:center;gap:clamp(24px,5vw,72px);height:min(60vh,520px);padding:clamp(20px,4vh,40px) clamp(20px,3vw,48px)}
+  .col{flex:0 1 160px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:10px}
+  .col span{width:100%;border-radius:12px 12px 4px 4px;background:rgba(26,26,26,.18)}
+  .col.hi span{background:var(--magenta)}
+  .col b{font-weight:800;font-size:clamp(2.2rem,min(4.6vw,7vh),4.4rem);line-height:1;letter-spacing:-.04em;color:var(--fg-2)}
+  .col.hi b{color:var(--magenta)}
+  .col em{font-style:normal;font-weight:700;font-size:clamp(.95rem,1.4vw,1.2rem);text-align:center}
+
+  /* 09: crowd */
+  .crowd{display:flex;justify-content:center;align-items:flex-end;gap:clamp(10px,2vw,30px);margin-top:clamp(22px,4vh,44px)}
+  .crowd .p{position:relative;width:clamp(36px,4.6vw,70px);height:clamp(70px,13vh,130px)}
+  .crowd .p::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:44%;aspect-ratio:1;border-radius:50%;background:rgba(26,26,26,.16)}
+  .crowd .p::after{content:"";position:absolute;bottom:0;left:0;right:0;height:56%;border-radius:40% 40% 10px 10px;background:rgba(26,26,26,.16)}
+  .crowd .p.one{width:clamp(48px,6vw,92px);height:clamp(92px,17vh,170px)}
+  .crowd .p.one::before,.crowd .p.one::after{background:var(--magenta)}
+  .traits{list-style:none;margin:clamp(14px,2.6vh,26px) 0 0;padding:0;display:flex;justify-content:center;gap:clamp(10px,1.6vw,20px);flex-wrap:wrap}
+  .traits li{background:#fff;box-shadow:var(--shadow-card);border-radius:var(--r-md);padding:.55rem 1.2rem;font-weight:700;font-size:clamp(1.05rem,min(1.8vw,2.8vh),1.6rem)}
+  #persona .honest{text-align:center}
+
+  /* 10: chat */
+  .chat{display:flex;flex-direction:column;gap:14px}
+  .bub{max-width:92%;border-radius:20px;padding:clamp(14px,2.4vh,22px) clamp(16px,2vw,24px);font-size:clamp(1rem,min(1.5vw,2.4vh),1.35rem);line-height:1.5}
+  .bub small{display:block;font-size:.75em;font-weight:700;color:var(--magenta);margin-bottom:4px}
+  .bub.ai{align-self:flex-start;background:#fff;box-shadow:var(--shadow-card);border-start-start-radius:6px}
+  .bub.ai strong{display:block;margin-top:8px;font-weight:700}
+  .bub.me{align-self:flex-end;background:var(--dark);border-start-end-radius:6px;display:flex;gap:7px;padding:18px 22px}
+  .bub.me i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.6);animation:blink 1.4s infinite}
+  .bub.me i:nth-child(2){animation-delay:.2s} .bub.me i:nth-child(3){animation-delay:.4s}
+  @keyframes blink{0%,80%,100%{opacity:.3}40%{opacity:1}}
+
+  /* 11: book */
+  .book{background:var(--dark);color:#fff;border-radius:28px;padding:clamp(18px,3.4vh,36px) clamp(22px,3vw,40px)}
+  .book h2{font-size:clamp(1.6rem,min(3vw,4.6vh),2.6rem)}
+  .prompt{color:rgba(255,255,255,.42)}
+  .prompt .hd{font-weight:700;color:rgba(255,255,255,.55)}
+  .prompt .key{color:#fff;font-weight:700;font-size:1.12em}
+  .prompt .key mark{color:var(--pink)}
+
+  /* 12: answer */
+  .ans{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center;margin-top:clamp(14px,2.6vh,28px)}
+  .answer{margin:0}
+  .answer li{grid-template-columns:1.6em minmax(0,9em) minmax(0,1fr);font-size:clamp(.95rem,min(1.3vw,2.2vh),1.2rem);box-shadow:none;background:transparent;border-bottom:1px solid var(--line);border-radius:0;padding-inline:0}
+  .answer li.hot{background:transparent;color:var(--magenta)}
+  .answer li.hot b{color:var(--magenta)}
+  .answer li.hot::before{color:var(--magenta)}
+  .inf{font-style:normal;margin-inline-start:6px}
+  .fear{position:relative}
+  .fear img{width:46%;aspect-ratio:3/4;object-fit:cover;border-radius:18px;box-shadow:0 24px 60px rgba(26,26,26,.18);transform:rotate(2deg)}
+  .fear-card{position:relative;margin-top:-22%;margin-inline-start:22%;background:var(--dark);color:#fff;border-radius:var(--r-lg);padding:clamp(18px,3vh,30px) clamp(20px,2.4vw,32px);display:grid;gap:14px}
+  .fear-card p{font-weight:700;font-size:clamp(1.2rem,min(2.1vw,3.3vh),1.9rem);line-height:1.3}
+  .fear-card span{color:var(--pink);font-weight:800;margin-inline-end:10px}
+
+  @media (max-width:920px){
+    .inner.two,.ans{grid-template-columns:1fr;height:auto}
+    .pair{height:44vh}
+    .phone{height:60vh;transform:none}
+    .slide.on{justify-content:safe center}
+    .fear-card{margin:12px 0 0}
+  }
+  @media (prefers-reduced-motion:reduce){.bub.me i{animation:none;opacity:.7}}
+
+  #peek .bub.mine{margin-top:clamp(16px,3vh,28px);background:#fff;box-shadow:var(--shadow-card);border-start-start-radius:6px;max-width:100%;font-size:clamp(.95rem,min(1.3vw,2.1vh),1.2rem)}
+  #peek .bub.mine small{color:var(--fg-2)}
 </style>
 </head>
 <body>
@@ -251,59 +363,70 @@
 
   <!-- ===== חלק 1: הקדמה ===== -->
   <section class="slide" id="intro" data-part="1" data-name="פתיחה" aria-labelledby="t-intro">
-    <div class="inner">
-      <h1 class="big" id="t-intro">הפסיכולוגיה של<br><span class="pen">עמודי נחיתה</span></h1>
-      <p class="lede">אל תבנו עמוד. תבנו החלטה.</p>
-      <div class="byline"><img src="robot-color.png" alt=""><span><strong>גל</strong> · BOOST ME · AI &amp; Tools</span></div>
+    <div class="inner two">
+      <div>
+        <h1 class="big" id="t-intro">הפסיכולוגיה של<br><span class="pen">עמודי נחיתה</span></h1>
+        <p class="lede">אל תבנו עמוד. תבנו החלטה.</p>
+        <p class="byline"><img src="robot-color.png" alt="">גל · BOOST ME · AI &amp; Tools</p>
+      </div>
+      <div class="pair" aria-hidden="true">
+        <img class="p-before" src="shampoo-before-phone.jpg" alt="">
+        <img class="p-after" src="shampoo-after-warm-clean.jpg" alt="">
+      </div>
     </div>
   </section>
 
   <section class="slide" id="site-vs-lp" data-part="1" data-name="אתר מול עמוד" aria-labelledby="t-vs">
-    <div class="inner sheet paper">
-      <h2 id="t-vs">אתר מול עמוד נחיתה</h2>
+    <div class="inner">
+      <h2 class="h" id="t-vs">אתר מול עמוד נחיתה</h2>
       <div class="vs">
-        <div>
+        <div class="card">
+          <div class="dia-site" aria-hidden="true">
+            <span class="root">תפריט</span>
+            <div class="branches"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
           <h3>אתר</h3>
-          <ul><li><b>כמו כלבו.</b> הרבה עמודים, תפריט.</li><li>באים להסתובב, לחפור, לגלות.</li></ul>
+          <p>כמו כלבו. באים להסתובב ולחפור.</p>
         </div>
-        <div>
-          <h3><em>עמוד נחיתה</em></h3>
-          <ul><li><b>עמוד אחד. מטרה אחת.</b></li><li>בלי תפריט, בלי "אולי תציצו גם פה".</li></ul>
+        <div class="card">
+          <div class="dia-lp" aria-hidden="true"><span class="page"><i></i><i></i><i></i><b>הצעד</b></span></div>
+          <h3>עמוד נחיתה</h3>
+          <p>עמוד אחד. מטרה אחת. בלי תפריט.</p>
         </div>
       </div>
       <p class="honest">או שעושים את הצעד, <mark>או שלא.</mark></p>
     </div>
   </section>
 
-  <section class="slide dark" id="chat" data-part="1" data-name="לצ'אט" aria-labelledby="t-chat">
+  <section class="slide" id="chat" data-part="1" data-name="לצ'אט" aria-labelledby="t-chat">
     <div class="inner">
-      <p class="kicker">כתבו בצ'אט</p>
+      <p class="lede top">כתבו בצ'אט</p>
       <h2 class="big" id="t-chat">יש לכם עמוד נחיתה?<br><span class="pen">על מה הוא?</span></h2>
     </div>
   </section>
 
   <section class="slide" id="meeting" data-part="1" data-name="נקודת מפגש" aria-labelledby="t-meet">
-    <div class="inner sheet paper">
-      <h2 id="t-meet">נקודת מפגש אחת</h2>
+    <div class="inner">
+      <h2 class="h" id="t-meet">נקודת מפגש אחת</h2>
       <div class="roads">
         <ol aria-label="מאיפה מגיעים">
-          <li><span class="dot" aria-hidden="true"></span>מודעה</li>
-          <li><span class="dot" aria-hidden="true"></span>ניוזלטר</li>
-          <li><span class="dot" aria-hidden="true"></span>הודעה בוואטסאפ</li>
+          <li>מודעה</li>
+          <li>ניוזלטר</li>
+          <li>הודעה בוואטסאפ</li>
         </ol>
         <div class="arrow-big" aria-hidden="true">←</div>
-        <div class="end-pt"><b><span class="dot" aria-hidden="true"></span>העמוד</b><p>כל הדרכים נגמרות כאן.</p></div>
+        <div class="end-pt"><b>העמוד</b><p>כל הדרכים נגמרות כאן.</p></div>
       </div>
       <p class="honest">אתם לא שם כדי להסביר. <mark>העמוד מדבר במקומכם.</mark></p>
     </div>
   </section>
 
   <section class="slide" id="peek" data-part="1" data-name="הצצה" aria-labelledby="t-peek">
-    <div class="inner with-phone">
+    <div class="inner two">
       <div>
-        <p class="kicker">ניסוי קטן</p>
-        <h2 class="big" id="t-peek">ביקשתי מ-AI עמוד נחיתה לסדנה.<br><span class="pen">בשורה אחת.</span></h2>
-        <p class="lede">נראה טוב, נכון? <strong>תזכרו אותו. נחזור אליו.</strong></p>
+        <h2 class="big md" id="t-peek">ביקשתי מ-AI עמוד נחיתה לסדנה.<br><span class="pen">בשורה אחת.</span></h2>
+        <div class="bub mine"><small>הפרומפט</small>תבנה לי עמוד נחיתה לסדנת זום של שעתיים, שבה בעלות חנויות אונליין לומדות להפוך תמונה של המוצר שלהן לתמונות מוצר מרשימות עם AI. יוצאים עם 5 תמונות מוכנות לאתר. המנחה: גל אפרתי. רביעי 9.12, 12 מקומות, 190 ש"ח.</div>
+        <p class="lede">נראה טוב, נכון? תזכרו אותו. נחזור אליו.</p>
       </div>
       <div class="phone"><iframe data-src="generic.html" title="העמוד הגנרי" loading="lazy"></iframe></div>
     </div>
@@ -312,72 +435,81 @@
   <!-- ===== חלק 2: כאב או תענוג ===== -->
   <section class="slide" id="pain" data-part="2" data-name="העיקרון" aria-labelledby="t-pain">
     <div class="inner">
-      <h2 class="big" id="t-pain">מתרחקים מכאב.<br><span class="pen">מתקרבים לתענוג.</span></h2>
+      <h2 class="big md" id="t-pain">מתרחקים מכאב. מתקרבים <span class="pen">לתענוג.</span></h2>
+      <div class="axis" aria-hidden="true">
+        <span class="end">כאב</span>
+        <span class="line"></span>
+        <span class="end pen">תענוג</span>
+      </div>
       <p class="lede">תולעת · חתול · בן אדם</p>
     </div>
   </section>
 
   <section class="slide" id="study" data-part="2" data-name="המחקר" aria-labelledby="t-study">
-    <div class="inner sheet paper">
-      <h2 id="t-study">אותו מוצר. מצב אחר.</h2>
-      <div class="study">
-        <p class="q">כמה בחרו <b>במשחת שיניים מלבינה</b>, ולא במשחה נגד עששת?</p>
-        <div class="row"><div class="who">חשבו קודם על<br>החלומות שלהם</div><div class="track"><div class="fill" style="width:39%"></div></div><div class="num">39%</div></div>
-        <div class="row low"><div class="who">חשבו קודם על<br>חובות ובעיות</div><div class="track"><div class="fill" style="width:17%"></div></div><div class="num">17%</div></div>
+    <div class="inner two">
+      <div>
+        <h2 class="h" id="t-study">אותו מוצר. מצב אחר.</h2>
+        <p class="lede">כמה בחרו במשחת שיניים מלבינה, ולא במשחה נגד עששת?</p>
+        <p class="src">Chernev, 2004 · Journal of Consumer Psychology</p>
       </div>
-      <p class="src">Chernev, 2004 · Journal of Consumer Psychology</p>
+      <div class="card cols" role="img" aria-label="39% מאלה שחשבו על חלומות, 17% מאלה שחשבו על בעיות">
+        <div class="col hi"><b>39%</b><span style="height:39%"></span><em>חשבו על חלומות</em></div>
+        <div class="col"><b>17%</b><span style="height:17%"></span><em>חשבו על בעיות</em></div>
+      </div>
     </div>
   </section>
 
   <section class="slide" id="business" data-part="2" data-name="ולעסקים" aria-labelledby="t-biz">
-    <div class="inner split">
+    <div class="inner two">
       <div>
-        <p class="kicker">מהשטח</p>
-        <h2 class="big" id="t-biz">בעלי עסקים מגיעים <span class="pen">כשמשהו כואב.</span></h2>
-        <p class="lede">הם לא מחפשים חוויה. <strong>הם רוצים שמשהו יפסיק להציק.</strong></p>
+        <h2 class="big md" id="t-biz">בעלי עסקים מגיעים <span class="pen">כשמשהו כואב.</span></h2>
+        <p class="lede">הם לא מחפשים חוויה. הם רוצים שמשהו יפסיק להציק.</p>
       </div>
-      <div class="quote paper">
-        <span class="lbl">הכותרת בעמוד הדוגמה</span>
-        <p>יש לך מוצר ואין לך צלם?</p>
-        <small>לא "תמונות מהממות". מתחילה מהכאב.</small>
-      </div>
+      <div class="phone"><iframe data-src="index.html" title="עמוד הדוגמה" loading="lazy"></iframe></div>
     </div>
   </section>
 
   <!-- ===== חלק 3: בראש של הלקוח ===== -->
   <section class="slide" id="persona" data-part="3" data-name="אפיון" aria-labelledby="t-persona">
-    <div class="inner sheet paper">
-      <h2 id="t-persona">"כולם" זה לא קהל.</h2>
-      <p class="sub">גם "בעלי עסקים" זה לא קהל. אפיון לקוח הוא תמונה של <strong>אדם אחד</strong>:</p>
-      <ul class="person">
-        <li><span>1</span>מה כואב לו</li>
-        <li><span>2</span>ממה הוא חושש</li>
-        <li><span>3</span>מה הוא כבר ניסה</li>
+    <div class="inner">
+      <h2 class="h" id="t-persona">"כולם" זה לא קהל.</h2>
+      <div class="crowd" aria-hidden="true">
+        <span class="p"></span><span class="p"></span><span class="p"></span><span class="p"></span>
+        <span class="p one"></span>
+        <span class="p"></span><span class="p"></span><span class="p"></span><span class="p"></span>
+      </div>
+      <ul class="traits" aria-label="אדם אחד">
+        <li>מה כואב לו</li><li>ממה הוא חושש</li><li>מה הוא כבר ניסה</li>
       </ul>
       <p class="honest">כשזה לא כתוב, <mark>ה-AI ממלא את החורים בממוצע.</mark></p>
     </div>
   </section>
 
   <section class="slide" id="flip" data-part="3" data-name="הפוך" aria-labelledby="t-flip">
-    <div class="inner">
-      <p class="kicker">הפעם הראשונה של ה-AI בהדרכה</p>
-      <h2 class="big" id="t-flip">ה-AI שואל.<br><span class="pen">אתם עונים.</span></h2>
-      <p class="lede">הוא לא מכיר את הלקוחות שלכם. <strong>אתם כן.</strong></p>
+    <div class="inner two">
+      <div>
+        <h2 class="big" id="t-flip">ה-AI שואל.<br><span class="pen">אתם עונים.</span></h2>
+        <p class="lede">הוא לא מכיר את הלקוחות שלכם. אתם כן.</p>
+      </div>
+      <div class="chat">
+        <div class="bub ai"><small>Claude</small>היי, בשמחה. שים לב שבשדה "המוצר או השירות שלי" נשאר הסוגריים הריקים [ ], אז נתחיל משם.<br><strong>מה המוצר או השירות שלך? תאר במשפט או שניים מה אתה מוכר.</strong></div>
+        <div class="bub me" aria-label="התשובה שלכם"><i></i><i></i><i></i></div>
+      </div>
     </div>
   </section>
 
   <section class="slide" id="prompt" data-part="3" data-name="הפרומפט" aria-labelledby="t-prompt">
-    <div class="inner sheet paper">
+    <div class="inner book">
       <div class="prompt-head"><h2 id="t-prompt">פרומפט: ראיין אותי</h2><button type="button" class="copy" id="copy">להעתקת הפרומפט</button></div>
       <div class="prompt" id="prompt-text">
-        <p class="h">אני רוצה לדייק מי הלקוח שלי. תראיין אותי.<br>המוצר או השירות שלי: [ ]</p>
-        <p class="h">כללים:</p>
+        <p class="hd">אני רוצה לדייק מי הלקוח שלי. תראיין אותי.<br>המוצר או השירות שלי: [ ]</p>
+        <p class="hd">כללים:</p>
         <ul>
           <li>שאל שאלה אחת בכל פעם, וחכה לתשובה.</li>
           <li>עד 8 שאלות. אם תשובה כללית מדי ("כולם", "נשים", "עסקים קטנים"), שאל שאלת המשך אחת שמחדדת.</li>
           <li class="key"><mark>אל תציע תשובות ואל תנחש.</mark> את התשובות אתה מקבל ממני, אתה רק שואל.</li>
         </ul>
-        <p class="h">בסוף הראיון, סכם את הלקוח שלי בשבע שורות:</p>
+        <p class="hd">בסוף הראיון, סכם את הלקוח שלי בשבע שורות:</p>
         <ol>
           <li>מה הוא רוצה</li>
           <li>מה כואב לו עכשיו (במילים שלו, לא במילים שיווקיות)</li>
@@ -393,18 +525,26 @@
   </section>
 
   <section class="slide" id="answer" data-part="3" data-name="התשובה" aria-labelledby="t-answer">
-    <div class="inner sheet paper">
-      <div class="prompt-head"><h2 id="t-answer">הלקוחה שלי בשבע שורות</h2><span class="demo-lbl">סדנה לדוגמה</span></div>
-      <ol class="answer">
-        <li><b>מה היא רוצה</b><span>תמונות של המוצר שלה, שאפשר להעלות לחנות</span></li>
-        <li><b>מה כואב לה</b><span>"זה נראה ביתי"</span></li>
-        <li><b>מה היא כבר יודעת</b><span>שאחרים מצליחים עם AI</span></li>
-        <li><b>מה היא לא מבינה</b><span>חושבת שיש פרומפט סודי או כלי בתשלום</span><span class="inf">הסקה</span></li>
-        <li class="hot"><b>ממה היא חוששת</b><span><mark>ללמוד, ולהישאר עם תמונות שאי אפשר להשתמש בהן</mark></span></li>
-        <li class="hot"><b>במה היא לא מאמינה</b><span><mark>שהיא תגיע לרמה מספיק טובה</mark></span></li>
-        <li><b>מה כבר ניסתה</b><span>חלון, צלם, כלי AI ששינה את הצבעים והתווית</span></li>
-      </ol>
-      <p class="legend">כל השורות מהתשובות, חוץ מזו שמסומנת "הסקה".</p>
+    <div class="inner">
+      <h2 class="h" id="t-answer">הלקוחה שלי בשבע שורות <small>סדנה לדוגמה</small></h2>
+      <div class="ans">
+        <ol class="answer">
+          <li><b>מה היא רוצה</b><span>תמונות שאפשר להעלות לחנות</span></li>
+          <li><b>מה כואב לה</b><span>"זה נראה ביתי"</span></li>
+          <li><b>מה היא כבר יודעת</b><span>שאחרים מצליחים עם AI</span></li>
+          <li><b>מה היא לא מבינה</b><span>חושבת שיש פרומפט סודי <em class="inf">הסקה</em></span></li>
+          <li class="hot"><b>ממה היא חוששת</b></li>
+          <li class="hot"><b>במה היא לא מאמינה</b></li>
+          <li><b>מה כבר ניסתה</b><span>חלון, צלם, כלי AI ששינה את התווית</span></li>
+        </ol>
+        <div class="fear">
+          <img src="shampoo-before-phone.jpg" alt="תמונת מוצר שצולמה בטלפון בבית">
+          <div class="fear-card">
+            <p><span>5</span>ללמוד, ולהישאר עם תמונות שאי אפשר להשתמש בהן.</p>
+            <p><span>6</span>שהיא לא תגיע לרמה מספיק טובה.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -510,7 +650,7 @@
       var b = btn(PARTS[p], '', function () { go(firstOf(p)); });
       if (p === s.part) b.setAttribute('aria-current', 'true');
       nav.appendChild(b);
-      if (p === s.part) {
+      if (p === s.part && p === 4) {
         STEPS.forEach(function (x, k) {
           if (x.part !== p) return;
           var sb = btn(x.name, 'sub', function () { go(k); });
