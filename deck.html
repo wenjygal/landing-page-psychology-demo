@@ -874,6 +874,7 @@
     var avail = s.el.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
     var need = inner.scrollHeight;
     if (need > avail && avail > 0) inner.style.zoom = Math.max(.5, avail / need).toFixed(3);
+    placeFly(s.el);
   }
   window.addEventListener('resize', fit);
   // .fly: starts big in the middle of the slide, travels to its place when its step is revealed
