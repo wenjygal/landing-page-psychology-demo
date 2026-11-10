@@ -360,6 +360,17 @@
   @keyframes hesitate{0%,100%{opacity:1;transform:translate(var(--tx),var(--ty))}50%{opacity:1;transform:translate(calc(var(--tx) + 10px),calc(var(--ty) + 6px))}}
   .cursor.done{opacity:1;transform:translate(var(--tx),var(--ty))}
   @media (prefers-reduced-motion:reduce){.cursor.go{animation:none;opacity:1;transform:translate(var(--tx),var(--ty))}}
+
+  /* device simulation for every phone (slides 1, 5, 8 and part 4) */
+  .phone,.bezel{position:relative;background:#fff;border:11px solid #1A1A1A;border-radius:54px;padding:36px 0 0;
+    box-shadow:0 0 0 2px #4a4a4a,0 0 0 3px #1A1A1A,0 30px 70px rgba(26,26,26,.28);transform:none!important}
+  .phone::before,.bezel::before{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:32%;height:24px;border-radius:999px;background:#1A1A1A;z-index:3}
+  .phone::after,.bezel::after{content:"21:30";direction:ltr;position:absolute;top:10px;left:11%;font-size:14px;font-weight:700;color:#1A1A1A;letter-spacing:.01em;z-index:3}
+  .phone iframe,.bezel iframe{border-radius:0 0 43px 43px}
+  .bezel .none{inset:36px 0 0 0;border-radius:0 0 43px 43px}
+  .batt{position:absolute;top:13px;right:10%;width:24px;height:12px;border:1.6px solid #1A1A1A;border-radius:4px;z-index:3}
+  .batt::after{content:"";position:absolute;inset:1.5px;right:5px;background:#1A1A1A;border-radius:2px}
+  .side{position:absolute;width:4px;border-radius:2px;background:#2a2a2a;z-index:-1}
 </style>
 </head>
 <body>
@@ -381,7 +392,7 @@
         <p class="byline"><img src="robot-color.png" alt="">גל · BOOST ME · AI &amp; Tools</p>
       </div>
       <div class="hover-wrap">
-        <div class="phone flat"><iframe id="signup-if" data-src="signup-preview.html?static" title="עמוד ההרשמה להדרכה" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="phone flat"><span class="batt"></span><iframe id="signup-if" data-src="signup-preview.html?static" title="עמוד ההרשמה להדרכה" loading="lazy" tabindex="-1"></iframe></div>
         <svg class="cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2 L3 19 L8 14.5 L11.5 22 L14.5 20.6 L11 13.4 L17.5 13.4 Z" fill="#1A1A1A" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
       </div>
     </div>
@@ -439,7 +450,7 @@
         <div class="bub mine"><small>הפרומפט</small>תבנה לי עמוד נחיתה לסדנת זום של שעתיים, שבה בעלות חנויות אונליין לומדות להפוך תמונה של המוצר שלהן לתמונות מוצר מרשימות עם AI. יוצאים עם 5 תמונות מוכנות לאתר. המנחה: גל אפרתי. רביעי 9.12, 12 מקומות, 190 ש"ח.</div>
         <p class="lede">נראה טוב, נכון? תזכרו אותו. נחזור אליו.</p>
       </div>
-      <div class="phone"><iframe data-src="generic.html" title="העמוד הגנרי" loading="lazy"></iframe></div>
+      <div class="phone"><span class="batt"></span><iframe data-src="generic.html" title="העמוד הגנרי" loading="lazy"></iframe></div>
     </div>
   </section>
 
@@ -476,7 +487,7 @@
         <h2 class="big md" id="t-biz">בעלי עסקים מגיעים <span class="pen">כשמשהו כואב.</span></h2>
         <p class="lede">הם לא מחפשים חוויה. הם רוצים שמשהו יפסיק להציק.</p>
       </div>
-      <div class="phone"><iframe data-src="index.html" title="עמוד הדוגמה" loading="lazy"></iframe></div>
+      <div class="phone"><span class="batt"></span><iframe data-src="index.html" title="עמוד הדוגמה" loading="lazy"></iframe></div>
     </div>
   </section>
 
@@ -573,14 +584,14 @@
   <div class="col-cap g"><h3>גנרי</h3><p id="gcap"></p></div>
   <div class="frame g" id="gframe">
     <div class="lbl">גנרי · פרומפט של שורה אחת</div>
-    <div class="bezel">
+    <div class="bezel"><span class="batt"></span>
       <iframe id="gif" src="generic.html" title="העמוד הגנרי"></iframe>
       <div class="none"><b>אין</b><span>בעמוד הגנרי אין סקשן כזה</span></div>
     </div>
   </div>
   <div class="frame i" id="iframe">
     <div class="lbl">מושכל · אחרי ההחלטות</div>
-    <div class="bezel"><iframe id="iif" src="index.html" title="העמוד המושכל"></iframe></div>
+    <div class="bezel"><span class="batt"></span><iframe id="iif" src="index.html" title="העמוד המושכל"></iframe></div>
   </div>
   <div class="col-cap i"><h3>מושכל</h3><p id="icap"></p></div>
 </div>
