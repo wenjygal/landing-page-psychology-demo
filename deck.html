@@ -95,7 +95,7 @@
   .roads li::before{content:counter(q);font-weight:800;color:var(--magenta)}
   .dot{display:none}
   .arrow-big{font-weight:800;font-size:clamp(2.4rem,5vw,4.4rem);color:var(--magenta);line-height:1}
-  .end-pt{background:var(--gradient);color:#fff;border-radius:var(--r-lg);padding:clamp(22px,4vh,44px) clamp(22px,3vw,40px);box-shadow:0 30px 70px rgba(110,0,60,.25)}
+  .end-pt{background:var(--dark);color:#fff;border-radius:var(--r-lg);border-right:4px solid var(--magenta);padding:clamp(22px,4vh,44px) clamp(22px,3vw,40px)}
   .end-pt b{font-weight:800;font-size:clamp(2rem,min(3.8vw,5.6vh),3.4rem);line-height:1}
   .end-pt p{margin-top:8px;font-weight:700;font-size:clamp(1rem,1.5vw,1.3rem)}
 
@@ -309,7 +309,7 @@
   </section>
 
   <!-- ===== חלק 2: כאב או תענוג ===== -->
-  <section class="slide grad" id="pain" data-part="2" data-name="העיקרון" aria-labelledby="t-pain">
+  <section class="slide" id="pain" data-part="2" data-name="העיקרון" aria-labelledby="t-pain">
     <div class="inner">
       <h2 class="big" id="t-pain">מתרחקים מכאב.<br><span class="pen">מתקרבים לתענוג.</span></h2>
       <p class="lede">תולעת · חתול · בן אדם</p>
@@ -357,7 +357,7 @@
     </div>
   </section>
 
-  <section class="slide grad" id="flip" data-part="3" data-name="הפוך" aria-labelledby="t-flip">
+  <section class="slide" id="flip" data-part="3" data-name="הפוך" aria-labelledby="t-flip">
     <div class="inner">
       <p class="kicker">הפעם הראשונה של ה-AI בהדרכה</p>
       <h2 class="big" id="t-flip">ה-AI שואל.<br><span class="pen">אתם עונים.</span></h2>
@@ -513,7 +513,7 @@
         STEPS.forEach(function (x, k) {
           if (x.part !== p) return;
           var sb = btn(x.name, 'sub', function () { go(k); });
-          sb.style.color = k === cur ? 'var(--ink)' : '';
+          sb.style.color = '';
           sb.style.textDecoration = k === cur ? 'underline' : '';
           sb.style.textUnderlineOffset = '.3em';
           if (k === cur) sb.setAttribute('aria-current', 'step');
