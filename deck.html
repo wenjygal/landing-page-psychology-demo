@@ -452,6 +452,318 @@
   .cone .b3{width:58%;background:rgba(26,26,26,.16);clip-path:polygon(0 0,100% 0,62% 100%,38% 100%)}
   .the-btn{margin-top:14px;background:var(--magenta);color:#fff;font-weight:800;font-size:clamp(1.3rem,min(2.4vw,3.8vh),2.2rem);border-radius:var(--r-pill);padding:.5em 1.8em;box-shadow:0 0 0 10px var(--magenta-10),0 18px 40px rgba(224,18,139,.3)}
   .the-btn.frag{transform:scale(.6)} .the-btn.frag.in{transform:none;transition:opacity .4s var(--ease-out),transform .5s cubic-bezier(.34,1.56,.64,1)}
+
+  /* 04 v2: one continuous funnel, channels in its mouth, button out of its neck */
+  .cone2{position:relative;width:min(100%,1000px);height:clamp(200px,38vh,380px);display:flex;align-items:flex-start;justify-content:center;padding-top:clamp(18px,3.4vh,34px)}
+  .cone2::before{content:"";position:absolute;inset:0;z-index:0;
+    clip-path:polygon(0 0,100% 0,58% 82%,58% 100%,42% 100%,42% 82%);
+    background:linear-gradient(180deg,rgba(26,26,26,.06) 0%,rgba(26,26,26,.1) 45%,rgba(224,18,139,.35) 100%)}
+  .cone2 .chan{position:relative;z-index:1;width:88%}
+  #meeting .the-btn{margin-top:-2px}
+
+  /* 04 v3: curved funnel, soft flow into the button */
+  .cone3{position:relative;width:min(100%,1000px);height:clamp(200px,38vh,380px);display:flex;justify-content:center;padding-top:clamp(14px,2.8vh,28px)}
+  .cone3 svg{position:absolute;inset:0;width:100%;height:100%}
+  .cone3 .chan{position:relative;z-index:1;width:84%;gap:clamp(6px,1vw,12px)}
+  .cone3 .chan li{font-weight:500;font-size:clamp(.95rem,min(1.4vw,2.3vh),1.3rem);border-radius:var(--r-pill);padding:.35em 1em;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+  .cone3 .flow circle{opacity:.55}
+  #meeting .the-btn{margin-top:0;font-weight:700;font-size:clamp(1.2rem,min(2.1vw,3.3vh),1.9rem);padding:.45em 1.6em;box-shadow:0 0 0 8px var(--magenta-10),0 14px 30px rgba(224,18,139,.25)}
+  @media (prefers-reduced-motion:reduce){.cone3 .flow{display:none}}
+
+  /* 04 v4: many channels, curved wires, one button */
+  .merge{display:grid;grid-template-columns:auto minmax(120px,1fr) auto;align-items:center;gap:0;margin-top:clamp(24px,5vh,56px);width:100%}
+  #meeting .merge.in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+  .chan5{list-style:none;margin:0;padding:0;height:clamp(260px,46vh,440px);display:grid;grid-template-rows:repeat(5,1fr)}
+  .chan5 li{align-self:center;justify-self:end;background:#fff;box-shadow:var(--shadow-card);border-radius:var(--r-pill);padding:.35em 1.2em;font-weight:500;font-size:clamp(1rem,min(1.5vw,2.4vh),1.35rem);white-space:nowrap}
+  .wires{width:100%;height:clamp(260px,46vh,440px);display:block}
+  .wires path{fill:none;stroke:url(#wire-g);stroke-width:2.5;vector-effect:non-scaling-stroke;stroke-linecap:round}
+  #meeting .the-btn{margin:0;white-space:nowrap}
+
+  /* 04 animation: channels one by one, wires draw toward the point, button lights them up */
+  #meeting .merge.in{transition:opacity .3s ease 1.1s,transform .3s ease 1.1s}
+  .chan5 li{opacity:0;transform:translateX(-14px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out)}
+  .merge.in .chan5 li{opacity:1;transform:none}
+  .merge.in .chan5 li:nth-child(1){transition-delay:1.2s}
+  .merge.in .chan5 li:nth-child(2){transition-delay:1.4s}
+  .merge.in .chan5 li:nth-child(3){transition-delay:1.6s}
+  .merge.in .chan5 li:nth-child(4){transition-delay:1.8s}
+  .merge.in .chan5 li:nth-child(5){transition-delay:2s}
+  .wires{-webkit-mask-image:linear-gradient(to left,#000 50%,transparent 50%);mask-image:linear-gradient(to left,#000 50%,transparent 50%);
+    -webkit-mask-size:200% 100%;mask-size:200% 100%;-webkit-mask-position:0 0;mask-position:0 0;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+    transition:-webkit-mask-position 1.2s cubic-bezier(.65,0,.35,1),mask-position 1.2s cubic-bezier(.65,0,.35,1)}
+  .merge.in .wires{-webkit-mask-position:100% 0;mask-position:100% 0;transition-delay:2.2s}
+  .wires .hot path{stroke:#E0128B;stroke-width:4;opacity:0}
+  .merge:has(.the-btn.in) .wires .hot path{animation:wireflash 1.3s ease-out .25s}
+  @keyframes wireflash{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+  @media (prefers-reduced-motion:reduce){.chan5 li{opacity:1;transform:none}.wires{-webkit-mask-image:none;mask-image:none}}
+
+  /* no rail on screen: thin progress line + presenter menu on M */
+  body{grid-template-rows:auto 1fr}
+  nav{display:none}
+  body.menu nav{display:flex;position:fixed;inset:0;z-index:50;background:rgba(26,26,26,.45);align-items:center;justify-content:center;padding:24px}
+  .menu-box{background:#fff;border-radius:var(--r-lg);box-shadow:0 30px 80px rgba(0,0,0,.25);padding:24px 28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 28px;max-width:1100px;width:100%;max-height:90vh;overflow:auto}
+  .menu-box>div{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+  .menu-box h3{font-size:1rem;font-weight:800;margin:0 0 6px;padding-bottom:6px;border-bottom:2px solid var(--fg);align-self:stretch}
+  .menu-box button{color:var(--fg-2);font-size:15px;padding:5px 10px}
+  .menu-box button[aria-current="true"]{background:var(--magenta-10);color:var(--magenta-ink);font-weight:700}
+  .menu-hint{grid-column:1/-1;margin:10px 0 0;color:var(--fg-2);font-size:.85rem}
+  .progress{position:fixed;inset-inline:0;bottom:0;height:4px;background:rgba(26,26,26,.06);z-index:40}
+  .progress i{display:block;height:100%;background:var(--magenta);transition:width .5s var(--ease-out)}
+  @media (max-width:860px){.menu-box{grid-template-columns:1fr 1fr}}
+
+  /* 05: the generic page as one long screenshot, cut into strips */
+  .inner.peek{display:flex;flex-direction:column;gap:clamp(14px,2.6vh,28px);height:100%}
+  .peek-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center}
+  .peek-top .lede{margin-top:10px}
+  #peek .bub.mine{margin-top:0}
+  .strips{flex:1;min-height:0;display:flex;justify-content:center;align-items:flex-start;gap:clamp(10px,1.4vw,22px)}
+  .strip{position:relative;overflow:hidden;background:#fff;border-radius:8px;box-shadow:0 0 0 1px var(--line),0 14px 34px rgba(26,26,26,.12);opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out)}
+  .strip.on{opacity:1;transform:none}
+  .strip iframe{position:absolute;top:0;left:0;width:1280px;border:0;transform-origin:0 0;pointer-events:none}
+  @media (max-width:920px){.peek-top{grid-template-columns:1fr}}
+
+  #peek .h{font-size:clamp(1.8rem,min(3.2vw,5.4vh),3rem)}
+
+  .strip.shot iframe{pointer-events:auto}
+  .strip.shot{border-radius:10px}
+
+  /* 05 v3: text column on the right (heading, then prompt), the page fills the left column top to bottom */
+  .inner.peek{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(24px,4vw,64px);align-items:stretch}
+  .peek-top{display:flex;flex-direction:column;justify-content:center;gap:clamp(16px,3vh,32px)}
+  #peek .bub.mine{max-width:100%}
+  .strips{height:100%;align-items:stretch}
+  @media (max-width:920px){.inner.peek{grid-template-columns:1fr}.strips{height:60vh}}
+
+  /* 06: schema, away from pain, toward pleasure */
+  .poles{display:grid;grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr) auto;align-items:start;gap:clamp(10px,1.6vw,24px);margin-top:clamp(40px,10vh,110px)}
+  #pain .poles.in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+  .pole{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:8em}
+  .pole b{font-weight:800;font-size:clamp(2rem,min(4.4vw,7vh),4rem);line-height:1}
+  .pole small{color:var(--fg-2);font-size:clamp(.9rem,1.2vw,1.1rem)}
+  .pole.pain b{color:var(--fg-2)}
+  .pole.joy b{color:var(--magenta)}
+  .pole em{margin-top:clamp(18px,4vh,40px);font-style:normal;font-weight:700;font-size:clamp(1.1rem,min(1.9vw,3vh),1.7rem);background:#fff;box-shadow:var(--shadow-card);border-radius:var(--r-md);padding:.35em 1em}
+  .pole.joy em{color:var(--magenta-ink)}
+  .me{width:clamp(22px,2.4vw,34px);aspect-ratio:1;border-radius:50%;background:var(--fg);margin-top:clamp(14px,2.4vh,26px);box-shadow:0 0 0 8px rgba(26,26,26,.08)}
+  .arrow{position:relative;height:4px;border-radius:2px;margin-top:calc(clamp(14px,2.4vh,26px) + clamp(11px,1.2vw,17px) - 2px)}
+  .arrow span{position:absolute;top:14px;left:50%;transform:translateX(-50%);color:var(--fg-2);font-size:clamp(.95rem,1.4vw,1.25rem);font-weight:500;white-space:nowrap}
+  .arrow::after{content:"";position:absolute;top:50%;width:14px;height:14px;border-top:4px solid;border-left:4px solid}
+  /* RTL: pain is on the right, pleasure on the left; both arrows point left (away from pain, toward pleasure) */
+  .arrow.away{background:rgba(26,26,26,.35);color:rgba(26,26,26,.35)}
+  .arrow.away::after{left:-2px;transform:translateY(-50%) rotate(-45deg)}
+  .arrow.toward{background:var(--magenta);color:var(--magenta)}
+  .arrow.toward::after{left:-2px;transform:translateY(-50%) rotate(-45deg)}
+
+  /* 06 v3: two forces, what they are on the page, emphasis depends on the product */
+  .forces{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,20px);margin-top:clamp(24px,5vh,52px)}
+  #pain .forces.in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+  .force{border-radius:var(--r-lg);padding:clamp(28px,7vh,72px) clamp(20px,3vw,44px);display:flex;flex-direction:column;align-items:center;gap:6px}
+  .force b{font-weight:800;font-size:clamp(2.4rem,min(5.4vw,8.6vh),5rem);line-height:1}
+  .force small{font-size:clamp(.95rem,1.3vw,1.2rem);opacity:.75}
+  .f-pain{background:var(--dark);color:#fff}
+  .f-joy{background:var(--magenta-10);color:var(--magenta-ink)}
+  .maps{text-align:center;font-weight:700;font-size:clamp(1.2rem,min(2.1vw,3.3vh),1.9rem);margin-top:4px}
+  .maps::before{content:"בעמוד: ";font-weight:400;color:var(--fg-2)}
+  .dial{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:clamp(10px,2vh,20px)}
+  .dial .track{position:relative;width:100%;height:6px;border-radius:3px;background:linear-gradient(to left,var(--dark),var(--magenta))}
+  .dial .track i{position:absolute;top:50%;width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid var(--magenta);transform:translate(50%,-50%);right:50%}
+  .dial.in .track i{animation:dialmove 4s ease-in-out .3s 1 both}
+  @keyframes dialmove{0%{right:50%}30%{right:18%}65%{right:82%}100%{right:50%}}
+  .dial em{font-style:normal;font-weight:700;font-size:clamp(1.05rem,min(1.7vw,2.7vh),1.5rem)}
+  @media (prefers-reduced-motion:reduce){.dial.in .track i{animation:none}}
+
+  /* 07: two toothpastes, two groups, the numbers */
+  .paste{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(10px,2vh,22px) clamp(16px,3vw,48px);margin-top:clamp(20px,4vh,44px)}
+  #study .paste.in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+  .tube{position:relative;display:flex;align-items:center;justify-self:center;width:min(100%,320px);height:clamp(64px,10vh,96px);filter:drop-shadow(0 10px 18px rgba(26,26,26,.12))}
+  .tube .cap{flex:none;width:16%;height:56%;background:var(--fg);border-radius:2px 6px 6px 2px}
+  .tube .body{flex:1;height:100%;background:#fff;border-radius:14px 4px 4px 14px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .tube .body::before{content:"";position:absolute;inset:0 0 0 auto;width:28%}
+  .tube b{position:relative;font-weight:800;font-size:clamp(1.1rem,min(1.9vw,3vh),1.7rem)}
+  .tube .crimp{flex:none;width:6%;height:100%;background:repeating-linear-gradient(0deg,#e9e9ee 0 4px,#d9d9e0 4px 8px);border-radius:4px 0 0 4px}
+  .t-white .body::before{background:var(--magenta-10)}
+  .t-white b{color:var(--magenta-ink)}
+  .t-guard .body::before{background:rgba(26,26,26,.07)}
+  .grp{font-size:clamp(1rem,min(1.6vw,2.6vh),1.4rem);color:var(--fg-2);line-height:1.3;padding:clamp(10px,2vh,20px) 0;border-top:1px solid var(--line)}
+  .grp strong{color:var(--fg);font-weight:800;font-size:1.15em}
+  .num{justify-self:center;font-weight:800;font-size:clamp(2.6rem,min(6vw,9vh),5.6rem);line-height:1;letter-spacing:-.04em;color:rgba(26,26,26,.28)}
+  .num.hi{color:var(--magenta)}
+
+  /* 07 v2: the tubes are the chart, paste fills each tube to its share */
+  .paste{grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1fr);row-gap:clamp(18px,4vh,44px)}
+  .paste .tube{width:100%;max-width:420px;height:clamp(72px,12vh,118px)}
+  .paste .tube .body{justify-content:space-between;padding-inline:clamp(12px,1.4vw,22px)}
+  .paste .tube .body::before{content:none}
+  .paste .tube .fill{position:absolute;top:0;bottom:0;right:0;width:0;background:rgba(26,26,26,.12);transition:width 1.1s cubic-bezier(.65,0,.35,1) .2s}
+  .paste .tube.in .fill{width:var(--p)}
+  .paste .tube.hi .fill{background:var(--magenta-10);box-shadow:inset 0 0 0 2px rgba(224,18,139,.25)}
+  .paste .tube b{color:var(--fg);font-size:clamp(1rem,min(1.5vw,2.4vh),1.35rem)}
+  .paste .tube em{position:relative;font-style:normal;font-weight:800;font-size:clamp(1.8rem,min(3.6vw,5.6vh),3.2rem);letter-spacing:-.03em;color:rgba(26,26,26,.4)}
+  .paste .tube.hi em{color:var(--magenta)}
+  .paste .grp{border-top:0;padding:0}
+
+  /* 07 v3: pies, tubes as the legend */
+  .pies{margin-top:clamp(14px,2.6vh,28px);display:flex;flex-direction:column;align-items:center;gap:clamp(14px,3vh,30px)}
+  #study .pies.in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+  .legend{display:flex;gap:clamp(16px,3vw,48px)}
+  .tube.mini{width:clamp(150px,14vw,220px);height:clamp(40px,6vh,56px);filter:drop-shadow(0 6px 12px rgba(26,26,26,.1))}
+  .tube.mini .body::before{content:none}
+  .tube.mini.t-white .body{background:var(--magenta)} .tube.mini.t-white b{color:#fff}
+  .tube.mini.t-guard .body{background:#d6d6dc} .tube.mini.t-guard b{color:var(--fg)}
+  .tube.mini b{font-size:clamp(.95rem,1.3vw,1.2rem)}
+  .pie-row{display:flex;justify-content:center;gap:clamp(40px,10vw,160px)}
+  .pie-fig{margin:0;display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2vh,18px)}
+  .pie{--a:0;width:clamp(170px,min(20vw,34vh),300px);aspect-ratio:1;border-radius:50%;
+    background:conic-gradient(var(--magenta) calc(var(--a) * 1%),#d6d6dc 0);display:grid;place-items:center;position:relative;transition:--a 1.2s cubic-bezier(.65,0,.35,1)}
+  .pie-fig.in .pie{--a:var(--p)}
+  .pie::before{content:"";position:absolute;inset:22%;border-radius:50%;background:var(--bg)}
+  .pie span{position:relative;display:flex;flex-direction:column;align-items:center;line-height:1.1;font-weight:700;color:var(--magenta-ink);font-size:clamp(.9rem,1.2vw,1.1rem)}
+  .pie b{font-weight:800;font-size:clamp(2rem,min(3.8vw,6vh),3.4rem);color:var(--magenta);letter-spacing:-.03em}
+  .pie-fig figcaption{text-align:center;color:var(--fg-2);font-size:clamp(1rem,min(1.5vw,2.4vh),1.35rem);line-height:1.3}
+  .pie-fig figcaption strong{color:var(--fg);font-weight:800}
+  @property --a{syntax:"<number>";inherits:false;initial-value:0}
+
+  /* 07 v4: two big numbers */
+  .stat2{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(24px,6vw,96px);margin-top:clamp(18px,4vh,40px)}
+  #study .stat2.in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+  .q2{grid-column:1/-1;color:var(--fg-2);font-size:clamp(1.15rem,min(1.9vw,3vh),1.7rem);font-weight:500;margin-bottom:clamp(18px,4vh,40px)}
+  .s-col{display:flex;flex-direction:column;align-items:center;gap:clamp(6px,1.4vh,14px);padding-top:clamp(14px,2.6vh,26px);border-top:2px solid var(--line)}
+  .s-col .g{font-size:clamp(1.2rem,min(2vw,3.2vh),1.8rem);color:var(--fg-2)}
+  .s-col .g strong{color:var(--fg);font-weight:800}
+  .s-col .n{font-weight:800;font-size:clamp(4.5rem,min(11vw,17vh),10rem);line-height:1;letter-spacing:-.05em;color:rgba(26,26,26,.32)}
+  .s-col .n.hi{color:var(--magenta)}
+  .s-col .c{font-weight:700;font-size:clamp(1.1rem,min(1.8vw,2.9vh),1.6rem)}
+
+  /* 07 v5: both shares per group */
+  .pair2{display:flex;justify-content:center;gap:clamp(18px,3vw,48px);margin-top:clamp(6px,1.4vh,14px)}
+  .pp{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .pp b{font-weight:800;font-size:clamp(3rem,min(7vw,11vh),6.4rem);line-height:1;letter-spacing:-.05em}
+  .pp span{font-weight:700;font-size:clamp(1rem,min(1.6vw,2.6vh),1.45rem)}
+  .pp.w b,.pp.w span{color:var(--magenta)}
+  .pp.k b{color:rgba(26,26,26,.35)} .pp.k span{color:var(--fg-2)}
+
+  /* 08: the choice */
+  #business .forces.in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+  .forces.choose .force small{font-size:clamp(1.05rem,min(1.7vw,2.7vh),1.5rem);opacity:.85;text-align:center}
+
+  #persona .frag.in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+
+  .persona-sub{margin-top:10px}
+
+  /* 10: a quiet chat window, the AI asks */
+  #flip .chatwin.in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+  .chatwin{width:min(100%,780px);margin:clamp(22px,4.6vh,48px) auto 0;background:#fff;border-radius:22px;box-shadow:0 2px 12px rgba(0,0,0,.06),0 30px 60px -30px rgba(26,26,26,.25);overflow:hidden}
+  .cw-head{display:flex;align-items:center;gap:10px;padding:14px 22px;border-bottom:1px solid var(--line);font-weight:700;font-size:1rem;color:var(--fg-2)}
+  .cw-dot{width:10px;height:10px;border-radius:50%;background:var(--magenta)}
+  .cw-body{display:flex;flex-direction:column;gap:16px;padding:clamp(20px,4vh,40px) clamp(20px,2.6vw,36px)}
+  .cw-msg{max-width:82%;font-size:clamp(1.2rem,min(2vw,3.2vh),1.8rem);line-height:1.45}
+  .cw-msg.ai{align-self:flex-start;font-weight:500}
+  .cw-msg.me{align-self:flex-end;background:var(--bg);border-radius:18px;padding:16px 22px;display:flex;gap:7px}
+  .cw-msg.me i{width:9px;height:9px;border-radius:50%;background:rgba(26,26,26,.45);animation:blink 1.4s infinite}
+  .cw-msg.me i:nth-child(2){animation-delay:.2s} .cw-msg.me i:nth-child(3){animation-delay:.4s}
+  .cw-input{margin:0 clamp(16px,2vw,24px) clamp(16px,2vw,24px);border:1px solid var(--line);border-radius:14px;padding:12px 16px;color:rgba(26,26,26,.4);font-size:1rem}
+
+  /* 12 v2: seven quiet rows, one card with the photo and the two fears */
+  #answer .frag[data-frag="1"].in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+  .ans2{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,4vw,64px);align-items:center;margin-top:clamp(14px,2.6vh,28px)}
+  .answer2{list-style:none;margin:0;padding:0;counter-reset:a}
+  .answer2 li{counter-increment:a;display:grid;grid-template-columns:1.8em minmax(0,9.5em) minmax(0,1fr);gap:10px;align-items:baseline;padding:clamp(7px,1.3vh,13px) 0;border-bottom:1px solid var(--line);font-size:clamp(.98rem,min(1.35vw,2.2vh),1.25rem);color:var(--fg-2);line-height:1.35;transition:color .4s}
+  .answer2 li::before{content:counter(a);font-weight:800;color:rgba(26,26,26,.3)}
+  .answer2 li b{font-weight:700;color:var(--fg)}
+  .ans2:has(.fear2.in) .answer2 li:not(.hot){opacity:.45}
+  .ans2:has(.fear2.in) .answer2 li.hot b,.ans2:has(.fear2.in) .answer2 li.hot span,.ans2:has(.fear2.in) .answer2 li.hot::before{color:var(--magenta)}
+  .answer2 li{transition:opacity .5s var(--ease-out)}
+  .fear2{margin:0;background:#fff;border-radius:var(--r-lg);box-shadow:0 2px 12px rgba(0,0,0,.06),0 30px 60px -30px rgba(26,26,26,.25);overflow:hidden}
+  .fear2 img{width:100%;aspect-ratio:4/3;object-fit:cover}
+  .fear2 figcaption{padding:clamp(14px,2.4vh,24px) clamp(18px,2vw,28px);display:grid;gap:10px}
+  .cap-quote{color:var(--fg-2);font-size:.95rem}
+  .fear2 p{font-weight:700;font-size:clamp(1.1rem,min(1.8vw,2.8vh),1.6rem);line-height:1.3}
+  .fear2 p b{color:var(--magenta);margin-inline-end:10px}
+  @media (max-width:920px){.ans2{grid-template-columns:1fr}}
+
+  /* part 4 opening: six questions, floating, not in order */
+  .thoughts{list-style:none;margin:clamp(28px,6vh,64px) auto 0;padding:0;max-width:1100px;display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(14px,2.6vh,28px) clamp(14px,2vw,28px)}
+  .thoughts li{background:#fff;border-radius:999px;box-shadow:0 2px 12px rgba(0,0,0,.06),0 18px 40px -24px rgba(26,26,26,.25);padding:.5em 1.3em;font-weight:800;font-size:clamp(1.4rem,min(2.6vw,4.2vh),2.4rem);letter-spacing:-.02em;transition:opacity .5s var(--ease-out),transform .5s var(--ease-out),color .4s,background .4s}
+  .thoughts li:nth-child(1){margin-top:22px} .thoughts li:nth-child(3){margin-top:30px} .thoughts li:nth-child(4){margin-inline-start:6%} .thoughts li:nth-child(6){margin-top:16px}
+  .thoughts li.frag{transform:translateY(14px) scale(.96)}
+  .thoughts li.frag.in{transform:none}
+  /* the newest question is the one in focus */
+  .thoughts li.in{color:var(--fg-2);background:rgba(255,255,255,.7)}
+  .thoughts li.in:not(:has(~ li.in)){color:var(--fg);background:#fff;box-shadow:0 0 0 3px var(--magenta),0 18px 40px -20px rgba(224,18,139,.35)}
+  /* comparison top bar: question + principle only, no stage names */
+  .tag .stage{display:none}
+
+  /* part 4: pages flat, no device frame */
+  .bezel{border:0!important;padding:0!important;border-radius:14px!important;background:#fff;box-shadow:0 0 0 1px var(--line),0 24px 50px -28px rgba(26,26,26,.35)!important}
+  .bezel::before,.bezel::after,.bezel .batt{display:none!important;content:none!important}
+  .bezel iframe{border-radius:14px!important}
+  .bezel .none{inset:0!important;border-radius:14px!important}
+
+  /* captions: each point is its own card */
+  .col-cap{background:none!important;box-shadow:none!important;padding:0!important;border:0!important}
+  .col-cap p{background:#fff;border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:clamp(14px,2vh,22px) clamp(16px,1.4vw,22px);margin:0 0 12px}
+  .col-cap.i p{border-right:4px solid var(--magenta)}
+  body.nocap .col-cap{visibility:hidden}
+
+  /* part 4 closing: what the "before" was missing */
+  .miss{list-style:none;margin:clamp(26px,5.4vh,56px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,22px);counter-reset:m}
+  .miss li{counter-increment:m;background:#fff;border-radius:var(--r-lg);box-shadow:0 2px 12px rgba(0,0,0,.06),0 24px 50px -32px rgba(26,26,26,.3);padding:clamp(20px,3.6vh,36px) clamp(18px,2vw,30px);display:flex;flex-direction:column;gap:10px}
+  .miss li::before{content:counter(m);font-weight:800;font-size:clamp(2rem,min(3.6vw,5.6vh),3.2rem);line-height:1;color:var(--magenta);letter-spacing:-.03em}
+  .miss b{font-weight:800;font-size:clamp(1.25rem,min(2.1vw,3.3vh),1.9rem);line-height:1.2}
+  .miss span{color:var(--fg-2);font-size:clamp(1rem,min(1.5vw,2.4vh),1.35rem);line-height:1.4}
+  .miss li.frag{transform:translateY(16px)} .miss li.frag.in{transform:none}
+  .sharpen{margin-top:clamp(26px,5.4vh,56px);font-weight:800;font-size:clamp(1.6rem,min(3.2vw,5vh),3rem);line-height:1.2;letter-spacing:-.02em;text-align:center}
+  .sharpen mark{color:var(--magenta);background:none;font-weight:800}
+  @media (max-width:920px){.miss{grid-template-columns:1fr}}
+
+  /* part 5: the final prompt */
+  .final-book .prompt{color:rgba(255,255,255,.82);font-size:clamp(.88rem,min(1.2vw,1.95vh),1.12rem)}
+  .final-book .pr-n{color:var(--pink);font-weight:700}
+  .menu-box{grid-template-columns:repeat(5,minmax(0,1fr))}
+
+  /* thank-you slide */
+  .inner.thanks{display:grid;grid-template-columns:minmax(0,1.1fr) auto;gap:clamp(28px,5vw,80px);align-items:center}
+  .qr-card{margin:0;background:#fff;border-radius:22px;padding:clamp(16px,2vw,26px);box-shadow:0 2px 12px rgba(0,0,0,.06),0 30px 60px -30px rgba(26,26,26,.3);display:flex;flex-direction:column;align-items:center;gap:12px}
+  #qr img,#qr canvas{width:clamp(200px,min(24vw,40vh),340px)!important;height:auto!important;display:block}
+  .qr-card figcaption{font-size:.85rem;color:var(--fg-2)}
+  @media (max-width:920px){.inner.thanks{grid-template-columns:1fr}}
+
+  /* recap */
+  .recap{list-style:none;margin:clamp(22px,4.4vh,46px) 0 0;padding:0;display:grid;gap:clamp(8px,1.4vh,14px);counter-reset:r;max-width:1000px}
+  .recap li{counter-increment:r;display:grid;grid-template-columns:2.2em minmax(0,auto) minmax(0,1fr);gap:clamp(10px,1.4vw,20px);align-items:baseline;background:#fff;border-radius:var(--r-lg);box-shadow:0 2px 12px rgba(0,0,0,.06);padding:clamp(12px,2.2vh,22px) clamp(16px,2vw,28px)}
+  .recap li::before{content:counter(r);font-weight:800;font-size:clamp(1.4rem,min(2.4vw,3.8vh),2.2rem);color:var(--magenta);line-height:1}
+  .recap b{font-weight:800;font-size:clamp(1.15rem,min(2vw,3.1vh),1.8rem);white-space:nowrap}
+  .recap span{color:var(--fg-2);font-size:clamp(1rem,min(1.6vw,2.5vh),1.4rem)}
+  .recap li.frag{transform:translateY(10px)} .recap li.frag.in{transform:none}
+  @media (max-width:920px){.recap li{grid-template-columns:2em 1fr}.recap span{grid-column:2}.recap b{white-space:normal}}
+
+  /* who am I + tonight */
+  #me .frag[data-frag="1"].in,#tonight .frag[data-frag="1"].in{transition:opacity .6s var(--ease-out) 1.15s,transform .6s var(--ease-out) 1.15s}
+  .facts-me{list-style:none;margin:clamp(26px,5.4vh,56px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,22px)}
+  .facts-me li{background:#fff;border-radius:var(--r-lg);box-shadow:0 2px 12px rgba(0,0,0,.06);padding:clamp(22px,4vh,40px) clamp(18px,2vw,30px);display:flex;flex-direction:column;justify-content:center;gap:8px}
+  .facts-me b{font-weight:800;font-size:clamp(1.8rem,min(3.6vw,5.6vh),3.2rem);line-height:1;letter-spacing:-.03em}
+  .facts-me li:nth-child(2) b{color:var(--magenta)}
+  .facts-me span{color:var(--fg-2);font-size:clamp(1rem,min(1.6vw,2.5vh),1.4rem)}
+  .tonight{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,22px);margin-top:clamp(22px,4.4vh,46px)}
+  .tn{background:#fff;border-radius:var(--r-lg);box-shadow:0 2px 12px rgba(0,0,0,.06),0 24px 50px -32px rgba(26,26,26,.3);padding:clamp(20px,3.6vh,36px) clamp(18px,2vw,30px);display:flex;flex-direction:column;gap:8px}
+  .tn small{font-weight:800;color:var(--magenta);font-size:clamp(1.4rem,min(2.4vw,3.8vh),2.2rem);line-height:1}
+  .tn b{font-weight:800;font-size:clamp(1.4rem,min(2.6vw,4vh),2.4rem);line-height:1.15}
+  .tn span{color:var(--fg-2);font-size:clamp(1rem,min(1.6vw,2.5vh),1.4rem)}
+  .tn-note{margin-top:clamp(18px,3.6vh,36px);font-weight:700;font-size:clamp(1.15rem,min(2vw,3.1vh),1.7rem);color:var(--fg-2)}
+  @media (max-width:920px){.facts-me,.tonight{grid-template-columns:1fr}}
+
+  .facts-me li.me-boost{flex-direction:row;align-items:center;justify-content:space-between;gap:16px}
+  .me-boost .me-url{display:block;margin-top:6px;font-weight:700;color:var(--magenta-ink)}
+  #qr-boost img,#qr-boost canvas{width:clamp(96px,min(9vw,15vh),150px)!important;height:auto!important;display:block}
+
+  .boost-qr{margin:clamp(20px,4vh,40px) auto 0;width:max-content;background:#fff;border-radius:var(--r-lg);box-shadow:0 2px 12px rgba(0,0,0,.06);padding:14px 14px 12px;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .boost-qr figcaption{display:flex;flex-direction:column;align-items:center;line-height:1.2}
+  .boost-qr figcaption b{font-weight:800;letter-spacing:.02em}
+  .boost-qr figcaption span{font-size:.85rem;color:var(--magenta-ink);font-weight:700}
+  #qr-boost img,#qr-boost canvas{width:clamp(110px,min(10vw,17vh),170px)!important}
+
+  /* QR in the bottom-left corner of the "who am I" slide */
+  #me .boost-qr{position:absolute;left:var(--gutter);bottom:clamp(14px,3vh,32px);margin:0}
 </style>
 </head>
 <body>
@@ -479,6 +791,33 @@
         </div>
         <svg class="cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2 L3 19 L8 14.5 L11.5 22 L14.5 20.6 L11 13.4 L17.5 13.4 Z" fill="#1A1A1A" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
       </div>
+    </div>
+  </section>
+
+  <section class="slide" id="me" data-part="1" data-name="מי אני" aria-labelledby="t-me">
+    <div class="inner">
+      <h2 class="h fly" data-frag="1" id="t-me">מי <span class="pen">אני</span></h2>
+      <ul class="facts-me">
+        <li class="frag" data-frag="1"><b>גל אפרתי</b></li>
+        <li class="frag" data-frag="1"><b>15+</b><span>שנה בשיווק דיגיטלי</span></li>
+        <li class="frag" data-frag="1"><b>דיגיטל ו-AI</b><span>לעסקים</span></li>
+      </ul>
+      <figure class="boost-qr frag" data-frag="1">
+        <div id="qr-boost" role="img" aria-label="קוד QR ל-boost-me.digital"></div>
+        <figcaption><b>BOOST ME</b><span dir="ltr">boost-me.digital</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="slide" id="tonight" data-part="1" data-name="מה הערב" aria-labelledby="t-tonight">
+    <div class="inner">
+      <h2 class="h fly" data-frag="1" id="t-tonight">הערב נכנסים <span class="pen">לראש של הלקוח</span></h2>
+      <p class="lede frag" data-frag="1">של מי שנוחת על עמוד הנחיתה שלכם</p>
+      <div class="tonight">
+        <div class="tn frag" data-frag="2"><small>1</small><b>חופרים בפסיכולוגיה</b><span>מה עובר לו בראש, ולמה הוא לוחץ או עוזב</span></div>
+        <div class="tn frag" data-frag="3"><small>2</small><b>רותמים אותה ל-AI</b><span>איך הופכים את זה לעמוד נחיתה, עם AI</span></div>
+      </div>
+      <p class="tn-note frag" data-frag="4">לא עוד סדנת עבודה. הפעם, הפסיכולוגיה שמאחורי העמוד.</p>
     </div>
   </section>
 
@@ -537,87 +876,92 @@
   <section class="slide" id="meeting" data-part="1" data-name="כפתור אחד" aria-labelledby="t-meet">
     <div class="inner">
       <h2 class="h fly" data-frag="1" id="t-meet">מטרה אחת. כפתור אחד.</h2>
-      <div class="funnel frag" data-frag="1" aria-label="מכל הערוצים לכפתור אחד">
-        <ul class="chan"><li>מודעה</li><li>ניוזלטר</li><li>וואטסאפ</li><li>אינסטגרם</li><li>גוגל</li></ul>
-        <div class="cone" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+      <div class="merge frag" data-frag="1" aria-label="מכל הערוצים לכפתור אחד">
+        <ul class="chan5"><li>מודעה</li><li>ניוזלטר</li><li>וואטסאפ</li><li>אינסטגרם</li><li>גוגל</li></ul>
+        <svg class="wires" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="wire-g" gradientUnits="userSpaceOnUse" x1="1000" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#1A1A1A" stop-opacity=".18"/><stop offset="1" stop-color="#E0128B" stop-opacity=".9"/></linearGradient></defs>
+          <g class="base"><path d="M1000 10 C560 10 440 50 0 50"/><path d="M1000 30 C560 30 440 50 0 50"/><path d="M1000 50 L0 50"/><path d="M1000 70 C560 70 440 50 0 50"/><path d="M1000 90 C560 90 440 50 0 50"/></g><g class="hot"><path d="M1000 10 C560 10 440 50 0 50"/><path d="M1000 30 C560 30 440 50 0 50"/><path d="M1000 50 L0 50"/><path d="M1000 70 C560 70 440 50 0 50"/><path d="M1000 90 C560 90 440 50 0 50"/></g>
+        </svg>
         <div class="the-btn frag" data-frag="2">הכפתור</div>
       </div>
     </div>
   </section>
 
   <section class="slide" id="peek" data-part="1" data-name="הצצה" aria-labelledby="t-peek">
-    <div class="inner two">
-      <div>
-        <h2 class="big md" id="t-peek">ביקשתי מ-AI עמוד נחיתה לסדנה.<br><span class="pen">בשורה אחת.</span></h2>
+    <div class="inner peek">
+      <div class="peek-top">
+        <div>
+          <h2 class="h" id="t-peek">ביקשתי מ-AI <span class="pen">עמוד נחיתה לסדנה.</span></h2>
+          <p class="lede">נראה טוב, נכון? תזכרו אותו. נחזור אליו.</p>
+        </div>
         <div class="bub mine"><small>הפרומפט</small>תבנה לי עמוד נחיתה לסדנת זום של שעתיים, שבה בעלות חנויות אונליין לומדות להפוך תמונה של המוצר שלהן לתמונות מוצר מרשימות עם AI. יוצאים עם 5 תמונות מוכנות לאתר. המנחה: גל אפרתי. רביעי 9.12, 12 מקומות, 190 ש"ח.</div>
-        <p class="lede">נראה טוב, נכון? תזכרו אותו. נחזור אליו.</p>
       </div>
-      <div class="phone"><span class="batt"></span><iframe data-src="generic.html" title="העמוד הגנרי" loading="lazy"></iframe></div>
+      <div class="strips" id="strips" role="img" aria-label="העמוד הגנרי, צילום מסך בדסקטופ"></div>
     </div>
   </section>
 
   <!-- ===== חלק 2: כאב או תענוג ===== -->
   <section class="slide" id="pain" data-part="2" data-name="העיקרון" aria-labelledby="t-pain">
     <div class="inner">
-      <h2 class="big md" id="t-pain">מתרחקים מכאב. מתקרבים <span class="pen">לתענוג.</span></h2>
-      <div class="axis" aria-hidden="true">
-        <span class="end">כאב</span>
-        <span class="line"></span>
-        <span class="end pen">תענוג</span>
+      <h2 class="h fly" data-frag="1" id="t-pain">כאב <span class="pen">ותענוג.</span></h2>
+      <div class="forces frag" data-frag="1">
+        <div class="force f-pain"><b>כאב</b><small lang="en">Pain</small></div>
+        <div class="force f-joy"><b>תענוג</b><small lang="en">Pleasure</small></div>
+        <p class="maps frag" data-frag="2">הבעיה שהמוצר או השירות פותר</p>
+        <p class="maps frag" data-frag="2">החיים אחרי שהבעיה נפתרה</p>
       </div>
-      <p class="lede">תולעת · חתול · בן אדם</p>
     </div>
   </section>
 
   <section class="slide" id="study" data-part="2" data-name="המחקר" aria-labelledby="t-study">
-    <div class="inner two">
-      <div>
-        <h2 class="h" id="t-study">אותו מוצר. מצב אחר.</h2>
-        <p class="lede">כמה בחרו במשחת שיניים מלבינה, ולא במשחה נגד עששת?</p>
-        <p class="src">Chernev, 2004 · Journal of Consumer Psychology</p>
+    <div class="inner">
+      <h2 class="h fly" data-frag="1" id="t-study">אותו מוצר. <span class="pen">מצב אחר.</span></h2>
+      <div class="stat2 frag" data-frag="1">
+        <p class="q2">איזו משחה בחרו?</p>
+        <div class="s-col"><span class="g">חשבו על <strong>חלומות</strong></span><div class="pair2 frag" data-frag="2"><div class="pp w"><b>39%</b><span>מלבינה</span></div><div class="pp k"><b>61%</b><span>נגד עששת</span></div></div></div>
+        <div class="s-col"><span class="g">חשבו על <strong>בעיות</strong></span><div class="pair2 frag" data-frag="3"><div class="pp w"><b>17%</b><span>מלבינה</span></div><div class="pp k"><b>83%</b><span>נגד עששת</span></div></div></div>
       </div>
-      <div class="card cols" role="img" aria-label="39% מאלה שחשבו על חלומות, 17% מאלה שחשבו על בעיות">
-        <div class="col hi"><b>39%</b><span style="height:39%"></span><em>חשבו על חלומות</em></div>
-        <div class="col"><b>17%</b><span style="height:17%"></span><em>חשבו על בעיות</em></div>
-      </div>
+      <p class="src">Chernev, 2004 · Journal of Consumer Psychology</p>
     </div>
   </section>
 
-  <section class="slide" id="business" data-part="2" data-name="ולעסקים" aria-labelledby="t-biz">
-    <div class="inner two">
-      <div>
-        <h2 class="big md" id="t-biz">בעלי עסקים מגיעים <span class="pen">כשמשהו כואב.</span></h2>
-        <p class="lede">הם לא מחפשים חוויה. הם רוצים שמשהו יפסיק להציק.</p>
+  <section class="slide" id="business" data-part="2" data-name="לבחור" aria-labelledby="t-biz">
+    <div class="inner">
+      <h2 class="h fly" data-frag="1" id="t-biz">לאיזה קצה <span class="pen">העמוד שלכם ידבר?</span></h2>
+      <div class="forces choose frag" data-frag="1">
+        <div class="force f-pain"><b>כאב</b><small>הבעיה שהמוצר או השירות פותר</small></div>
+        <div class="force f-joy"><b>תענוג</b><small>החיים אחרי שהבעיה נפתרה</small></div>
       </div>
-      <div class="phone"><span class="batt"></span><iframe data-src="index.html" title="עמוד הדוגמה" loading="lazy"></iframe></div>
     </div>
   </section>
 
   <!-- ===== חלק 3: בראש של הלקוח ===== -->
   <section class="slide" id="persona" data-part="3" data-name="אפיון" aria-labelledby="t-persona">
     <div class="inner">
-      <h2 class="h" id="t-persona">"כולם" זה לא קהל.</h2>
-      <div class="crowd" aria-hidden="true">
+      <h2 class="h fly" data-frag="1" id="t-persona">"כולם" זה לא קהל.</h2>
+      <p class="lede persona-sub frag" data-frag="1">מי האדם שאתם מדברים אליו</p>
+      <div class="crowd frag" data-frag="1" aria-hidden="true">
         <span class="p"></span><span class="p"></span><span class="p"></span><span class="p"></span>
         <span class="p one"></span>
         <span class="p"></span><span class="p"></span><span class="p"></span><span class="p"></span>
       </div>
-      <ul class="traits" aria-label="אדם אחד">
+      <ul class="traits frag" data-frag="1" aria-label="אדם אחד">
         <li>מה כואב לו</li><li>ממה הוא חושש</li><li>מה הוא כבר ניסה</li>
       </ul>
-      <p class="honest">כשזה לא כתוב, <mark>ה-AI ממלא את החורים בממוצע.</mark></p>
+      <p class="honest frag" data-frag="1">כשזה לא כתוב, <mark>ה-AI ממלא את החורים בממוצע.</mark></p>
     </div>
   </section>
 
   <section class="slide" id="flip" data-part="3" data-name="הפוך" aria-labelledby="t-flip">
-    <div class="inner two">
-      <div>
-        <h2 class="big" id="t-flip">ה-AI שואל.<br><span class="pen">אתם עונים.</span></h2>
-        <p class="lede">הוא לא מכיר את הלקוחות שלכם. אתם כן.</p>
-      </div>
-      <div class="chat">
-        <div class="bub ai"><small>Claude</small>היי, בשמחה. שים לב שבשדה "המוצר או השירות שלי" נשאר הסוגריים הריקים [ ], אז נתחיל משם.<br><strong>מה המוצר או השירות שלך? תאר במשפט או שניים מה אתה מוכר.</strong></div>
-        <div class="bub me" aria-label="התשובה שלכם"><i></i><i></i><i></i></div>
+    <div class="inner">
+      <h2 class="h fly" data-frag="1" id="t-flip">ה-AI שואל. <span class="pen">אתם עונים.</span></h2>
+      <div class="chatwin frag" data-frag="1">
+        <div class="cw-head"><span class="cw-dot"></span>Claude</div>
+        <div class="cw-body">
+          <div class="cw-msg ai">מה המוצר או השירות שלך? תאר במשפט או שניים מה אתה מוכר.</div>
+          <div class="cw-msg me frag" data-frag="2" aria-label="התשובה שלכם"><i></i><i></i><i></i></div>
+        </div>
+        <div class="cw-input">כתבו כאן...</div>
       </div>
     </div>
   </section>
@@ -650,25 +994,125 @@
 
   <section class="slide" id="answer" data-part="3" data-name="התשובה" aria-labelledby="t-answer">
     <div class="inner">
-      <h2 class="h" id="t-answer">הלקוחה שלי בשבע שורות <small>סדנה לדוגמה</small></h2>
-      <div class="ans">
-        <ol class="answer">
+      <h2 class="h fly" data-frag="1" id="t-answer">הלקוחה שלי <span class="pen">בשבע שורות</span></h2>
+      <p class="lede persona-sub frag" data-frag="1">סדנה לדוגמה: צילום מוצרים עם AI</p>
+      <div class="ans2">
+        <ol class="answer2 frag" data-frag="1">
           <li><b>מה היא רוצה</b><span>תמונות שאפשר להעלות לחנות</span></li>
           <li><b>מה כואב לה</b><span>"זה נראה ביתי"</span></li>
           <li><b>מה היא כבר יודעת</b><span>שאחרים מצליחים עם AI</span></li>
           <li><b>מה היא לא מבינה</b><span>חושבת שיש פרומפט סודי <em class="inf">הסקה</em></span></li>
-          <li class="hot"><b>ממה היא חוששת</b></li>
-          <li class="hot"><b>במה היא לא מאמינה</b></li>
+          <li class="hot"><b>ממה היא חוששת</b><span>להישאר עם תמונות שאי אפשר להשתמש בהן</span></li>
+          <li class="hot"><b>במה היא לא מאמינה</b><span>שתגיע לרמה מספיק טובה</span></li>
           <li><b>מה כבר ניסתה</b><span>חלון, צלם, כלי AI ששינה את התווית</span></li>
         </ol>
-        <div class="fear">
+        <figure class="fear2 frag" data-frag="2">
           <img src="shampoo-before-phone.jpg" alt="תמונת מוצר שצולמה בטלפון בבית">
-          <div class="fear-card">
-            <p><span>5</span>ללמוד, ולהישאר עם תמונות שאי אפשר להשתמש בהן.</p>
-            <p><span>6</span>שהיא לא תגיע לרמה מספיק טובה.</p>
-          </div>
-        </div>
+          <figcaption>
+            <span class="cap-quote">"זה נראה ביתי"</span>
+            <p><b>5</b>ללמוד, ולהישאר עם תמונות שאי אפשר להשתמש בהן.</p>
+            <p><b>6</b>שהיא לא תגיע לרמה מספיק טובה.</p>
+          </figcaption>
+        </figure>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== חלק 4: שש השאלות ===== -->
+  <section class="slide" id="questions" data-part="4" data-name="שש שאלות" aria-labelledby="t-q6">
+    <div class="inner">
+      <h2 class="h fly" data-frag="1" id="t-q6">מה עובר <span class="pen">לה בראש?</span></h2>
+      <ul class="thoughts">
+        <li class="frag" data-frag="2">מה זה?</li>
+        <li class="frag" data-frag="3">זה בשבילי?</li>
+        <li class="frag" data-frag="4">הבנתי מה מציעים?</li>
+        <li class="frag" data-frag="5">למה שאאמין?</li>
+        <li class="frag" data-frag="6">מה הסיכון?</li>
+        <li class="frag" data-frag="7">מה יקרה אם אלחץ?</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide" id="missing" data-part="4" data-after="cmp" data-name="מה חסר" aria-labelledby="t-miss">
+    <div class="inner">
+      <h2 class="h fly" data-frag="1" id="t-miss">מה חסר <span class="pen">ל"לפני"?</span></h2>
+      <ol class="miss">
+        <li class="frag" data-frag="2"><b>הוא לא הכיר את הלקוחה</b><span>לכן פתח בתענוג, כשהיא מגיעה עם כאב.</span></li>
+        <li class="frag" data-frag="3"><b>לא היו לו הוכחות</b><span>לכן הבטיח.</span></li>
+        <li class="frag" data-frag="4"><b>הוא לא ידע את הפרטים</b><span>שיש הקלטה, שיש קבוצה, מה מגיע במייל.</span></li>
+      </ol>
+      <p class="sharpen frag" data-frag="5">השאלות כלליות. אצל כל לקוח הן <mark>מתחדדות אחרת.</mark></p>
+    </div>
+  </section>
+
+  <section class="slide" id="final" data-part="5" data-after="cmp" data-name="הפרומפט הסופי" aria-labelledby="t-final">
+    <div class="inner book final-book">
+      <div class="prompt-head"><h2 id="t-final">הפרומפט הסופי: תבנה לי עמוד נחיתה</h2><button type="button" class="copy" data-copy="final-src">להעתקת הפרומפט</button></div>
+      <div class="prompt final-prompt">
+          <p>תבנה לי עמוד נחיתה.</p>
+          <p>מה אני מוכר: [ ]</p>
+          <p>המטרה של העמוד, מה צריך לקרות כשלוחצים על הכפתור: [ ]</p>
+          <p>הפרטים שרק אני יודע (תאריך, שעה, מחיר, מה מגיע אחרי ההרשמה, איזה ליווי יש): [ ]</p>
+          <p>הוכחות אמיתיות שיש לי (תוצאות, המלצות, תמונות): [ ]</p>
+          <p>הלקוח שלי בשבע שורות (מהראיון): [הדביקו כאן]</p>
+          <p>בנה את העמוד לפי העקרונות האלה:</p>
+          <p><span class="pr-n">1. כאב או תענוג:</span> לפי מה שאני מוכר ולפי המצב שבו הלקוח מגיע, החלט לאיזה קצה העמוד מדבר, לבעיה שאני פותר או לחיים אחרי שהיא נפתרה, ופתח משם.</p>
+          <p><span class="pr-n">2. שש השאלות:</span> הלקוח שואל את עצמו: מה זה? זה בשבילי? הבנתי מה מציעים? למה שאאמין? מה הסיכון? מה יקרה אם אלחץ? חדד כל שאלה לפי הלקוח שלי (במה בדיוק?), וענה על כל אחת במקום שבו היא עולה. השאלות הן כלי בשבילך, לא כותרות לעמוד: הכותרות עונות עליהן, ולא חוזרות עליהן.</p>
+          <p><span class="pr-n">3. מראה, לא כאבים:</span> תן ללקוח לזהות את עצמו בתיאור ניטרלי של המצב שלו.</p>
+          <p><span class="pr-n">4. הוכחה, לא הבטחה:</span> השתמש רק בהוכחות שנתתי. מה שחסר, כתוב &quot;חסר&quot; ואל תמציא.</p>
+          <p><span class="pr-n">5. כפתור אחד:</span> מטרה אחת, וכל הכפתורים בעמוד עושים את אותה פעולה. הכפתור מבטיח את מה שהלקוח מקבל, לא את הפעולה עצמה (לא &#x27;מקום בסדנה&#x27;, אלא מה שיוצאים איתו). ליד הכפתור: הפרטים, ומה יקרה אחרי הלחיצה.</p>
+          <p>לפני שאתה כותב, הצג לי בקצרה: לאיזה קצה בחרת ולמה, ואת שש השאלות כפי שחידדת אותן. חכה לאישור שלי, ורק אז כתוב את העמוד.</p>
+      </div>
+      <pre id="final-src" hidden>תבנה לי עמוד נחיתה.
+
+מה אני מוכר: [ ]
+המטרה של העמוד, מה צריך לקרות כשלוחצים על הכפתור: [ ]
+הפרטים שרק אני יודע (תאריך, שעה, מחיר, מה מגיע אחרי ההרשמה, איזה ליווי יש): [ ]
+הוכחות אמיתיות שיש לי (תוצאות, המלצות, תמונות): [ ]
+הלקוח שלי בשבע שורות (מהראיון): [הדביקו כאן]
+
+בנה את העמוד לפי העקרונות האלה:
+1. כאב או תענוג: לפי מה שאני מוכר ולפי המצב שבו הלקוח מגיע, החלט לאיזה קצה העמוד מדבר, לבעיה שאני פותר או לחיים אחרי שהיא נפתרה, ופתח משם.
+2. שש השאלות: הלקוח שואל את עצמו: מה זה? זה בשבילי? הבנתי מה מציעים? למה שאאמין? מה הסיכון? מה יקרה אם אלחץ? חדד כל שאלה לפי הלקוח שלי (במה בדיוק?), וענה על כל אחת במקום שבו היא עולה. השאלות הן כלי בשבילך, לא כותרות לעמוד: הכותרות עונות עליהן, ולא חוזרות עליהן.
+3. מראה, לא כאבים: תן ללקוח לזהות את עצמו בתיאור ניטרלי של המצב שלו.
+4. הוכחה, לא הבטחה: השתמש רק בהוכחות שנתתי. מה שחסר, כתוב &quot;חסר&quot; ואל תמציא.
+5. כפתור אחד: מטרה אחת, וכל הכפתורים בעמוד עושים את אותה פעולה. הכפתור מבטיח את מה שהלקוח מקבל, לא את הפעולה עצמה (לא &#x27;מקום בסדנה&#x27;, אלא מה שיוצאים איתו). ליד הכפתור: הפרטים, ומה יקרה אחרי הלחיצה.
+
+לפני שאתה כותב, הצג לי בקצרה: לאיזה קצה בחרת ולמה, ואת שש השאלות כפי שחידדת אותן. חכה לאישור שלי, ורק אז כתוב את העמוד.</pre>
+    </div>
+  </section>
+
+  <section class="slide" id="qa" data-part="5" data-after="cmp" data-name="שאלות" aria-labelledby="t-qa">
+    <div class="inner">
+      <h2 class="big" id="t-qa">שאלות<span class="pen">?</span></h2>
+      <p class="lede">כתבו בצ'אט או הרימו יד</p>
+    </div>
+  </section>
+
+  <section class="slide" id="recap" data-part="5" data-after="cmp" data-name="מה לוקחים" aria-labelledby="t-recap">
+    <div class="inner">
+      <h2 class="h fly" data-frag="1" id="t-recap">מה לוקחים <span class="pen">מהערב</span></h2>
+      <ol class="recap">
+        <li class="frag" data-frag="2"><b>מטרה אחת. כפתור אחד.</b><span>כל כפתור בעמוד מוביל לאותה פעולה.</span></li>
+        <li class="frag" data-frag="3"><b>כאב או תענוג.</b><span>בחרו לאיזה קצה העמוד שלכם מדבר.</span></li>
+        <li class="frag" data-frag="4"><b>הלקוח האידיאלי.</b><span>תנו ל-AI לראיין אתכם, לא לנחש.</span></li>
+        <li class="frag" data-frag="5"><b>שש השאלות.</b><span>חדדו כל אחת: במה בדיוק, אצל הלקוח שלי?</span></li>
+        <li class="frag" data-frag="6"><b>ה-AI מציע, אתם מחליטים.</b><span>כל השאר בפרומפט הסופי.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="slide" id="thanks" data-part="5" data-after="cmp" data-name="תודה" aria-labelledby="t-thanks">
+    <div class="inner thanks">
+      <div>
+        <h2 class="big" id="t-thanks">תודה <span class="pen">רבה!</span></h2>
+        <p class="lede">צלמו את הקוד, והמצגת כולה אצלכם: כל השקפים, ושני הפרומפטים עם כפתור העתקה.</p>
+        <p class="byline"><img src="robot-color.png" alt="">גל · BOOST ME · AI &amp; Tools</p>
+      </div>
+      <figure class="qr-card">
+        <div id="qr" role="img" aria-label="קוד QR למצגת"></div>
+        <figcaption dir="ltr">wenjygal.github.io/landing-page-psychology-demo/deck.html</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -683,59 +1127,60 @@
 </div>
 
 <div class="stage-area" id="stagearea">
-  <div class="col-cap g"><h3>גנרי</h3><p id="gcap"></p></div>
+  <div class="col-cap g"><h3>לפני</h3><div id="gcap"></div></div>
   <div class="frame g" id="gframe">
-    <div class="lbl">גנרי · פרומפט של שורה אחת</div>
+    <div class="lbl">לפני · מה שה-AI נתן</div>
     <div class="bezel"><span class="batt"></span>
       <iframe id="gif" src="generic.html" title="העמוד הגנרי"></iframe>
-      <div class="none"><b>אין</b><span>בעמוד הגנרי אין סקשן כזה</span></div>
+      <div class="none"><b>אין</b><span>בעמוד של "לפני" אין סקשן כזה</span></div>
     </div>
   </div>
   <div class="frame i" id="iframe">
-    <div class="lbl">מושכל · אחרי ההחלטות</div>
+    <div class="lbl">אחרי · עונה על השאלות שבראש שלה</div>
     <div class="bezel"><span class="batt"></span><iframe id="iif" src="index.html" title="העמוד המושכל"></iframe></div>
   </div>
-  <div class="col-cap i"><h3>מושכל</h3><p id="icap"></p></div>
+  <div class="col-cap i"><h3>אחרי</h3><div id="icap"></div></div>
 </div>
 
 <nav id="nav" aria-label="ניווט במצגת"></nav>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (function () {
-  var PARTS = { 1: 'הקדמה', 2: 'כאב או תענוג', 3: 'בראש של הלקוח', 4: 'מסע ההחלטה' };
+  var PARTS = { 1: 'הקדמה', 2: 'כאב או תענוג', 3: 'בראש של הלקוח', 4: 'מסע ההחלטה', 5: 'הפרומפט' };
 
   // Table "גנרי מול מושכל" (training note, 2026-11-10). g: selector in generic.html, null = no matching section.
   var S = [
     { id: 's1', name: 'פתיחה', stage: 'קשב', pr: 'בולטות',
-      g: '#s1', gt: '"תמונה אחת של המוצר. חמש תמונות שמוכרות." כפתור: "אני רוצה את המקום שלי".',
-      i: '#s1', it: 'פותח בכאב: "יש לך מוצר ואין לך צלם?". לפני ואחרי אמיתי. <mark>↩ מהגנרי:</mark> כפתור בגוף ראשון, "אני רוצה תמונות כאלה".' },
+      g: 'top', gt: '"תמונה אחת של המוצר. חמש תמונות שמוכרות." כפתור: "אני רוצה את המקום שלי".',
+      i: 'top', it: 'פותח בכאב: "יש לך מוצר ואין לך צלם?". לפני ואחרי אמיתי. <mark>↩</mark> גוף ראשון מה"לפני". אבל הכפתור, "אני רוצה תמונות כאלה", מבטיח יכולת שנשארת, לא מקום בסדנה.' },
     { id: 's2', name: 'בשבילך', stage: 'רלוונטיות', pr: 'רלוונטיות',
-      g: '#s2', gt: 'שלושה כאבים: תמונות סתמיות, צלם יקר, "ניסית AI ולא יצא טוב".',
-      i: '#s2', it: '<mark>↩</mark> חנות או בשלבי הקמה. <mark>↩</mark> "צילום ו-AI זה לא התחום שלך". תמונת ה"לפני" מהטלפון: "ככה התחלתי".' },
+      g: '#s2', gt: 'מזהה אותה דרך כאבים: תמונות סתמיות, צלם יקר, AI שלא הצליח.',
+      i: '#s2', it: 'מראה ניטרלית: <mark>↩</mark> חנות או בשלבי הקמה. <mark>↩</mark> "צילום ו-AI זה לא התחום שלך". ותמונת ה"לפני" מהטלפון.' },
     { id: 's3', name: 'מה מקבלים', stage: 'הבנה', pr: 'מאמץ קוגניטיבי',
-      g: '#s3', gt: 'שלוש רשימות נפרדות: איך זה עובד (4), מה תיקחי (4), מה להביא (3).',
-      i: '#s3', it: 'מספר אחד גדול: 5. שלושה סגנונות. <mark>↩</mark> "השיטה נשארת אצלך". מה להביא בשורה אחת.' },
+      g: '#s3', gt: 'שלוש רשימות, אחת עשרה שורות: איך זה עובד, מה תיקחי, מה להביא. את התמונה היא צריכה לחבר לבד.',
+      i: '#s3', it: 'תמונה אחת ברורה: חמש תמונות, שלושה סגנונות, ומה להביא בשורה אחת. <mark>↩</mark> "השיטה נשארת אצלך".' },
     { id: 's4', name: 'הוכחה', stage: 'אמון', pr: 'אמון והוכחה',
-      g: null, gt: 'אין הוכחה.',
-      i: '#s4', it: 'הניסיון הראשון שלא יצא טוב, בגלוי.' },
+      g: null, gt: 'אין תשובה ל"למה שאאמין שאצליח?".',
+      i: '#s4', it: 'הניסיון הראשון שלא יצא טוב, בגלוי. זה לא כישרון, זו שיטה.' },
     { id: 's5', name: 'הדרך', stage: 'ביטחון', pr: 'אי-ודאות',
-      g: '#faq details:nth-of-type(2)', open: true, gt: 'הפחד המרכזי, "יהיו דומות למוצר?", מופיע בשאלה נפוצה מקופלת, ונענה בהבטחה.',
+      g: '#faq details:nth-of-type(2)', open: true, gt: 'הסיכון שהתמונות לא ייצאו טוב מופיע בשאלה נפוצה מקופלת, ונענה בהבטחה.',
       i: '#s5', it: 'בדיקה, תיקון, תוצאה, כולל הפרומפט המתוקן וההבדל שנשאר.' },
     { id: 's5b', name: 'תוצאות', stage: 'אמון', pr: 'אמון והוכחה',
       g: null, gt: 'אין. הוא לא המציא תוצאות, וזה לזכותו.',
-      i: '#s5b', it: 'תוצאות מסומנות "לדוגמה, מדומות". בעמוד אמיתי: תוצאות אמיתיות.' },
+      i: '#s5b', it: 'תמונות של משתתפות מסדנאות קודמות, מסומנות "לדוגמה".' },
     { id: 's6', name: 'המנחה', stage: 'אמון', pr: 'אמון והוכחה',
-      g: '#s6', gt: '"גל תנחה צעד אחר צעד, בקבוצה קטנה". לא אומר מי היא.',
-      i: '#s6', it: '"אני לא צלמת". מי אני, ו"את התמונות כאן הפקתי בעצמי".' },
+      g: '#s6', gt: '"גל תנחה צעד אחר צעד, בקבוצה קטנה". שם, לא אדם.',
+      i: '#s6', it: 'אדם אמיתי: מי אני, מה אני עושה, הניסיון שלי. "אני לא צלמת", ו"את התמונות כאן הפקתי בעצמי".' },
     { id: 's7', name: 'פרטים', stage: 'ביטחון', pr: 'חיכוך',
-      g: '.g-facts', gt: 'יום, שעתיים, 12, מחיר. אין שעה ואין הקלטה.',
-      i: '#s7', it: 'שעה, זום עם הקלטה, "הקישור נשאר אצלך לתמיד".' },
+      g: '#register', gt: 'יום, שעתיים, 12, מחיר. אין שעה ואין הקלטה.',
+      i: '#s7', it: 'זום עם הקלטה, "הקישור נשאר אצלך לתמיד". עונה על "מה אם אפספס?".' },
     { id: 's8', name: 'סיכון', stage: 'ביטחון', pr: 'הפסד',
       g: null, gt: 'אין.',
-      i: '#s8', it: 'קבוצת וואטסאפ מרגע ההרשמה ועד שבוע אחרי הסדנה.' },
+      i: '#s8', it: 'קבוצת וואטסאפ מרגע ההרשמה ועד שבוע אחרי. עונה על "מה אם אתקע לבד?".' },
     { id: 's9', name: 'הרשמה', stage: 'פעולה', pr: 'חיכוך + דחיפות',
-      g: '#register', gt: '"12 מקומות בלבד" ו"נשארו 12 מקומות", ולצידם "כדי שיהיה זמן לכל אחת". קישור הזום רק בשאלה נפוצה.',
-      i: '#s9', it: '"12 משתתפות, כדי שיהיה זמן לעבור על התמונה של כל אחת". פרטים ומחיר ליד הכפתור. "אני נרשמת". שלושה דברים שיגיעו במייל, מתחת לכפתור.' }
+      g: '#register', gt: '"12 מקומות בלבד" ו"נשארו 12 מקומות", ולצידם "כדי שיהיה זמן לכל אחת". מחסור ואינטימיות באותו משפט.||אחרי הלחיצה: קישור הזום מופיע רק בשאלה נפוצה.',
+      i: '#s9', it: '"12 משתתפות, כדי שיהיה זמן לעבור על התמונה של כל אחת". בחר: אינטימיות, לא לחץ.||מתחת לכפתור: שלושה דברים שיגיעו במייל. והפרטים שוב ליד הכפתור.' }
   ];
 
   // 6 stages, one question each (Gal, 2026-11-10)
@@ -752,11 +1197,13 @@
 
   // one ordered list of steps: slides (parts 1-3), then map, then comparison sections (part 4)
   var STEPS = [];
+  var AFTER = [];
   Array.prototype.forEach.call(document.querySelectorAll('.slide'), function (el) {
-    STEPS.push({ kind: 'slide', id: el.id, part: +el.dataset.part, name: el.dataset.name, el: el });
+    var st = { kind: 'slide', id: el.id, part: +el.dataset.part, name: el.dataset.name, el: el };
+    if (el.dataset.after === 'cmp') AFTER.push(st); else STEPS.push(st);
   });
-  STEPS.push({ kind: 'map', id: 'map', part: 4, name: 'מפה' });
   S.forEach(function (s) { s.kind = 'cmp'; s.part = 4; STEPS.push(s); });
+  AFTER.forEach(function (st) { STEPS.push(st); });
 
   var gif = document.getElementById('gif'), iif = document.getElementById('iif');
   var gframe = document.getElementById('gframe'), nav = document.getElementById('nav');
@@ -765,31 +1212,31 @@
   // rail: arrows + parts; inside a part, its steps as small buttons
   function btn(t, c, f) { var b = document.createElement('button'); b.type = 'button'; b.textContent = t; if (c) b.className = c; b.onclick = f; return b; }
   function firstOf(p) { for (var k = 0; k < STEPS.length; k++) if (STEPS[k].part === p) return k; return 0; }
+  // presenter menu (M): every part and step; hidden from the audience the rest of the time
+  var prog = document.createElement('div'); prog.className = 'progress'; prog.innerHTML = '<i></i>'; document.body.appendChild(prog);
   function renderNav() {
+    prog.firstChild.style.width = (STEPS.length > 1 ? (cur / (STEPS.length - 1)) * 100 : 0) + '%';
+    if (!document.body.classList.contains('menu')) return;
     nav.innerHTML = '';
-    var s = STEPS[cur];
-    var prev = btn('→', 'arrow', function () { prev(); }); prev.setAttribute('aria-label', 'הקודם'); nav.appendChild(prev);
+    var box = document.createElement('div'); box.className = 'menu-box';
     Object.keys(PARTS).forEach(function (p) {
       p = +p;
-      var b = btn(PARTS[p], '', function () { go(firstOf(p)); });
-      if (p === s.part) b.setAttribute('aria-current', 'true');
-      nav.appendChild(b);
-      if (p === s.part && p === 4) {
-        STEPS.forEach(function (x, k) {
-          if (x.part !== p) return;
-          var sb = btn(x.name, 'sub', function () { go(k); });
-          sb.style.color = '';
-          sb.style.textDecoration = k === cur ? 'underline' : '';
-          sb.style.textUnderlineOffset = '.3em';
-          if (k === cur) sb.setAttribute('aria-current', 'step');
-          nav.appendChild(sb);
-        });
-        var sep = document.createElement('span'); sep.className = 'sep'; nav.appendChild(sep);
-      }
+      var col = document.createElement('div');
+      var hd = document.createElement('h3'); hd.textContent = p + '. ' + PARTS[p]; col.appendChild(hd);
+      STEPS.forEach(function (x, k) {
+        if (x.part !== p) return;
+        var b = btn(x.name, '', function () { closeMenu(); go(k); });
+        if (k === cur) b.setAttribute('aria-current', 'true');
+        col.appendChild(b);
+      });
+      box.appendChild(col);
     });
-    var next = btn('←', 'arrow', function () { next(); }); next.setAttribute('aria-label', 'הבא'); nav.appendChild(next);
-    var c = document.createElement('span'); c.className = 'count'; c.textContent = (cur + 1) + ' / ' + STEPS.length + ' · חיצים · C כיתובים'; nav.appendChild(c);
+    var hint = document.createElement('p'); hint.className = 'menu-hint'; hint.textContent = 'M או Esc לסגירה'; box.appendChild(hint);
+    nav.appendChild(box);
   }
+  function openMenu() { document.body.classList.add('menu'); renderNav(); var c = nav.querySelector('[aria-current="true"]'); if (c) c.focus(); }
+  function closeMenu() { document.body.classList.remove('menu'); nav.innerHTML = ''; }
+  nav.addEventListener('click', function (e) { if (e.target === nav) closeMenu(); });
 
   function prep(fr) {
     var d = fr.contentDocument;
@@ -802,6 +1249,7 @@
     var w = fr.contentWindow, d = fr.contentDocument;
     if (!d) return;
     d.querySelectorAll('.present-hl').forEach(function (e) { e.classList.remove('present-hl'); });
+    if (sel === 'top') { d.querySelectorAll('#faq details').forEach(function (x) { x.open = false; }); w.scrollTo({ top: 0, behavior: 'smooth' }); return; }
     var el = d.querySelector(sel);
     if (!el) return;
     d.querySelectorAll('#faq details').forEach(function (x) { x.open = false; });
@@ -843,14 +1291,16 @@
       var lz = s.el.querySelector('iframe[data-src]');
       if (lz && !lz.src) lz.src = lz.dataset.src;
       else if (s.id === 'intro' && typeof aimCursor === 'function') setTimeout(aimCursor, 50);
+      if (s.id === 'peek') setTimeout(buildStrips, 30);
     } else if (s.kind === 'map') {
       document.getElementById('stage').textContent = '';
     } else {
       document.getElementById('stage').textContent = s.stage;
       document.getElementById('q').textContent = Q[s.stage];
       document.getElementById('principle').textContent = s.pr;
-      document.getElementById('gcap').innerHTML = s.gt;
-      document.getElementById('icap').innerHTML = s.it;
+      var cards = function (t) { return t.split('||').map(function (x) { return '<p>' + x.trim() + '</p>'; }).join(''); };
+      document.getElementById('gcap').innerHTML = cards(s.gt);
+      document.getElementById('icap').innerHTML = cards(s.it);
       gframe.classList.toggle('empty', !s.g);
       if (loaded === 2) {
         if (s.g) scrollTo(gif, s.g, s.open);
@@ -873,6 +1323,8 @@
   });
 
   document.addEventListener('keydown', function (e) {
+    if (e.key === 'm' || e.key === 'M' || e.key === 'צ') { e.preventDefault(); document.body.classList.contains('menu') ? closeMenu() : openMenu(); return; }
+    if (document.body.classList.contains('menu')) { if (e.key === 'Escape') closeMenu(); return; }
     if (e.target && e.target.tagName === 'BUTTON' && e.key === ' ') return;
     if (e.key === 'ArrowLeft' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
     else if (e.key === 'ArrowRight' || e.key === 'PageUp') { e.preventDefault(); prev(); }
@@ -882,6 +1334,14 @@
   });
 
   // copy the interview prompt as plain text
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var t = document.getElementById(b.dataset.copy).textContent;
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+        b.textContent = 'הועתק'; setTimeout(function () { b.textContent = 'להעתקת הפרומפט'; }, 1800);
+      }, function () { b.textContent = 'לא הצלחתי להעתיק'; });
+    });
+  });
   document.getElementById('copy').addEventListener('click', function () {
     var b = this;
     var txt = 'אני רוצה לדייק מי הלקוח שלי. תראיין אותי.\nהמוצר או השירות שלי: [ ]\n\nכללים:\n- שאל שאלה אחת בכל פעם, וחכה לתשובה.\n- עד 8 שאלות. אם תשובה כללית מדי ("כולם", "נשים", "עסקים קטנים"), שאל שאלת המשך אחת שמחדדת.\n- אל תציע תשובות ואל תנחש. את התשובות אתה מקבל ממני, אתה רק שואל.\n\nבסוף הראיון, סכם את הלקוח שלי בשבע שורות:\n1. מה הוא רוצה\n2. מה כואב לו עכשיו (במילים שלו, לא במילים שיווקיות)\n3. מה הוא כבר יודע\n4. מה הוא לא מבין\n5. ממה הוא חושש\n6. במה הוא לא מאמין\n7. מה הוא כבר ניסה ולא עבד\n\nליד כל שורה סמן 🟢 אם זה מהתשובות שלי, או 🟡 אם זו הסקה שלך.';
@@ -902,6 +1362,48 @@
     placeFly(s.el);
   }
   window.addEventListener('resize', fit);
+  // slide 5: one landscape "screenshot" of the generic page at desktop width, scaled to fit, slow auto-scroll
+  var PW = 1280, PH = 800, shotBuilt = false, shotF = null, scrollTimer = null;
+  function buildStrips() {
+    var box = document.getElementById('strips');
+    if (!shotBuilt) {
+      shotBuilt = true;
+      var w = document.createElement('div'); w.className = 'strip shot';
+      shotF = document.createElement('iframe'); shotF.src = 'generic.html'; shotF.title = 'העמוד הגנרי'; shotF.tabIndex = -1;
+      w.appendChild(shotF); box.appendChild(w);
+      shotF.addEventListener('load', function () {
+        var d = shotF.contentDocument, st = d.createElement('style');
+        st.textContent = 'html{scroll-behavior:auto!important;scrollbar-width:none}html::-webkit-scrollbar{display:none}.rv{opacity:1!important;transform:none!important}';
+        d.head.appendChild(st);
+        d.querySelectorAll('body *').forEach(function (el) { if (getComputedStyle(el).position === 'fixed') el.style.display = 'none'; });
+        layoutStrips(); autoScroll();
+      });
+    } else { layoutStrips(); autoScroll(); }
+  }
+  function layoutStrips() {
+    var box = document.getElementById('strips'), w = box.firstChild; if (!w || !box.clientHeight) return;
+    var s = box.clientWidth / PW; PH = Math.round(box.clientHeight / s);
+    w.style.width = box.clientWidth + 'px'; w.style.height = box.clientHeight + 'px';
+    shotF.style.height = PH + 'px'; shotF.style.transform = 'scale(' + s + ')';
+    setTimeout(function () { w.classList.add('on'); }, 60);
+  }
+  function autoScroll() {
+    if (!shotF || !shotF.contentWindow) return;
+    clearInterval(scrollTimer);
+    var win = shotF.contentWindow; win.scrollTo(0, 0);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var t0 = null, wait = 1500, speed = 0.06; // px per ms
+    scrollTimer = setInterval(function () {
+      if (STEPS[cur].id !== 'peek') { clearInterval(scrollTimer); return; }
+      var now = Date.now(); if (t0 === null) t0 = now;
+      var dt = now - t0 - wait; if (dt < 0) return;
+      var max = win.document.documentElement.scrollHeight - PH;
+      var y = Math.min(max, dt * speed); win.scrollTo(0, y);
+      if (y >= max) clearInterval(scrollTimer);
+    }, 16);
+    win.addEventListener('wheel', function () { clearInterval(scrollTimer); }, { once: true, passive: true });
+  }
+  window.addEventListener('resize', function () { if (STEPS[cur].id === 'peek') layoutStrips(); });
   // .fly: starts big in the middle of the slide, travels to its place when its step is revealed
   function placeFly(sl) {
     sl.querySelectorAll('.fly').forEach(function (el) {
@@ -943,6 +1445,10 @@
   if (sif) sif.addEventListener('load', function () { setTimeout(aimCursor, 300); });
   window.addEventListener('resize', function () { if (STEPS[cur].id === 'intro') aimCursor(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+
+  try { new QRCode(document.getElementById('qr-boost'), { text: 'https://boost-me.digital', width: 200, height: 200, colorDark: '#1A1A1A', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M }); } catch (e) {}
+  // thank-you slide: QR to this deck
+  try { new QRCode(document.getElementById('qr'), { text: 'https://wenjygal.github.io/landing-page-psychology-demo/deck.html', width: 320, height: 320, colorDark: '#1A1A1A', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M }); } catch (e) {}
 
   var start = STEPS.findIndex(function (s) { return '#' + s.id === location.hash; });
   go(start > -1 ? start : 0);

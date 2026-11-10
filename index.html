@@ -240,6 +240,11 @@
     .js [data-reveal] { opacity: 1; transform: none; transition: none; }
     .pill, .btn, .btn .dot { transition: none; }
   }
+  .hero .lead { margin-bottom: 22px; }
+  .hero-facts { list-style: none; margin: 0 0 30px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 26px; }
+  .hero-facts li { display: flex; flex-direction: column; gap: 2px; padding-inline-start: 14px; border-inline-start: 2px solid var(--accent); }
+  .hero-facts small { font-size: 13px; color: var(--muted); letter-spacing: .04em; }
+  .hero-facts strong { font-family: var(--serif); font-weight: 700; font-size: clamp(18px, 2vw, 22px); color: var(--ink); }
 </style>
 </head>
 <body>
@@ -263,6 +268,11 @@
       <span class="eyebrow"><i></i>סדנת זום · שעתיים</span>
       <h1>יש לך מוצר ואין לך צלם? שעתיים בזום, וחמש תמונות <em>מוכנות להעלאה.</em></h1>
       <p class="lead">שעתיים בזום. מביאה תמונה מהטלפון, יוצאת עם חמש תמונות שאפשר להעלות לחנות.</p>
+      <ul class="hero-facts">
+        <li><small>יום</small><strong>רביעי, 9.12</strong></li>
+        <li><small>שעה</small><strong dir="ltr">16:00-18:00</strong></li>
+        <li><small>מחיר</small><strong>190 ש"ח</strong></li>
+      </ul>
       <a class="btn" href="#s9">אני רוצה תמונות כאלה
         <i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></i>
       </a>
@@ -393,7 +403,7 @@
   <div class="wrap">
     <div data-reveal>
       <span class="eyebrow"><i></i>תוצאות</span>
-      <h2>ככה זה נראה על מוצרים אחרים</h2>
+      <h2>תמונות של משתתפות בסדנאות קודמות</h2>
       <p class="chip-sim">תוצאות לדוגמה, מדומות. בעמוד אמיתי כאן מופיעות תוצאות אמיתיות.</p>
     </div>
     <div class="res-grid">

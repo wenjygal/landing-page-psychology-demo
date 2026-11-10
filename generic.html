@@ -268,6 +268,11 @@
   .faq details:last-child { border-bottom: 1px solid var(--hair); }
   .faq summary { cursor: pointer; font-family: var(--serif); font-weight: 700; font-size: clamp(20px, 2.4vw, 26px); }
   .faq details p { margin: 12px 0 0; color: var(--muted); }
+  .g-card { text-align: right; max-width: 460px; margin: 0 auto; }
+  .g-split { display: grid; gap: clamp(28px, 5vw, 72px); grid-template-columns: 1fr; align-items: center; }
+  @media (min-width: 900px) { .g-split { grid-template-columns: 1fr 1fr; } }
+  .g-split .g-price { max-width: none; margin: 0; }
+  .g-split .g-card { max-width: none; margin: 0; }
 </style>
 </head>
 <body>
@@ -369,15 +374,26 @@
 </section>
 
 <section class="dark" id="register">
-  <div class="wrap g-price" data-reveal>
+  <div class="wrap g-split" data-reveal>
+    <div class="g-price">
     <span class="seats">נשארו 12 מקומות</span>
     <h2>סדנת זום, רביעי 9.12</h2>
     <div class="amt">190 ש״ח</div>
     <p>שעתיים של עבודה מעשית, ו־5 תמונות מוכנות לאתר בסופן.</p>
-    <a class="btn" href="#register" id="g-cta">הרשמה לסדנה
-      <i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></i>
-    </a>
+    </div>
+    <div>
+    <div class="card g-card">
+      <form id="g-form" novalidate>
+        <label>שם<input type="text" name="name" autocomplete="name"></label>
+        <label>מייל<input type="email" name="email" autocomplete="email" inputmode="email" dir="ltr" style="text-align:right"></label>
+        <label>טלפון<input type="tel" name="phone" autocomplete="tel" inputmode="tel" dir="ltr" style="text-align:right"></label>
+        <button class="btn" type="submit" id="g-cta">הרשמה לסדנה
+          <i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></i>
+        </button>
+      </form>
+    </div>
     <div class="demo-msg" id="demo-msg" role="status">זה עמוד הדגמה. אין הרשמה אמיתית.</div>
+    </div>
   </div>
 </section>
 
@@ -416,7 +432,7 @@
       pill.querySelector('a').tabIndex = show ? 0 : -1;
     }, { threshold: 0 }).observe(hero);
   }
-  document.getElementById('g-cta').addEventListener('click', function (e) {
+  document.getElementById('g-form').addEventListener('submit', function (e) {
     e.preventDefault(); document.getElementById('demo-msg').classList.add('show');
   });
 })();
