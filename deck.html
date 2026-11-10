@@ -371,6 +371,17 @@
   .batt{position:absolute;top:13px;right:10%;width:24px;height:12px;border:1.6px solid #1A1A1A;border-radius:4px;z-index:3}
   .batt::after{content:"";position:absolute;inset:1.5px;right:5px;background:#1A1A1A;border-radius:2px}
   .side{position:absolute;width:4px;border-radius:2px;background:#2a2a2a;z-index:-1}
+
+  /* slide 1: laptop */
+  #intro .inner.two{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+  #intro .hover-wrap{height:auto;width:100%}
+  .laptop{width:100%;max-width:820px;margin:0 auto}
+  .lid{background:#1A1A1A;border-radius:18px 18px 4px 4px;padding:3.2% 2.6% 2.6%;box-shadow:0 0 0 2px #4a4a4a,0 30px 70px rgba(26,26,26,.25);position:relative}
+  .lid::before{content:"";position:absolute;top:1.3%;left:50%;width:7px;height:7px;transform:translateX(-50%);border-radius:50%;background:#3a3a3a}
+  .screen{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:4px;background:#fff}
+  .screen iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0}
+  .base{height:clamp(12px,1.6vw,20px);margin:0 -7%;background:linear-gradient(#d9d9de,#b9b9c0);border-radius:2px 2px 16px 16px;position:relative;box-shadow:0 18px 30px -12px rgba(26,26,26,.35)}
+  .base::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:16%;height:45%;background:#a9a9b0;border-radius:0 0 10px 10px}
 </style>
 </head>
 <body>
@@ -392,7 +403,10 @@
         <p class="byline"><img src="robot-color.png" alt="">גל · BOOST ME · AI &amp; Tools</p>
       </div>
       <div class="hover-wrap">
-        <div class="phone flat"><span class="batt"></span><iframe id="signup-if" data-src="signup-preview.html?static" title="עמוד ההרשמה להדרכה" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="laptop">
+          <div class="lid"><div class="screen"><iframe id="signup-if" data-src="signup-preview.html?static" title="עמוד ההרשמה להדרכה" loading="lazy" tabindex="-1"></iframe></div></div>
+          <div class="base"></div>
+        </div>
         <svg class="cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2 L3 19 L8 14.5 L11.5 22 L14.5 20.6 L11 13.4 L17.5 13.4 Z" fill="#1A1A1A" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
       </div>
     </div>
@@ -783,12 +797,19 @@
 
   // slide 1: cursor stops just short of the signup button inside the phone
   var sif = document.getElementById('signup-if'), cur1 = document.querySelector('#intro .cursor');
+  function scaleScreen() {
+    if (!sif) return;
+    var sc = sif.parentNode.clientWidth / 1440;
+    if (sc > 0) sif.style.transform = 'scale(' + sc + ')';
+  }
   function aimCursor() {
+    scaleScreen();
     if (!sif || !sif.contentDocument) return;
     var btn = sif.contentDocument.getElementById('hero-cta');
     if (!btn) return;
     var r = btn.getBoundingClientRect(), f = sif.getBoundingClientRect(), w = sif.closest('.hover-wrap').getBoundingClientRect();
-    var x = f.left - w.left + r.left + r.width * 0.5 + 18, y = f.top - w.top + r.top + r.height + 10;
+    var k = f.width / sif.offsetWidth;
+    var x = f.left - w.left + (r.left + r.width * 0.5) * k + 14, y = f.top - w.top + (r.top + r.height) * k + 8;
     cur1.style.setProperty('--tx', x + 'px'); cur1.style.setProperty('--ty', y + 'px');
     cur1.classList.remove('go'); void cur1.offsetWidth; cur1.classList.add('go');
   }
