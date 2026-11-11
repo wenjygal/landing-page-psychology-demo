@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="he" dir="rtl">
 <head>
+<script>document.documentElement.classList.add('fonts-wait')</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>הפסיכולוגיה של עמודי נחיתה</title>
@@ -379,7 +380,10 @@
   .lid{background:#1A1A1A;border-radius:18px 18px 4px 4px;padding:3.2% 2.6% 2.6%;box-shadow:0 0 0 2px #4a4a4a,0 30px 70px rgba(26,26,26,.25);position:relative}
   .lid::before{content:"";position:absolute;top:1.3%;left:50%;width:7px;height:7px;transform:translateX(-50%);border-radius:50%;background:#3a3a3a}
   .screen{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:4px;background:#fff}
-  .screen iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0}
+  .screen iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0;opacity:0;transition:opacity .5s var(--ease-out)}
+  .screen iframe.ready{opacity:1}
+  html.fonts-wait .slide .inner{opacity:0}
+  .slide .inner{transition:opacity .4s var(--ease-out)}
   .base{height:clamp(12px,1.6vw,20px);margin:0 -7%;background:linear-gradient(#d9d9de,#b9b9c0);border-radius:2px 2px 16px 16px;position:relative;box-shadow:0 18px 30px -12px rgba(26,26,26,.35)}
   .base::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:16%;height:45%;background:#a9a9b0;border-radius:0 0 10px 10px}
 
@@ -1462,9 +1466,11 @@
     cur1.style.setProperty('--tx', x + 'px'); cur1.style.setProperty('--ty', y + 'px');
     cur1.classList.remove('go'); void cur1.offsetWidth; cur1.classList.add('go');
   }
-  if (sif) sif.addEventListener('load', function () { setTimeout(aimCursor, 300); });
-  window.addEventListener('resize', function () { if (STEPS[cur].id === 'intro') aimCursor(); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  scaleScreen();
+  if (sif) sif.addEventListener('load', function () { scaleScreen(); sif.classList.add('ready'); setTimeout(aimCursor, 300); });
+  window.addEventListener('resize', function () { scaleScreen(); if (STEPS[cur].id === 'intro') aimCursor(); });
+  function fontsDone() { fit(); document.documentElement.classList.remove('fonts-wait'); }
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(fontsDone); setTimeout(fontsDone, 1500); } else fontsDone();
 
   try { new QRCode(document.getElementById('qr-boost'), { text: 'https://boost-me.digital', width: 200, height: 200, colorDark: '#1A1A1A', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M }); } catch (e) {}
   // thank-you slide: QR to this deck
