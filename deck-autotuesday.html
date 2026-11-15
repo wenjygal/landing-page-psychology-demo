@@ -577,7 +577,7 @@ body.menu #menu{display:flex}
     </div>
   </section>
 
-  <!-- 18-21, 23, 24: before/after compare stage -->
+  <!-- 18-23: before/after compare stage -->
   <section class="slide" id="cmp" data-part="5" data-name="לפני ואחרי">
     <div class="cmpq"><span class="chip" id="cmp-stg"></span><h2 id="cmp-q"></h2></div>
     <div class="cmpgrid">
@@ -588,14 +588,8 @@ body.menu #menu{display:flex}
     </div>
   </section>
 
-  <!-- 22 -->
-  <section class="slide" data-n="22" data-part="5" data-name="עד כאן">
-    <h2 class="rv" style="font-size:200px">עד <em>כאן.</em></h2>
-    <p class="lede" data-in style="--i:2">שאלות לפני שממשיכים?</p>
-  </section>
-
-  <!-- 25 -->
-  <section class="slide" data-n="25" data-part="5" data-name="הכפתור לא חי בוואקום">
+  <!-- 24 -->
+  <section class="slide" data-n="24" data-part="5" data-name="הכפתור לא חי בוואקום">
     <h2 class="rv">הכפתור לא<br><em>חי בוואקום</em></h2>
     <div class="pair">
       <div class="box" data-step="1"><p class="k">הכותרת נותנת את הכאב</p><p class="big">‹הכאב, במילים שלו›</p></div>
@@ -608,19 +602,8 @@ body.menu #menu{display:flex}
     </ul>
   </section>
 
-  <!-- 26 -->
-  <section class="slide" data-n="26" data-part="6" data-name="עמוד חי">
-    <div class="split">
-      <div>
-        <h2 class="rv">עמוד אחד,<br><em>בשידור חי</em></h2>
-        <p class="lede" data-in style="--i:2;margin-top:40px">מי מתנדב? עמוד אחד, עם טיימר.</p>
-      </div>
-      <div><div class="timer" id="timer" data-step="1" data-run="timer">8:00</div></div>
-    </div>
-  </section>
-
-  <!-- 27 -->
-  <section class="slide prompt" data-n="27" data-part="7" data-name="הפרומפט הסופי">
+  <!-- 25 -->
+  <section class="slide prompt" data-n="25" data-part="6" data-name="הפרומפט הסופי">
     <div class="ptop"><h2 class="rv">הפרומפט <em>הסופי</em></h2><button type="button" class="copy" data-copy="src-final">להעתקת הפרומפט</button></div>
     <div class="pcard final" data-in style="--i:2">
       <p class="hd">תבנה לי עמוד נחיתה.</p>
@@ -655,14 +638,14 @@ body.menu #menu{display:flex}
 לפני שאתה כותב, הצג לי בקצרה: לאיזה קצה בחרת ולמה, ואת שש השאלות כפי שחידדת אותן. חכה לאישור שלי, ורק אז כתוב את העמוד.</pre>
   </section>
 
-  <!-- 28 -->
-  <section class="slide" data-n="28" data-part="8" data-name="שאלות">
+  <!-- 26 -->
+  <section class="slide" data-n="26" data-part="7" data-name="שאלות">
     <h2 class="rv" style="font-size:220px"><em>שאלות?</em></h2>
     <p class="lede" data-in style="--i:2">כתבו בצ'אט או הרימו יד.</p>
   </section>
 
-  <!-- 29 -->
-  <section class="slide" data-n="29" data-part="8" data-name="מה לוקחים">
+  <!-- 27 -->
+  <section class="slide" data-n="27" data-part="7" data-name="מה לוקחים">
     <h2 class="rv" style="font-size:88px">מה לוקחים מהבוקר</h2>
     <ul class="rows sm">
       <li data-step="1"><b>מטרה אחת. פעולה אחת.</b> כל כפתור בעמוד מוביל לאותה פעולה.</li>
@@ -671,17 +654,6 @@ body.menu #menu{display:flex}
       <li data-step="4"><b>שש השאלות.</b> חדדו כל אחת: במה בדיוק, אצל הלקוח שלי?</li>
     </ul>
     <p class="lede" data-step="5" style="color:var(--ink)"><em>AI מציע, אתם מחליטים.</em></p>
-  </section>
-
-  <!-- 30 -->
-  <section class="slide" data-n="30" data-part="8" data-name="קשר">
-    <h2 class="rv">שקף אחד. <em>פעולה אחת.</em></h2>
-    <p class="lede" data-in style="--i:2">וואטסאפ ישיר אליי. שתי סיבות לכתוב:</p>
-    <ul class="rows sm">
-      <li data-step="1">אתם רוצים עמוד נחיתה משלכם.</li>
-      <li data-step="2">אתם בונים עמוד ללקוח ורוצים את <em>שכבת הפסיכולוגיה.</em></li>
-    </ul>
-    <div data-step="3"><span class="wa">לשיחה בוואטסאפ</span> <span class="small" style="margin-inline-start:28px">‹מספר וואטסאפ›</span></div>
   </section>
 
   <div class="prog"><i id="prog"></i></div>
@@ -693,7 +665,7 @@ body.menu #menu{display:flex}
 (function(){
   'use strict';
   var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var PARTS = ['פתיחה','מטרה אחת, פעולה אחת','כאב ותענוג','בראש של הלקוח','שש השאלות','לפני ואחרי','עמוד חי','הפרומפט הסופי','שאלות וסיכום'];
+  var PARTS = ['פתיחה','מטרה אחת, פעולה אחת','כאב ותענוג','בראש של הלקוח','שש השאלות','לפני ואחרי','הפרומפט הסופי','שאלות וסיכום'];
   var stage = document.getElementById('stage');
 
   /* ---------- compare stage data (from the live workshop pages) ---------- */
@@ -710,11 +682,11 @@ body.menu #menu{display:flex}
     {n:21,name:'הבנתי מה מציעים?',subs:[{stg:'3',stn:'הבנה',q:'הבנתי מה מציעים?',g:'#s3',i:'#s3',
       gt:'שלוש רשימות, אחת עשרה שורות: איך זה עובד, מה תיקחי, מה להביא. את התמונה היא צריכה לחבר לבד.',
       it:'תמונה אחת ברורה: חמש תמונות, שלושה סגנונות, ומה להביא בשורה אחת. <mark>↩</mark> "השיטה נשארת אצלך".'}]},
-    {n:23,name:'למה שאאמין?',subs:[
+    {n:22,name:'למה שאאמין?',subs:[
       {stg:'4',stn:'אמון',q:'למה שאאמין?',g:null,i:'#s4',gt:'אין תשובה ל"למה שאאמין שאצליח?".',it:'הניסיון הראשון שלא יצא טוב, בגלוי. זה לא כישרון, זו שיטה.'},
       {stg:'4',stn:'אמון',q:'למה שאאמין?',g:null,i:'#s5b',gt:'אין. הוא לא המציא תוצאות, וזה לזכותו.',it:'תמונות של משתתפות מסדנאות קודמות, מסומנות "לדוגמה".'},
       {stg:'4',stn:'אמון',q:'למה שאאמין?',g:'#s6',i:'#s6',gt:'"גל תנחה צעד אחר צעד, בקבוצה קטנה". שם, לא אדם.',it:'אדם אמיתי: מי אני, מה אני עושה, הניסיון שלי. "אני לא צלמת", ו"את התמונות כאן הפקתי בעצמי".'}]},
-    {n:24,name:'מה הסיכון ומה יקרה אם אלחץ?',subs:[
+    {n:23,name:'מה הסיכון ומה יקרה אם אלחץ?',subs:[
       {stg:'5',stn:'ביטחון',q:'מה הסיכון?',g:'#faq details:nth-of-type(2)',open:true,i:'#s5',gt:'הסיכון שהתמונות לא ייצאו טוב מופיע בשאלה נפוצה מקופלת, ונענה בהבטחה.',it:'בדיקה, תיקון, תוצאה, כולל הפרומפט המתוקן וההבדל שנשאר.'},
       {stg:'5',stn:'ביטחון',q:'מה הסיכון?',g:'#register',i:'#s7',gt:'יום, שעתיים, 12, מחיר. אין שעה ואין הקלטה.',it:'זום עם הקלטה, "הקישור נשאר אצלך לתמיד". עונה על "מה אם אפספס?".'},
       {stg:'5',stn:'ביטחון',q:'מה הסיכון?',g:null,i:'#s8',gt:'אין.',it:'קבוצת וואטסאפ מרגע ההרשמה ועד שבוע אחרי. עונה על "מה אם אתקע לבד?".'},
