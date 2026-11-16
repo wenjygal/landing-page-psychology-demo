@@ -222,6 +222,7 @@ h3{font-size:44px;font-weight:500}
 .thx .wasm{font-size:30px;padding:16px 40px;margin-top:36px;box-shadow:none}
 .thx figcaption{font-size:32px;color:var(--soft);margin-top:20px}
 .pgl{display:inline-block;margin-top:28px;font-size:26px;font-weight:500;color:var(--accent);background:var(--accent-wash);padding:12px 26px;border-radius:999px;text-decoration:none}
+#cmp:not(.intro) .pgl{display:none}
 .pgl:hover{background:var(--accent);color:#fff}
 .vac{gap:40px}
 .vac .vrow{display:grid;grid-template-columns:560px 70px 500px 1fr;align-items:center;gap:32px;padding:30px 0;border-bottom:1px solid var(--line)}
@@ -1044,7 +1045,7 @@ body.menu #menu{display:flex}
     document.getElementById('cmp-stg').textContent = s.stg ? ('שאלה ' + s.stg + ' · ' + s.stn) : 'אותו מוצר, שני עמודים';
     document.getElementById('cmp-q').textContent = s.q;
     document.getElementById('cmp-qs').textContent = s.qs || '';
-    cmpEl.classList.toggle('sg', s.side==='g'); cmpEl.classList.toggle('si', s.side==='i');
+    cmpEl.classList.toggle('intro', !s.stg); cmpEl.classList.toggle('sg', s.side==='g'); cmpEl.classList.toggle('si', s.side==='i');
     document.getElementById('gph').classList.toggle('empty', s.g === null);
     setCaption(document.getElementById('gcap'), cap(s.gt), first);
     setCaption(document.getElementById('icap'), cap(s.it), first);
