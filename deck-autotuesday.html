@@ -993,9 +993,9 @@ body.menu #menu{display:flex}
   function mark(el){ var ps = el.querySelectorAll('p'); ps.forEach(function(p,j){ p.classList.add('pin'); p.style.setProperty('--j', j); }); void el.offsetWidth; requestAnimationFrame(function(){ ps.forEach(function(p){ p.classList.add('go'); }); }); }
   function paintCmp(s, first){
     if (loaded < 2){ pending = {s:s,first:first}; return; }
-    scrollFrame('g', gif, s.g || 'top', s.open);
-    if (s.g === null) scrollFrame('g', gif, 'top');
-    scrollFrame('i', iif, s.i);
+    /* only the phone in focus moves, so the scroll happens on its own click */
+    if (s.side === 'g') scrollFrame('g', gif, s.g || 'top', s.open);
+    else scrollFrame('i', iif, s.i);
   }
   function renderCmp(s, first){
     document.getElementById('cmp-stg').textContent = s.stg ? ('שאלה ' + s.stg + ' · ' + s.stn) : 'אותו מוצר, שני עמודים';
