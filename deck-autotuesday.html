@@ -215,6 +215,13 @@ h3{font-size:44px;font-weight:500}
 
 /* button demo (slide 25) */
 .pair{display:flex;align-items:center;gap:56px}
+.thx .thxgrid{display:grid;grid-template-columns:1fr 420px;gap:96px;align-items:center}
+.thx .qr{margin:0;text-align:center}
+.thx .qrbox{width:420px;height:420px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;color:var(--soft);font-size:40px}
+.thx .qrbox svg{width:100%;height:100%;display:block}
+.thx figcaption{font-size:32px;color:var(--soft);margin-top:20px}
+.pgl{display:inline-block;margin-top:28px;font-size:26px;font-weight:500;color:var(--accent);background:var(--accent-wash);padding:12px 26px;border-radius:999px;text-decoration:none}
+.pgl:hover{background:var(--accent);color:#fff}
 .vac{gap:40px}
 .vac .vrow{display:grid;grid-template-columns:560px 70px 500px 1fr;align-items:center;gap:32px;padding:30px 0;border-bottom:1px solid var(--line)}
 .vac .vrow:first-child{border-top:1px solid var(--line)}
@@ -761,10 +768,10 @@ body.menu #menu{display:flex}
   <section class="slide" id="cmp" data-part="5" data-name="לפני ואחרי">
     <div class="cmpq"><span class="chip" id="cmp-stg"></span><h2 id="cmp-q"></h2><p id="cmp-qs"></p></div>
     <div class="cmpgrid">
-      <div class="capcol g"><h3>לפני</h3><div class="capbody" id="gcap"></div></div>
+      <div class="capcol g"><h3>לפני</h3><div class="capbody" id="gcap"></div><a class="pgl" href="generic.html" target="_blank" rel="noopener">לצפייה בעמוד לפני</a></div>
       <div class="phone g" id="gph"><iframe id="gif" title="העמוד של לפני"></iframe><i class="dim"></i><div class="none"><b>אין</b><span>בעמוד של "לפני" אין סקשן כזה</span></div></div>
       <div class="phone i" id="iph"><iframe id="iif" title="העמוד של אחרי"></iframe><i class="dim"></i></div>
-      <div class="capcol i"><h3>אחרי</h3><div class="capbody" id="icap"></div></div>
+      <div class="capcol i"><h3>אחרי</h3><div class="capbody" id="icap"></div><a class="pgl" href="index.html" target="_blank" rel="noopener">לצפייה בעמוד אחרי</a></div>
     </div>
   </section>
 
@@ -839,11 +846,22 @@ body.menu #menu{display:flex}
     <h2 class="rv" style="font-size:88px">מה לוקחים מהבוקר</h2>
     <ul class="rows sm">
       <li data-step="1"><b>מטרה אחת. פעולה אחת.</b> כל כפתור בעמוד מוביל לאותה פעולה.</li>
-      <li data-step="2"><b>כאב או תענוג.</b> בחרו לאיזה קצה העמוד שלכם מדבר.</li>
-      <li data-step="3"><b>הלקוח האידיאלי.</b> תנו ל-AI לראיין אתכם, לא לנחש.</li>
-      <li data-step="4"><b>שש השאלות.</b> חדדו כל אחת: במה בדיוק, אצל הלקוח שלי?</li>
+      <li data-step="2"><b>כאב ותענוג.</b> המוצר קובע איפה מתחילים, מצב הרוח קובע את המינון.</li>
+      <li data-step="3"><b>הלקוח בשבע שורות.</b> תנו ל-AI לראיין אתכם, לא לנחש.</li>
+      <li data-step="4"><b>שש השאלות.</b> חדדו כל אחת לפי הלקוח שלכם.</li>
     </ul>
     <p class="lede" data-step="5" style="color:var(--ink)"><em>AI מציע, אתם מחליטים.</em></p>
+  </section>
+
+  <!-- 28 -->
+  <section class="slide thx" data-n="28" data-part="7" data-name="תודה">
+    <div class="thxgrid">
+      <div>
+        <h2 class="rv" style="font-size:180px"><em>תודה!</em></h2>
+        <p class="lede" data-in style="--i:2;color:var(--ink)">מי שרוצה שאסתכל על העמוד שלו, אפשר לדבר איתי אחרי.</p>
+      </div>
+      <figure class="qr" data-in style="--i:3"><div class="qrbox" id="qrbox">QR</div><figcaption>המצגת, כולל הפרומפטים</figcaption></figure>
+    </div>
   </section>
 
   <div class="prog"><i id="prog"></i></div>
@@ -1094,7 +1112,7 @@ body.menu #menu{display:flex}
     else if (k==='f'||k==='F'||k==='כ'){ if(!document.fullscreenElement) document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen(); else document.exitFullscreen(); }
   });
   document.addEventListener('click', function(e){
-    if (e.target.closest('button')) return;
+    if (e.target.closest('button,a')) return;
     if (document.body.classList.contains('menu')){ if(e.target.id==='menu') closeMenu(); return; }
     next();
   });
