@@ -258,6 +258,7 @@ h3{font-size:44px;font-weight:500}
 #cmp{padding:0;gap:0}
 #cmp .cmpq{position:absolute;inset-block-start:96px;inset-inline:84px;display:flex;align-items:baseline;gap:36px}
 #cmp .cmpq h2{font-size:84px}
+#cmp-qs{margin:0;font-size:46px;font-weight:500;color:var(--accent);transition:opacity .25s ease-out}
 #cmp .cmpgrid{position:absolute;inset-block-start:212px;inset-inline:40px;height:836px;display:grid;grid-template-columns:360px 500px 500px 360px;gap:40px;justify-content:center}
 #cmp .capcol,#cmp .phone .dim{transition:opacity .35s ease-out}
 #cmp .phone .dim{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;z-index:2}
@@ -748,7 +749,7 @@ body.menu #menu{display:flex}
 
   <!-- 18-23: before/after compare stage -->
   <section class="slide" id="cmp" data-part="5" data-name="לפני ואחרי">
-    <div class="cmpq"><span class="chip" id="cmp-stg"></span><h2 id="cmp-q"></h2></div>
+    <div class="cmpq"><span class="chip" id="cmp-stg"></span><h2 id="cmp-q"></h2><p id="cmp-qs"></p></div>
     <div class="cmpgrid">
       <div class="capcol g"><h3>לפני</h3><div class="capbody" id="gcap"></div></div>
       <div class="phone g" id="gph"><iframe id="gif" title="העמוד של לפני"></iframe><i class="dim"></i><div class="none"><b>אין</b><span>בעמוד של "לפני" אין סקשן כזה</span></div></div>
@@ -855,15 +856,15 @@ body.menu #menu{display:flex}
       gt:'שלוש רשימות, אחת עשרה שורות. את התמונה המלאה היא צריכה להרכיב לבד.',
       it:'"שעתיים. חמש תמונות. של המוצר שלך."||ומה להביא, בשורה אחת.'}]},
     {n:22,name:'למה שאאמין?',subs:[
-      {stg:'4',stn:'אמון',q:'למה שאאמין?',g:null,i:'#s4',gt:'אין. רק הבטחה: "נעבור על זה יחד".',it:'הניסיון הראשון שלא יצא טוב, בגלוי.||בדיוק מה שהיא כבר ניסתה: AI ששינה את התווית.'},
-      {stg:'4',stn:'אמון',q:'למה שאאמין?',g:null,i:'#s5b',gt:'אין. הוא לא המציא תוצאות, וזה לזכותו.',it:'תמונות של משתתפות. כאן הן מדומות, ומסומנות ככה.'},
-      {stg:'4',stn:'אמון',q:'למה שאאמין?',g:'#s6',i:'#s6',gt:'"גל תנחה צעד אחר צעד." שם, לא אדם.',it:'אדם: "אני לא צלמת", ו"את התמונות שראית כאן הפקתי בעצמי".'}]},
+      {stg:'4',stn:'אמון',q:'למה שאאמין:',g:null,i:'#s4',qs:'גם אני אצליח?',gt:'אין. רק הבטחה: "נעבור על זה יחד".',it:'הניסיון הראשון שלא יצא טוב, בגלוי.||בדיוק מה שהיא כבר ניסתה: AI ששינה את התווית.'},
+      {stg:'4',stn:'אמון',q:'למה שאאמין:',g:null,i:'#s5b',qs:'זה עבד לאחרות?',gt:'אין. הוא לא המציא תוצאות, וזה לזכותו.',it:'תמונות של משתתפות. כאן הן מדומות, ומסומנות ככה.'},
+      {stg:'4',stn:'אמון',q:'למה שאאמין:',g:'#s6',i:'#s6',qs:'מי בכלל מלמדת?',gt:'"גל תנחה צעד אחר צעד." שם, לא אדם.',it:'אדם: "אני לא צלמת", ו"את התמונות שראית כאן הפקתי בעצמי".'}]},
     {n:23,name:'מה הסיכון ומה יקרה אם אלחץ?',subs:[
-      {stg:'5',stn:'ביטחון',q:'מה הסיכון?',g:'#faq details:nth-of-type(2)',open:true,i:'#s5',gt:'"יהיה דומה למוצר?" בשאלה נפוצה מקופלת, ונענה בהבטחה.',it:'בדיקה, תיקון, תוצאה.||כולל הפרומפט המתוקן, וההבדל שעדיין נשאר.'},
-      {stg:'5',stn:'ביטחון',q:'מה הסיכון?',g:'#register',i:'#s7',gt:'תאריך, שעתיים, מחיר. אין שעה ואין הקלטה.',it:'"יש הקלטה, והקישור נשאר אצלך לתמיד."'},
-      {stg:'5',stn:'ביטחון',q:'מה הסיכון?',g:null,i:'#s8',gt:'אין.',it:'"ואם לא יצא לי טוב?"||קבוצת וואטסאפ, מההרשמה ועד שבוע אחרי.'},
-      {stg:'6',stn:'פעולה',q:'מה יקרה אם אלחץ?',g:'#register',i:'#s9',gt:'"כדי שיהיה זמן לכל אחת", וגם "12 מקומות בלבד".||אינטימיות ודחיפות מדומה באותו עמוד.',it:'"12 משתתפות, כדי שיהיה זמן לעבור על התמונה של כל אחת."||רק אינטימיות.'},
-      {stg:'6',stn:'פעולה',q:'מה יקרה אם אלחץ?',g:'#faq details:nth-of-type(3)',open:true,i:'#s9 .next',gt:'רק בשאלה נפוצה: "הקישור והפרטים נשלחים לאחר ההרשמה."',it:'מתחת לכפתור: מה יגיע במייל, ומה לעשות עד הסדנה.'}]}
+      {stg:'5',stn:'ביטחון',q:'מה הסיכון:',g:'#faq details:nth-of-type(2)',open:true,i:'#s5',qs:'התמונות לא ייראו כמו המוצר שלי?',gt:'"יהיה דומה למוצר?" בשאלה נפוצה מקופלת, ונענה בהבטחה.',it:'בדיקה, תיקון, תוצאה.||כולל הפרומפט המתוקן, וההבדל שעדיין נשאר.'},
+      {stg:'5',stn:'ביטחון',q:'מה הסיכון:',g:'#register',i:'#s7',qs:'קניתי ולא אוכל להשתתף?',gt:'תאריך, שעתיים, מחיר. אין שעה ואין הקלטה.',it:'"יש הקלטה, והקישור נשאר אצלך לתמיד."'},
+      {stg:'5',stn:'ביטחון',q:'מה הסיכון:',g:null,i:'#s8',qs:'אנסה לבד, ולא יצא לי?',gt:'אין.',it:'"ואם לא יצא לי טוב?"||קבוצת וואטסאפ, מההרשמה ועד שבוע אחרי.'},
+      {stg:'6',stn:'פעולה',q:'מה יקרה אם אלחץ:',g:'#register',i:'#s9',qs:'יהיה זמן גם בשבילי?',gt:'"כדי שיהיה זמן לכל אחת", וגם "12 מקומות בלבד".||אינטימיות ודחיפות מדומה באותו עמוד.',it:'"12 משתתפות, כדי שיהיה זמן לעבור על התמונה של כל אחת."||רק אינטימיות.'},
+      {stg:'6',stn:'פעולה',q:'מה יקרה אם אלחץ:',g:'#faq details:nth-of-type(3)',open:true,i:'#s9 .next',qs:'מה אקבל אחרי ההרשמה?',gt:'רק בשאלה נפוצה: "הקישור והפרטים נשלחים לאחר ההרשמה."',it:'מתחת לכפתור: מה יגיע במייל, ומה לעשות עד הסדנה.'}]}
   ];
 
   /* ---------- entries ---------- */
@@ -1001,6 +1002,7 @@ body.menu #menu{display:flex}
   function renderCmp(s, first){
     document.getElementById('cmp-stg').textContent = s.stg ? ('שאלה ' + s.stg + ' · ' + s.stn) : 'אותו מוצר, שני עמודים';
     document.getElementById('cmp-q').textContent = s.q;
+    document.getElementById('cmp-qs').textContent = s.qs || '';
     cmpEl.classList.toggle('sg', s.side==='g'); cmpEl.classList.toggle('si', s.side==='i');
     document.getElementById('gph').classList.toggle('empty', s.g === null);
     setCaption(document.getElementById('gcap'), cap(s.gt), first);
