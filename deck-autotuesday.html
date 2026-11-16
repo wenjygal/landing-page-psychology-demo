@@ -215,6 +215,16 @@ h3{font-size:44px;font-weight:500}
 
 /* button demo (slide 25) */
 .pair{display:flex;align-items:center;gap:56px}
+.vac{gap:40px}
+.vac .vrow{display:grid;grid-template-columns:560px 70px 500px 1fr;align-items:center;gap:32px;padding:30px 0;border-bottom:1px solid var(--line)}
+.vac .vrow:first-child{border-top:1px solid var(--line)}
+.vac .k{font-size:30px;color:var(--soft);margin:0 0 8px}
+.vac .q{font-size:42px;line-height:1.25;margin:0}
+.vac .btn{font-size:44px;padding:22px 40px;white-space:nowrap;text-align:center}
+.vac .why{font-size:40px;font-weight:500;color:var(--accent);margin:0;white-space:nowrap}
+.vac .arrow{width:70px}
+.vac .rule{font-size:58px;font-weight:500;margin:0}
+.vac .rule2{font-size:46px;color:var(--soft);margin:0}
 .pair .box{flex:1}
 .pair .k{font-size:30px;color:var(--soft);margin-bottom:10px}
 .pair .big{font-size:78px;font-weight:500;line-height:1.1}
@@ -759,16 +769,24 @@ body.menu #menu{display:flex}
   </section>
 
   <!-- 24 -->
-  <section class="slide" data-n="24" data-part="5" data-name="הכפתור לא חי בוואקום">
-    <h2 class="rv">הכפתור לא<br><em>חי בוואקום</em></h2>
-    <div class="pair">
-      <div class="box" data-step="1"><p class="k">הכותרת נותנת את הכאב</p><p class="big">‹הכאב, במילים שלו›</p></div>
-      <div class="arrow" data-step="1"></div>
-      <div class="box" data-step="2"><p class="k">הכפתור נותן את החיים שאחרי</p><span class="btn">אני רוצה תינוק רגוע</span></div>
+  <section class="slide vac" data-n="24" data-part="5" data-name="הכפתור לא חי בוואקום">
+    <h2 class="rv">הכפתור לא <em>חי בוואקום</em></h2>
+    <div class="vrows">
+      <div class="vrow" data-step="1">
+        <div class="ctx"><p class="k">למעלה, ליד הכותרת</p><p class="q">"יש לך מוצר ואין לך צלם? שעתיים בזום, וחמש תמונות מוכנות להעלאה."</p></div>
+        <i class="arrow"></i>
+        <span class="btn">אני רוצה תמונות כאלה</span>
+        <p class="why">כאן היא עוד חולמת</p>
+      </div>
+      <div class="vrow" data-step="2">
+        <div class="ctx"><p class="k">בטופס, ליד הפרטים</p><p class="q">רביעי 9.12, 16:00-18:00<br>190 ש"ח</p></div>
+        <i class="arrow"></i>
+        <span class="btn">אני נרשמת</span>
+        <p class="why">כאן היא כבר החליטה</p>
+      </div>
     </div>
-    <ul class="rows sm">
-      <li data-step="3">מחיר: מוצר במעורבות נמוכה, מחיר למעלה. מעל 500 ש"ח זו כבר שיחה.</li>
-    </ul>
+    <p class="rule" data-step="3">פעולה אחת, טקסט אחר. הכפתור ממשיך את המשפט שעומד לידו.</p>
+    <p class="rule2" data-step="4">וליד כל כפתור, כל הפרטים יחד. שלא תצטרך לחפש.</p>
   </section>
 
   <!-- 25 -->
