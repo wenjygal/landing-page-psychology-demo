@@ -437,5 +437,20 @@
   });
 })();
 </script>
+<script>
+/* when shown inside the training deck: scrollbar on the right, links inert, slide keys go to the deck */
+if (window.self !== window.top) {
+  document.documentElement.classList.add('inframe');
+  var st = document.createElement('style');
+  st.textContent = 'html.inframe{direction:ltr;scrollbar-color:#6B2F73 rgba(43,26,46,.12)}html.inframe body{direction:rtl}';
+  document.head.appendChild(st);
+  document.addEventListener('click', function(e){ if (e.target.closest('a,button,input,[role=button]')) e.preventDefault(); }, true);
+  document.addEventListener('submit', function(e){ e.preventDefault(); }, true);
+  document.addEventListener('keydown', function(e){
+    if (['ArrowLeft','ArrowRight',' ','PageDown','PageUp','Enter','Backspace','Home','End','m','M','f','F','Escape'].indexOf(e.key) < 0) return;
+    e.preventDefault(); try { window.parent.postMessage({deckKey: e.key}, '*'); } catch (_) {}
+  });
+}
+</script>
 </body>
 </html>

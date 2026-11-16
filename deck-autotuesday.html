@@ -258,19 +258,25 @@ h3{font-size:44px;font-weight:500}
 #cmp{padding:0;gap:0}
 #cmp .cmpq{position:absolute;inset-block-start:96px;inset-inline:84px;display:flex;align-items:baseline;gap:36px}
 #cmp .cmpq h2{font-size:84px}
-#cmp .cmpgrid{position:absolute;inset-block-start:228px;inset-inline:40px;height:790px;display:grid;grid-template-columns:440px 380px 380px 440px;gap:48px;justify-content:center}
-.capcol h3{font-size:46px;margin-bottom:22px;color:var(--soft)}
+#cmp .cmpgrid{position:absolute;inset-block-start:212px;inset-inline:40px;height:836px;display:grid;grid-template-columns:360px 500px 500px 360px;gap:40px;justify-content:center}
+#cmp .capcol,#cmp .phone .dim{transition:opacity .35s ease-out}
+#cmp .phone .dim{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;z-index:2}
+#cmp.sg .phone.i .dim,#cmp.si .phone.g .dim{opacity:.72}
+#cmp.sg .capcol.i,#cmp.si .capcol.g{opacity:0}
+#cmp.sg .phone.i,#cmp.si .phone.g{box-shadow:none}
+#cmp.sg .phone.i iframe,#cmp.si .phone.g iframe{pointer-events:none}
+.capcol h3{font-size:50px;margin-bottom:22px;color:var(--soft)}
 .capcol.i h3{color:var(--accent)}
-.capbody{font-size:34px;line-height:1.4;transition:opacity .14s ease-out,transform .14s ease-out}
+.capbody{font-size:32px;line-height:1.42;transition:opacity .14s ease-out,transform .14s ease-out}
 .capbody.swap{opacity:0;transform:translateY(-8px)}
 .capbody p{margin-bottom:24px}
 .capbody p.pin{opacity:0;transform:translateY(14px)}
 .capbody p.pin.go{opacity:1;transform:none;transition:opacity .5s var(--ease-out) calc(var(--j,0)*90ms),transform .6s var(--ease-out) calc(var(--j,0)*90ms)}
 .capbody mark{font-weight:500}
-.phone{position:relative;width:380px;height:790px;border:8px solid var(--ink);border-radius:46px;overflow:hidden;background:#fff;box-shadow:0 30px 60px -34px rgba(43,26,46,.5);opacity:0;transform:translateY(30px)}
+.phone{position:relative;width:500px;height:836px;border:8px solid var(--ink);border-radius:46px;overflow:hidden;background:#fff;box-shadow:0 30px 60px -34px rgba(43,26,46,.5);opacity:0;transform:translateY(30px)}
 .live .phone{opacity:1;transform:none;transition:opacity .7s var(--ease-out) .2s,transform .8s var(--ease-out) .2s}
 .live .phone.i{transition-delay:.32s}
-.phone iframe{width:100%;height:100%;border:0;display:block;pointer-events:none;background:#fff}
+.phone iframe{position:absolute;top:0;right:0;width:390px;height:calc(820px / 1.2410);transform:scale(1.2410);transform-origin:top right;border:0;display:block;background:#fff}
 .phone .none{position:absolute;inset:0;background:rgba(251,249,246,.96);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:40px;opacity:0;transition:opacity .3s ease-out;pointer-events:none}
 .phone.empty .none{opacity:1}
 .none b{font-size:90px;color:var(--accent)}
@@ -745,8 +751,8 @@ body.menu #menu{display:flex}
     <div class="cmpq"><span class="chip" id="cmp-stg"></span><h2 id="cmp-q"></h2></div>
     <div class="cmpgrid">
       <div class="capcol g"><h3>לפני</h3><div class="capbody" id="gcap"></div></div>
-      <div class="phone g" id="gph"><iframe id="gif" title="העמוד של לפני"></iframe><div class="none"><b>אין</b><span>בעמוד של "לפני" אין סקשן כזה</span></div></div>
-      <div class="phone i" id="iph"><iframe id="iif" title="העמוד של אחרי"></iframe></div>
+      <div class="phone g" id="gph"><iframe id="gif" title="העמוד של לפני"></iframe><i class="dim"></i><div class="none"><b>אין</b><span>בעמוד של "לפני" אין סקשן כזה</span></div></div>
+      <div class="phone i" id="iph"><iframe id="iif" title="העמוד של אחרי"></iframe><i class="dim"></i></div>
       <div class="capcol i"><h3>אחרי</h3><div class="capbody" id="icap"></div></div>
     </div>
   </section>
@@ -857,6 +863,7 @@ body.menu #menu{display:flex}
 
   /* ---------- entries ---------- */
   var cmpEl = document.getElementById('cmp');
+  CMP.forEach(function(c){ var out=[]; c.subs.forEach(function(sb){ out.push(Object.assign({},sb,{side:'g'})); out.push(Object.assign({},sb,{side:'i'})); }); c.subs=out; });
   var entries = [];
   Array.prototype.forEach.call(stage.querySelectorAll('.slide'), function(el){
     if (el === cmpEl) CMP.forEach(function(c){ entries.push({el:el,kind:'cmp',c:c,n:c.n,name:c.name,part:5}); });
@@ -989,6 +996,7 @@ body.menu #menu{display:flex}
   function renderCmp(s, first){
     document.getElementById('cmp-stg').textContent = s.stg ? ('שאלה ' + s.stg + ' · ' + s.stn) : 'אותו מוצר, שני עמודים';
     document.getElementById('cmp-q').textContent = s.q;
+    cmpEl.classList.toggle('sg', s.side==='g'); cmpEl.classList.toggle('si', s.side==='i');
     document.getElementById('gph').classList.toggle('empty', s.g === null);
     setCaption(document.getElementById('gcap'), cap(s.gt), first);
     setCaption(document.getElementById('icap'), cap(s.it), first);
@@ -1046,6 +1054,7 @@ body.menu #menu{display:flex}
   function openMenu(){ document.body.classList.add('menu'); }
   function closeMenu(){ document.body.classList.remove('menu'); }
 
+  window.addEventListener('message', function(m){ if (m.data && m.data.deckKey) document.dispatchEvent(new KeyboardEvent('keydown', {key:m.data.deckKey, bubbles:true, cancelable:true})); });
   document.addEventListener('keydown', function(e){
     var k = e.key;
     if (k==='m'||k==='M'||k==='צ'){ e.preventDefault(); document.body.classList.contains('menu')?closeMenu():openMenu(); return; }
