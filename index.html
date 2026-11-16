@@ -85,7 +85,7 @@
   .btn {
     display: inline-flex; align-items: center; gap: 14px; cursor: pointer; border: 0; text-decoration: none;
     background: var(--accent); color: var(--accent-ink);
-    font: 500 18px/1 var(--sans); padding: 8px 8px 8px 26px; border-radius: 999px;
+    font: 500 18px/1 var(--sans); padding: 8px; padding-inline-start: 26px; border-radius: 999px;
     transition: transform .6s var(--ease), background .4s var(--ease), box-shadow .6s var(--ease);
     box-shadow: 0 16px 30px -14px rgba(122, 31, 46, .7);
   }
@@ -97,7 +97,7 @@
   .btn:hover { background: #651726; }
   .btn:hover .dot { transform: translate(-4px, -1px) scale(1.06); background: rgba(255,255,255,.26); }
   .btn:active { transform: scale(.98); }
-  .btn.sm { font-size: 15px; padding: 5px 5px 5px 18px; }
+  .btn.sm { font-size: 15px; padding: 5px; padding-inline-start: 18px; }
   .btn.sm .dot { width: 34px; height: 34px; }
   .btn:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid #d58a97; outline-offset: 3px; }
 
