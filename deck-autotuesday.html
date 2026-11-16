@@ -155,6 +155,19 @@ h3{font-size:44px;font-weight:500}
 .live .axis{transform:none;transition:transform 1.2s var(--ease-io) .4s}
 
 /* 7 lines */
+.seven-s{position:relative}
+.seven-s .sham{position:absolute;left:140px;top:300px;width:250px;margin:0;display:flex;flex-direction:column;gap:12px;align-items:center;z-index:2}
+.seven-s .sham img{width:250px;height:400px;object-fit:cover;border-radius:18px;box-shadow:0 24px 50px -28px rgba(43,26,46,.55)}
+.seven-s .sham figcaption{font-size:30px;font-weight:500;color:var(--accent)}
+.seven-s .seven{margin-inline-start:0;max-width:calc(100% - 300px)}
+.seven-s .seven li{grid-template-columns:36px 380px 1fr}
+.seven-s .seven li{transition:background-color .5s var(--ease-out),opacity .5s}
+.seven-s:has(.sham.shown) .seven li:not(.h1){opacity:.45}
+.seven-s:has(.sham.shown) .seven li.h1{background:var(--accent-wash)}
+.seven-s:has(.sham.shown) .seven li.h1 .v{color:var(--ink);font-weight:500}
+.seven-s:has([data-step="2"].shown) .seven li.h1{background:none;opacity:.45}
+.seven-s:has([data-step="2"].shown) .seven li.h2{opacity:1;background:#FBF1D6}
+.seven-s:has([data-step="2"].shown) .seven li.h2 .v{color:var(--ink);font-weight:500}
 .seven li{display:grid;grid-template-columns:36px 420px 1fr;gap:32px;align-items:baseline;font-size:40px;padding:15px 0;border-bottom:1px solid var(--line);line-height:1.25}
 .seven .dot{width:22px;height:22px;border-radius:50%;background:#2E8B57;align-self:center}
 .seven .dot.y{background:#E2A200}
@@ -637,18 +650,20 @@ body.menu #menu{display:flex}
   </section>
 
   <!-- 15 -->
-  <section class="slide" data-n="15" data-part="3" data-name="שבע שורות">
+  <section class="slide seven-s" data-n="15" data-part="3" data-name="שבע שורות">
     <h2 class="rv" style="font-size:88px">הלקוחה בשבע שורות <span style="color:var(--soft);font-size:.5em">סדנה לדוגמה</span></h2>
+    <figure class="sham" data-step="1"><img src="shampoo-before-phone.jpg" alt="בקבוק שמפו ליד כיור, צולם בטלפון"><figcaption>"זה נראה ביתי"</figcaption></figure>
+    <i hidden data-step="2"></i>
     <ul class="seven">
-      <li data-step="1"><i class="dot"></i><span class="k">מה היא רוצה</span><span class="v">תמונות שאפשר להעלות לחנות</span></li>
-      <li data-step="2"><i class="dot"></i><span class="k">מה כואב לה</span><span class="v">"זה נראה ביתי"</span></li>
-      <li data-step="3"><i class="dot"></i><span class="k">מה היא כבר יודעת</span><span class="v">שאחרים מצליחים עם AI</span></li>
-      <li data-step="4"><i class="dot y"></i><span class="k">מה היא לא מבינה</span><span class="v">חושבת שיש פרומפט סודי<span class="tag">הסקה</span></span></li>
-      <li data-step="5"><i class="dot"></i><span class="k">ממה היא חוששת</span><span class="v">להישאר עם תמונות שאי אפשר להשתמש בהן</span></li>
-      <li data-step="6"><i class="dot"></i><span class="k">במה היא לא מאמינה</span><span class="v">שתגיע לרמה מספיק טובה</span></li>
-      <li data-step="7"><i class="dot"></i><span class="k">מה כבר ניסתה</span><span class="v">חלון, צלם, כלי AI ששינה את התווית</span></li>
+      <li><i class="dot"></i><span class="k">מה היא רוצה</span><span class="v">תמונות שאפשר להעלות לחנות</span></li>
+      <li class="h1"><i class="dot"></i><span class="k">מה כואב לה</span><span class="v">"זה נראה ביתי"</span></li>
+      <li><i class="dot"></i><span class="k">מה היא כבר יודעת</span><span class="v">שאחרים מצליחים עם AI</span></li>
+      <li class="h2"><i class="dot y"></i><span class="k">מה היא לא מבינה</span><span class="v">חושבת שיש פרומפט סודי<span class="tag">הסקה</span></span></li>
+      <li><i class="dot"></i><span class="k">ממה היא חוששת</span><span class="v">להישאר עם תמונות שאי אפשר להשתמש בהן</span></li>
+      <li><i class="dot"></i><span class="k">במה היא לא מאמינה</span><span class="v">שתגיע לרמה מספיק טובה</span></li>
+      <li><i class="dot"></i><span class="k">מה כבר ניסתה</span><span class="v">חלון, צלם, כלי AI ששינה את התווית</span></li>
     </ul>
-    <p class="small" data-step="8">ירוק: מהתשובות שלי. צהוב: הסקה של ה-AI. אפשר להריץ את אותו ראיון מול הלקוח שלכם.</p>
+    <p class="small">ירוק: מהתשובות שלי. צהוב: הסקה של ה-AI. אפשר להריץ את אותו ראיון מול הלקוח שלכם.</p>
   </section>
 
   <!-- 16 -->
